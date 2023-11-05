@@ -1,2 +1,2 @@
-node_modules/
-myScript.js
+node_modules/*
+*myScript.js
