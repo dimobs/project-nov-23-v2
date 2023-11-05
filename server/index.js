@@ -3,7 +3,7 @@ const app = require('express')();
 const routes = require('./src/routes');
 const config = require('./src/config/config.json')[process.env_NODE_ENV || 'development'];
 
-
+console.log('dasda');
 // const app = express();
 app.get('/', (req, res) => {
     res.send('Dimoooooooooooo')
