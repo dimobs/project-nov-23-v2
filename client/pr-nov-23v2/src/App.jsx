@@ -1,5 +1,6 @@
-import Footer from './components/Footer';
-import Header from './components/Header';
+import UserList from './components/Administrator/UserList';
+import Footer from './components/Header-Footer/Footer';
+import Header from './components/Header-Footer/Header';
 import './styles.css';
 
 function App() {
@@ -9,9 +10,9 @@ function App() {
             <Header />
 
             <main className="main">
-              <h1>Hello</h1>
+            <UserList />
             </main>
-<Footer />
+            <Footer />
         </div>
     );
 }
