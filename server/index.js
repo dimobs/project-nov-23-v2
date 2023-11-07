@@ -1,15 +1,20 @@
 const express = require('express');
+// const cors = require('cors');
 // const path = require('path');
 const routes = require('./src/routes');
 const config = require('./src/config/config.json')[process.env_NODE_ENV || 'development'];
-const cors = require('./src/middlewares/cors');
+// const cors = require('./src/middlewares/cors');
 const initDB = require('./src/config/database');
 
 
-app = express();
-initDB();
+start()
 
-app.use(express.urlencoded({extended: true})) //body parser when work with MPA -
+function start() {
+    
+    app = express();
+    initDB();
+    // app.use(cors);
+    app.use(express.urlencoded({extended: true})) //body parser when work with MPA -
 // get, post data from <form /> or case with searchbars where have to pars data in SPA /> 
 
 app.use(express.json()) //-works with  SPA
@@ -23,7 +28,13 @@ app.get('/', (req, res) => {
 //const initHandlebars = require('./config/handlebars'); //алтернатива е горното 
 
 // app.use(express.static(path.resolve(__dirname, './public')));
-
+// app.get('/user/users', async (req, res) => {
+//     console.log('users1');
+//     const data = await User.find({})
+//     const result = res.json(data)
+//     console.log(result);
+// })
 app.use(routes);
 
-app.listen(config.PORT, console.log.bind(console, `App is running on http://localhost${config.PORT}`));
+app.listen(config.PORT, () => console.log(`App is running on http://localhost:${config.PORT}`));
+}
