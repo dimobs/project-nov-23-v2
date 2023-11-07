@@ -1,7 +1,7 @@
- const User = require('../models/Users'); //userSchema
-const {userSession} = require('../middlewares/userSession');
+const User = require('../models/Users'); //userSchema
+const { userSession } = require('../middlewares/userSession');
 
-async function register(session, username, password, email, gender ) {
+async function register(session, username, password, email, gender) {
     const existing = await getUserByUsername(username);
 
     if (existing) {
@@ -27,14 +27,14 @@ async function getUserByUsername(username) {
 }
 
 async function getAllUsers() {
-    console.log('/users4');
-    const allData = await User.find({});
-    return allData;
-}
+    console.log('stage4');
+    const users = await User.find({})
+    return users
+};
 
 async function login(session, username, password) { //req.session, ...params
     const user = await User.findOne({ username });
-    
+
     if (user && await user.comparePassword(password)) {
         session.user = {
             id: user._id,
@@ -51,7 +51,7 @@ function logout(session) {
 }
 
 async function userUpdate(session, username, newUser, password) {
-            const user = await User.findOne({ username });
+    const user = await User.findOne({ username });
     if (newUser) {
         username = newUser;
         user.username = username;
@@ -76,7 +76,8 @@ module.exports = () => (req, res, next) => {
         login: (...params) => login(req.session, ...params),
         userUpdate: (...params) => userUpdate(req.session, ...params),
         logout: () => logout(req.session),
-        getAllUsers: () => getAllUsers()
+        getAllUsers: () => getAllUsers(),
+        getUserByUsername: () => getUserByUsername()
     };
 
     next();

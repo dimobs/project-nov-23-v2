@@ -1,8 +1,9 @@
 const express = require('express');
-// const cors = require('cors');
+const cors = require('cors');
 // const path = require('path');
 const routes = require('./src/routes');
-const config = require('./src/config/config.json')[process.env_NODE_ENV || 'development'];
+const config = require('./src/config/config.json')[process.env.DE_ENV || 'development'];
+
 // const cors = require('./src/middlewares/cors');
 const initDB = require('./src/config/database');
 
@@ -13,14 +14,14 @@ function start() {
     
     app = express();
     initDB();
-    // app.use(cors);
     app.use(express.urlencoded({extended: true})) //body parser when work with MPA -
-// get, post data from <form /> or case with searchbars where have to pars data in SPA /> 
-
-app.use(express.json()) //-works with  SPA
+    // get, post data from <form /> or case with searchbars where have to pars data in SPA /> 
+    
+    app.use(express.json()) //-works with  SPA
+    app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send('RESTful service');
+    res.send('RESTful service!');
 });
 
 
@@ -36,5 +37,5 @@ app.get('/', (req, res) => {
 // })
 app.use(routes);
 
-app.listen(config.PORT, () => console.log(`App is running on http://localhost:${config.PORT}`));
+app.listen(config.PORT, () => console.log(`http://localhost:${config.PORT} App is running on `));
 }

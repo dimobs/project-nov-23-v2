@@ -1,10 +1,22 @@
+import './styleComponent.css'
+
 const Header = () => {
     return (
-        <header className="header">
-            <div className="logo">
-                <span className="course">Dimo Karachorbadzhiev - Nov 2023</span>
+        <header>
+        <h1><a href="/">Furniture Store</a></h1>
+        <nav>
+            <a id="catalogLink" href="/" className="${active}">Dashboard</a>
+            <div id="user">
+                <a id="${createLink}" href="/create" >Create Item</a>
+                <a id="${profileLink}" href="/my-furniture" >My Publications</a>
+                <a id="${logoutBtn}" href="javascript:void(0)">Logout</a>
             </div>
-        </header>
+            <div id="guest">
+                <a id="${loginLink}" href="/login">Login</a>
+                <a id="${registerLink}" href="/register">Register</a>
+            </div>
+        </nav>
+    </header>
     );
 };
 
