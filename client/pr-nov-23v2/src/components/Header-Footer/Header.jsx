@@ -13,7 +13,7 @@ const Header = () => {
             </div>
             <div id="guest">
                 <a id="${loginLink}" href="/login">Login</a>
-                <a id="${registerLink}" href="/register">Register</a>
+                <a id="${registerLink}" href="/registration">Register</a>
             </div>
         </nav>
     </header>

@@ -11,6 +11,7 @@ function App() {
 
             <main className="main">
             <UserList />
+            {/* <RegistrationPage /> */}
             </main>
             <Footer />
         </div>
