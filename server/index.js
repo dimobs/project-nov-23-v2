@@ -3,10 +3,8 @@ const cors = require('cors');
 // const path = require('path');
 const routes = require('./src/routes');
 const config = require('./src/config/config.json')[process.env.DE_ENV || 'development'];
-
 // const cors = require('./src/middlewares/cors');
 const initDB = require('./src/config/database');
-
 
 start()
 
