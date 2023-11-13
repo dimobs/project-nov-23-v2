@@ -51,8 +51,8 @@ res.json(data)
 });
 
 
-authController.get('/getUser', async(req, res) => {
-    const data = await getUserByUsername("dimo");
+authController.get('/users', async(req, res) => {
+    const data = await getAllUsers();
     console.log(data);
     res.json(data)
     });
