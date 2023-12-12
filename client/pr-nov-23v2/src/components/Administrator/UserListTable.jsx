@@ -41,7 +41,8 @@ const UserListTable = () => {
         const data = Object.fromEntries(new FormData(e.currentTarget));
 
         // Create new user at the server
-        const newUser = await userService.create(data);
+        // const newUser = await userService.create(data);
+        const newUser = (data);
 
         // Add newly created user to the local state
         setUsers(state => [...state, newUser]);
@@ -72,7 +73,10 @@ const UserListTable = () => {
     };
 
     return (
+        <>
+            <button className="btn-add btn" onClick={createUserClickHandler}>Add new user</button>
         <div className="table-wrapper">
+
             {showCreate && (
                 <CreateUserModal
                     onClose={hideCreateUserModal}
@@ -154,14 +158,14 @@ const UserListTable = () => {
                 <tbody>
                     {users.map(user => (
                         <UserListItem
-                            key={user._id}
-                            userId={user._id}
-                            createdAt={user.createdAt}
+                            key={user.id}
+                            userId={user.id}
+                            createdAt={user.birthDate}
                             email={user.email}
                             firstName={user.firstName}
-                            imageUrl={user.imageUrl}
+                            imageUrl={user.image}
                             lastName={user.lastName}
-                            phoneNumber={user.phoneNumber}
+                            phoneNumber={user.phone}
                             onInfoClick={userInfoClickHandler}
                             onDeleteClick={deleteUserClickHandler}
                         />
@@ -169,8 +173,8 @@ const UserListTable = () => {
                 </tbody>
             </table>
 
-            <button className="btn-add btn" onClick={createUserClickHandler}>Add new user</button>
         </div>
+        </>
     );
 };
 

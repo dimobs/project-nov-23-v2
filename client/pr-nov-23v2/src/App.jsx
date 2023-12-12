@@ -1,7 +1,8 @@
 import UserList from './components/Administrator/UserList';
+import Todo from './components/Administrator/Todo';
 import Footer from './components/Header-Footer/Footer';
 import Header from './components/Header-Footer/Header';
-import Registration from './components/Registration';
+// import Registration from './components/Registration';
 import './styles.css';
 
 function App() {
@@ -11,8 +12,9 @@ function App() {
             <Header />
 
             <main className="main">
+                {/* <Todo /> */}
             <UserList />
-          <Registration />
+          {/* <Registration /> */}
             </main>
             <Footer />
         </div>

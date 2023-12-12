@@ -1,13 +1,20 @@
 // const baseUrl = 'http://localhost:3030/jsonstore/users';
-const baseUrl = 'http://localhost:3030/users';
+// const baseUrl = 'http://localhost:3030/users';
+const baseUrl = 'https://dummyjson.com/users'
 
 export const getAll = async () => {
+
+    try {
     const response = await fetch(baseUrl);
     const result = await response.json();
-
-    const data = Object.values(result);
-
+    console.log(Object.values(result)[0]);
+    const data = Object.values(result)[0];
+    
     return data;
+    }catch(error) {
+        console.log(error);
+    }
+
 };
 
 export const getOne = async (userId) => {
