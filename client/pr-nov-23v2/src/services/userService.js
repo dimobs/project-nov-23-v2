@@ -1,5 +1,5 @@
 // const baseUrl = 'http://localhost:3030/jsonstore/users';
-// const baseUrl = 'http://localhost:3030/users';
+// const baseUrl = 'http://localhost:3030/';
 const baseUrl = 'https://dummyjson.com/users'
 
 export const getAll = async () => {
