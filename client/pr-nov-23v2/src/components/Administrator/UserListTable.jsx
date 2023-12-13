@@ -39,16 +39,18 @@ const UserListTable = () => {
 
         // Get data from form data
         const data = Object.fromEntries(new FormData(e.currentTarget));
-
+        console.log(data);
         // Create new user at the server
         // const newUser = await userService.create(data);
         const newUser = (data);
 
         // Add newly created user to the local state
         setUsers(state => [...state, newUser]);
-
+   
         // Close the modal
-        setShowCreate(false);
+        // setShowCreate(false);
+        hideCreateUserModal();
+
     };
 
     const userInfoClickHandler = async (userId) => {
@@ -69,7 +71,8 @@ const UserListTable = () => {
         setUsers(state => state.filter(user => user._id !== selectedUser));
 
         // Close the delete modal
-        setShowDelete(false);
+        // setShowDelete(false);
+        hideCreateUserModal;
     };
 
     return (

@@ -1,5 +1,5 @@
-import { html } from '../../node_modules/lit-html/lit-html.js';
-import { register } from '../api/data.js';
+import { html } from 'lit-html';
+import { register } from '../../../services/api.js';
 
 
 const registerTemplate = (onSubmit, errorMsg, invalidEmail, invalidPass, invalidRe) => html`<div class="row space-top">

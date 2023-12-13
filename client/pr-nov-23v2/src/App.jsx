@@ -1,9 +1,11 @@
+import { Routes, Route } from 'react-router-dom';
 import UserList from './components/Administrator/UserList';
-import Todo from './components/Administrator/Todo';
+// import Todo from './components/Administrator/Todo';
 import Footer from './components/Header-Footer/Footer';
 import Header from './components/Header-Footer/Header';
-// import Registration from './components/Registration';
 import './styles.css';
+import Register from './components/views/Register/Register';
+// import Register from './components/views/Register/Register';
 
 function App() {
 
@@ -11,11 +13,24 @@ function App() {
         <div>
             <Header />
 
-            <main className="main">
+            {/* <main className="main"> */}
                 {/* <Todo /> */}
-            <UserList />
-          {/* <Registration /> */}
-            </main>
+                {/* <Register /> */}
+                <UserList />
+               
+                {/* <Routes> */}
+                {/* <Route path="/" element={<UserList />} /> */}
+                {/* <Route path="/register" element={<Register />} /> */}
+                {/* <Route path="/games" element={<GameList />} /> */}
+                {/* <Route path="/games/create" element={<GameCreate />} /> */}
+                {/* <Route path="/login" element={<Login />} /> */}
+                {/* <Route path="/games/:gameId" element={<GameDetails /> } /> */}
+            {/* </Routes> */}
+
+
+
+
+            {/* </main> */}
             <Footer />
         </div>
     );
