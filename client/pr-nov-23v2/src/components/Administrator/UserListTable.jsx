@@ -25,6 +25,21 @@ const UserListTable = () => {
             .finally(() => setIsLoading(false));
     }, []);
 
+    useEffect(() => {
+        const handleEscKey = (e) => {
+            if (e.key === 'Escape') {
+                hideCreateUserModal()
+            }
+        };
+ 
+        window.addEventListener('keydown', handleEscKey);
+ 
+        return () => {
+            window.removeEventListener('keydown', handleEscKey)
+        }
+    }, []);
+
+
     const createUserClickHandler = () => {
         setShowCreate(true);
     };

@@ -1,4 +1,31 @@
+import { useState } from "react";
+
+
+const formInitialState = {
+    'email': '',
+    'password': '',
+    'confirmPassword': '',
+    'age': '',
+}
+
+
 export default function Register() {
+    const [fromValues, setFormValues] = useState(formInitialState)
+
+    const changeHandler = (e) => {
+        setFormValues(state => ({
+            ...state, [e.target.name]: e.target.value
+        }))
+    }
+
+    const resetFromHandler = () => {
+        setFormValues(formInitialState)
+    }
+
+    const submitHandler = (e) => {
+e.target.value
+    }
+
     return (
         <section id="register-page" className="content auth">
             <form id="register">
@@ -7,16 +34,32 @@ export default function Register() {
                     <h1>Register</h1>
 
                     <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="maria@email.com" />
+                    <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    // defaultValue="maria@email.com"
+                    value={fromValues.email}
+                    onChange={changeHandler}
+                    onBlur={() => console.log('onBlur')}
+                    />
+
 
                     <label htmlFor="pass">Password:</label>
-                    <input type="password" name="password" id="register-password" />
+                    <input 
+                    type="password" 
+                    name="password"
+                     id="register-password" 
+                     value={fromValues.password}
+                    onChange={changeHandler}
+                     />
 
                     <label htmlFor="con-pass">Confirm Password:</label>
-                    <input type="password" name="confirm-password" id="confirm-password" />
+                    <input type="password" name="confirm-password" id="confirm-password" value={fromValues.confirmPassword}
+                    onChange={changeHandler}/>
 
-                    <input className="btn submit" type="submit" value="Register" />
-
+                    <input className="btn submit" type="button" value="Register" onClick={submitHandler} />
+                    <input className="btn submit" type="button" value="Reset" onClick={resetFromHandler} />
                     <p className="field">
                         <span>If you already have profile click <a href="#">here</a></span>
                     </p>
