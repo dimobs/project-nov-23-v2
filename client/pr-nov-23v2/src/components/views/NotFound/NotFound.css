@@ -145,10 +145,15 @@ bottom: -12px;
   }
 
   article h2 {
-    color: green;
+    color: #4f8a8b;
     font-size: 3em;
+    font-family: Lora;
+    font-style: italic;
   }
 
   article h2 span {
-    color: red;
+    color: #f3c623;
+    font-family: sans-serif;
+    font-style: normal;
+    font-size: 1em;
   }

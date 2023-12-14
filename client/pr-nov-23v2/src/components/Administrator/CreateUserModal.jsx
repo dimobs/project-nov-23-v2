@@ -1,7 +1,12 @@
+import useFocus from '../../utils/focusInputField'
+
 const CreateUserModal = ({
     onClose,
     onCreate,
 }) => {
+
+const focusField = useFocus();
+
     return (
         <div className="overlay" >
             <div className="backdrop" onClick={onClose}></div>
@@ -24,7 +29,12 @@ const CreateUserModal = ({
                                 <label htmlFor="firstName">First name</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-user"></i></span>
-                                    <input id="firstName" name="firstName" type="text" />
+                                    <input 
+                                    ref={focusField}
+                                    id="firstName" 
+                                    name="firstName" 
+                                    type="text" 
+                                    />
                                 </div>
                             </div>
                             <div className="form-group">

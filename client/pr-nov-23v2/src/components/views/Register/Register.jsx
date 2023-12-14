@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-
+import { useState } from "react";
+// import FocusInput from "../../../utils/focusInputField";
+import useFocus from "../../../utils/focusInputField";
 
 const formInitialState = {
     'email': '',
@@ -11,7 +12,8 @@ const formInitialState = {
 
 export default function Register() {
     const [fromValues, setFormValues] = useState(formInitialState)
-    const focusImputField = useRef();
+    // const focusImputField = useRef();
+    const focusInputRef = useFocus();
    
 
     const changeHandler = (e) => {
@@ -20,9 +22,9 @@ export default function Register() {
         }))
     };
 
-    useEffect(() => {
-        focusImputField.current.focus();
-    }, []);
+    // useEffect(() => {
+    //     focusImputField.current.focus();
+    // }, []);
 
 
     const resetFromHandler = () => {
@@ -42,7 +44,7 @@ e.target.value
 
                     <label htmlFor="email">Email:</label>
                     <input 
-                    ref = {focusImputField}
+                    ref = {focusInputRef}
                     type="email" 
                     id="email" 
                     name="email" 
