@@ -1,19 +1,21 @@
+import  {Link } from 'react-router-dom'
 import './styleComponent.css'
+
 
 const Header = () => {
     return (
         <header>
-        <h1><a href="/">Furniture Store</a></h1>
+        <h1><Link to="/">Furniture Store</Link></h1>
         <nav>
-            <a id="catalogLink" href="/" className="${active}">Dashboard</a>
+            <Link id="catalogLink" to="/" className="${active}">Dashboard</Link>
             <div id="user">
-                <a id="${createLink}" href="/create" >Create Item</a>
-                <a id="${profileLink}" href="/my-furniture" >My Publications</a>
-                <a id="${logoutBtn}" href="javascript:void(0)">Logout</a>
+                <Link id="${createLink}" to="/create">Create Item</Link>
+                <Link id="${profileLink}" to="/my-furniture" >My Publications</Link>
+                <Link id="${logoutBtn}" to="javascript:void(0)">Logout</Link>
             </div>
             <div id="guest">
-                <a id="${loginLink}" href="/login">Login</a>
-                <a id="${registerLink}" href="/register">Register</a>
+                <Link id="${loginLink}" to="/login">Login</Link>
+                <Link id="${registerLink}" to="/register">Register</Link>
             </div>
         </nav>
     </header>

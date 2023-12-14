@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 
 const formInitialState = {
@@ -11,20 +11,27 @@ const formInitialState = {
 
 export default function Register() {
     const [fromValues, setFormValues] = useState(formInitialState)
+    const focusImputField = useRef();
+   
 
     const changeHandler = (e) => {
         setFormValues(state => ({
             ...state, [e.target.name]: e.target.value
         }))
-    }
+    };
+
+    useEffect(() => {
+        focusImputField.current.focus();
+    }, []);
+
 
     const resetFromHandler = () => {
         setFormValues(formInitialState)
-    }
+    };
 
     const submitHandler = (e) => {
 e.target.value
-    }
+    };
 
     return (
         <section id="register-page" className="content auth">
@@ -35,6 +42,7 @@ e.target.value
 
                     <label htmlFor="email">Email:</label>
                     <input 
+                    ref = {focusImputField}
                     type="email" 
                     id="email" 
                     name="email" 
