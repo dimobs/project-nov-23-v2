@@ -6,6 +6,7 @@ import Header from './components/Header-Footer/Header';
 import './styles.css';
 import Register from './components/views/Register/Register';
 import NotFound from './components/views/NotFound/NotFound';
+import Login from './components/views/login/login';
 // import Register from './components/views/Register/Register';
 
 function App() {
@@ -15,24 +16,18 @@ function App() {
             <Header />
 
             <main className="main">
-                {/* <Todo /> */}
-                {/* <Register /> */}
-                {/* <UserList /> */}
-               
                 <Routes>
                 <Route path="/" element={<UserList />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
                 <Route path='/:id' element={<NotFound />} />
                 {/* <Route path="/games" element={<GameList />} /> */}
                 {/* <Route path="/games/create" element={<GameCreate />} /> */}
                 {/* <Route path="/login" element={<Login />} /> */}
                 {/* <Route path="/games/:gameId" element={<GameDetails /> } /> */}
             </Routes>
-
-
-
-
             </main>
+            
             <Footer />
         </div>
     );

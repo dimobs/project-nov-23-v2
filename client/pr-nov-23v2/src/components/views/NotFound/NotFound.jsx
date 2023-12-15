@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+
+import {  useParams } from 'react-router-dom';
 import './NotFound.css';
 // import {notFoundScript} from './script.js'
 

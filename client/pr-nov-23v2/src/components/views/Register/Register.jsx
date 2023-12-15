@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 // import FocusInput from "../../../utils/focusInputField";
 import useFocus from "../../../utils/focusInputField";
 
@@ -65,13 +66,17 @@ e.target.value
                      />
 
                     <label htmlFor="con-pass">Confirm Password:</label>
-                    <input type="password" name="confirm-password" id="confirm-password" value={fromValues.confirmPassword}
+                    <input 
+                    type="password" 
+                    name="confirm-password" 
+                    id="confirm-password" 
+                    value={fromValues.confirmPassword}
                     onChange={changeHandler}/>
 
                     <input className="btn submit" type="button" value="Register" onClick={submitHandler} />
                     <input className="btn submit" type="button" value="Reset" onClick={resetFromHandler} />
                     <p className="field">
-                        <span>If you already have profile click <a href="#">here</a></span>
+                        <span>If you already have profile click <Link to="/login">here</Link></span>
                     </p>
                 </div>
             </form>
