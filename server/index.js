@@ -1,39 +1,36 @@
 const express = require('express');
-const cors = require('cors');
-// const path = require('path');
-const routes = require('./src/routes');
-const config = require('./src/config/config.json')[process.env.DE_ENV || 'development'];
-// const cors = require('./src/middlewares/cors');
-const initDB = require('./src/config/database');
+const config = require('./config/config.json')[process.env.DE_ENV || 'development'];
+const initDB = require('./config/database');
+const cors = require('./middlewares/cors');
+const authController = require('./controllers/authController');
+const dataController = require('./controllers/dataController');
+const trimBody = require('./middlewares/trimBody');
+const session = require('./middlewares/session');
 
-start()
 
-function start() {
-    
-    app = express();
-    initDB();
-    app.use(express.urlencoded({extended: true})) //body parser when work with MPA -
-    // get, post data from <form /> or case with searchbars where have to pars data in SPA /> 
-    
-    app.use(express.json()) //-works with  SPA
+const connectionString = 'mongodb://localhost:27017/furniture4';
+
+start();
+
+async function start() {
+
+    const app = express();
+   await initDB();
+    app.use(express.urlencoded({extended: true})) 
+
+
+    app.use(express.json());
     app.use(cors());
+    app.use(trimBody());
+    app.use(session());
 
-app.get('/', (req, res) => {
-    res.send('RESTful service!');
-});
+    app.get('/', (req, res) => {
+        res.json({ message: 'REST service operational' });
+    });
 
-
-// require('./config/handlebars')(app);
-//const initHandlebars = require('./config/handlebars'); //алтернатива е горното 
-
-// app.use(express.static(path.resolve(__dirname, './public')));
-// app.get('/user/users', async (req, res) => {
-//     console.log('users1');
-//     const data = await User.find({})
-//     const result = res.json(data)
-//     console.log(result);
-// })
-app.use(routes);
+    app.use('/users', authController);
+    app.use('/data/catalog', dataController);
 
 app.listen(config.PORT, () => console.log(`http://localhost:${config.PORT} App is running on `));
+
 }
