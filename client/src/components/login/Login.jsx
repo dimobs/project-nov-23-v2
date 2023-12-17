@@ -2,6 +2,7 @@ import { useContext } from "react";
 import useForm from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
 import { Link } from "react-router-dom";
+import FocusImput from "../../hooks/focusInputForm";
 
 const LoginFormKyes = {
     Email: 'email',
@@ -14,6 +15,8 @@ export default function Login() {
         [LoginFormKyes.Email]: '',
         [LoginFormKyes.Password]: '',
     });
+
+    const imputField = FocusImput();
 
     return (
         <section id="login-page" className="auth">
@@ -30,6 +33,7 @@ export default function Login() {
                         placeholder="Sokka@gmail.com"
                         onChange={onChange}
                         value={values[LoginFormKyes.Email]}
+                        ref={imputField}
                     />
 
                     <label htmlFor="login-pass">Password:</label>

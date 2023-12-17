@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../contexts/authContext";
 import useForm from "../../hooks/useForm";
+import FocusImput from '../../hooks/focusInputForm'
 
 const RegisterFormKeys = {
     Email: 'email',
@@ -16,6 +17,8 @@ export default function Register() {
         [RegisterFormKeys.Password]: '',
         [RegisterFormKeys.ConfirmPassword]: '',
     });
+
+const focusField = FocusImput()
 
     return (
         <section id="register-page" className="content auth">
@@ -32,6 +35,7 @@ export default function Register() {
                         placeholder="maria@email.com"
                         onChange={onChange}
                         values={values[RegisterFormKeys.Email]}
+                        ref={focusField}
                     />
 
                     <label htmlFor="pass">Password:</label>
