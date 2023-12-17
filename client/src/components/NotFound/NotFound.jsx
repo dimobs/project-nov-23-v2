@@ -1,6 +1,6 @@
 
 import {  useParams } from 'react-router-dom';
-import './NotFound.css';
+// import './NotFound.css';
 // import {notFoundScript} from './script.js'
 
 export default function NotFound () {

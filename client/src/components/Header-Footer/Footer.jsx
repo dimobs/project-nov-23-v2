@@ -1,4 +1,4 @@
-import './styleComponent.css'
+// import './styleComponent.css'
 
 const Footer = () => {
     return (

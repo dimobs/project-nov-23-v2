@@ -1,10 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
 import { AuthProvider } from './contexts/authContext';
+import '../src/input.css'
 import Path from './paths';
-
-// import Header from "./components/header/Header"
 import Header from './components/Header-Footer/Header'
 import Home from "./components/home/Home"
 import GameList from './components/game-list/GameList';
@@ -15,6 +13,7 @@ import Register from './components/register/Register';
 import GameEdit from './components/game-edit/GameEdit';
 import ErrorBoundary from './components/ErrorBoundary';
 import AuthGuard from './components/guards/AuthGuard';
+import Example from './components/newComponent';
 // import GameDetails from './components/game-details/GameDetails';
 const GameDetails = lazy(() => import('./components/game-details/GameDetails'));
 
@@ -22,8 +21,9 @@ function App() {
     return (
         <ErrorBoundary>
             <AuthProvider>
-                <div id="box">
+               <div id="box">
                     <Header />
+                            <Example />
                     <Suspense fallback={<h1>Loading...</h1>}>
                         <Routes>
                             <Route path={Path.Home} element={<Home />} />
