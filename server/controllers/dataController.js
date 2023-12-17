@@ -16,7 +16,10 @@ dataController.get('/', async (req, res) => {
     res.json(items);
 });
 
-dataController.post('/', hasUser(), async (req, res) => {
+dataController.post('/', 
+hasUser(), 
+// req.user._id = '54883',
+async (req, res) => {
     try {
         const data = Object.assign({ _ownerId: req.user._id }, req.body);
         const item = await create(data);
