@@ -1,0 +1,76 @@
+// {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+//     "version": "2.0.0",
+//     "tasks": [
+//         {
+//             "label": "echo",
+//             "type": "shell",
+//             "command": "echo Hello"
+//         }
+//     ]
+// }
+
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm run dev (client)",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "dev"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/client"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "nodemon (server)",
+      "type": "shell",
+      "command": "nodemon",
+      "args": [
+        "index.js"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/server"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Start Dev Environment",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "npm run dev (client)",
+        "nodemon (server)"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
+
+
+
+

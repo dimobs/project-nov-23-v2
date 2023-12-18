@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "nodemon (server)",
+        "type": "shell",
+        "command": "nodemon",
+        "args": ["index.js"], 
+        
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "options": {
+          "cwd": "${workspaceFolder}/server"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        },
+        "problemMatcher": []
+      }
+    ]
+  }
+  

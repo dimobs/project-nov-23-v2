@@ -15,38 +15,34 @@ import ErrorBoundary from './components/ErrorBoundary';
 import AuthGuard from './components/guards/AuthGuard';
 // import GameDetails from './components/game-details/GameDetails';
 const GameDetails = lazy(() => import('./components/game-details/GameDetails'));
-import { useState, useEffect } from 'react';
 
 function App() {
-const [theme, setTheme] = useState(null);
+// const [theme, setTheme] = useState(null);
 
-useEffect(() =>{
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches){
-setTheme('dark');
-    }else {
-        setTheme('light');
-    }
-}, []);
+// useEffect(() =>{
+//     if (window.matchMedia('(prefers-color-scheme: dark)').matches){
+// setTheme('dark');
+//     }else {
+//         setTheme('light');
+//     }
+// }, []);
 
-useEffect(() => {
-if (theme === "dark"){
-    document.documentElement.classList.add("dark");
-}else {
-    document.documentElement.classList.remove("dark");
-}
-}, [theme]);
+// useEffect(() => {
+// if (theme === "dark"){
+//     document.documentElement.classList.add("dark");
+// }else {
+//     document.documentElement.classList.remove("dark");
+// }
+// }, [theme]);
 
-const handleThemeSwitch = () => {
-    setTheme(theme === "dark" ? 'light' : 'dark')
-}
+// const handleThemeSwitch = () => {
+//     setTheme(theme === "dark" ? 'light' : 'dark')
+// }
 
     return (
         <ErrorBoundary>
             <AuthProvider>
-               <div id="box" className='h-screen bg-white dark:bg-slate-900 dark:text-white flex justify-center items-center' >
-                <button className='bg-green-200 p-4 rounded-3xl' onClick={handleThemeSwitch}>
-                    Dark Mode
-                    </button>
+            <div id="box" className='h-screen bg-white dark:bg-slate-900 dark:text-white flex justify-center items-center' >
                     <Header />
                     <Suspense fallback={<h1>Loading...</h1>}>
                         <Routes>
