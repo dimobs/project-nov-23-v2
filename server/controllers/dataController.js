@@ -18,7 +18,6 @@ dataController.get('/', async (req, res) => {
 
 dataController.post('/', 
 hasUser(), 
-// req.user._id = '54883',
 async (req, res) => {
     try {
         const data = Object.assign({ _ownerId: req.user._id }, req.body);

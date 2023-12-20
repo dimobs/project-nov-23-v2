@@ -4,6 +4,7 @@ const initDB = require('./config/database');
 const cors = require('./middlewares/cors');
 const authController = require('./controllers/authController');
 const dataController = require('./controllers/dataController');
+const roomController = require('./controllers/roomController')
 const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
 
@@ -30,6 +31,12 @@ async function start() {
 
     app.use('/users', authController);
     app.use('/data/catalog', dataController);
+    // app.use('/data/rooms', roomController);
+
+    app.post('/data/rooms', (req, res) => {
+        console.log(req.body);
+        res.end();
+    })
 
 app.listen(config.PORT, () => console.log(`http://localhost:${config.PORT} App is running on `));
 
