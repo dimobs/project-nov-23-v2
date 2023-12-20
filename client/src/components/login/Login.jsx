@@ -19,37 +19,108 @@ export default function Login() {
     const imputField = FocusImput();
 
     return (
-        <section id="login-page" className="auth">
-            <form id="login" onSubmit={onSubmit}>
-
-                <div className="container">
-                    <div className="brand-logo"></div>
-                    <h1>Login</h1>
-                    <label htmlFor="email">Email:</label>
+        <div className="dark:bg-slate-900 dark:text-white min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
+          <div className="sm:mx-auto sm:w-full sm:max-w-md">
+            <img
+              className="mx-auto h-12 w-auto"
+              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              alt="Workflow"
+            />
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 shadow-inner dark:text-white">
+            Login
+            </h2>
+            <p className="mt-2 text-center text-sm text-gray-600 max-w dark:text-green-300">
+              Not registered?
+              <a
+                href="\register"
+                className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-orange-200 dark:hover:text-indigo-100"
+              >
+                Login
+              </a>
+            </p>
+          </div>
+          <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div className="bg-slate-100 dark:bg-slate-600 dark:text-green-100 py-8 px-6 shadow rounded-lg sm:px-10">
+              <form className=" mb-0 space-y-6" action="#" onSubmit={onSubmit}>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 dark:text-green-100"
+                  >
+                    Email:
+                  </label>
+                  <div className="mt-1">
                     <input
-                        type="email"
-                        id="email"
-                        name={LoginFormKyes.Email}
-                        placeholder="Sokka@gmail.com"
-                        onChange={onChange}
+                      id="email"
+                      name={LoginFormKyes.Email}
+                      type="email"
+                      autoComplete="email"
+                      required=""
+                      className="text-amber-900 font-bold"
+                      onChange={onChange}
                         value={values[LoginFormKyes.Email]}
                         ref={imputField}
                     />
-
-                    <label htmlFor="login-pass">Password:</label>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-700 dark:text-green-100"
+                  >
+                    Password
+                  </label>
+                  <div className="mt-1">
                     <input
-                        type="password"
-                        id="login-password"
-                        name={LoginFormKyes.Password}
+                      id="password"
+                      type="password"
+                      autoComplete="current-password"
+                      required=""
+                      className="text-zinc-500"
+                      name={LoginFormKyes.Password}
                         onChange={onChange}
                         value={values[LoginFormKyes.Password]}
-                    />
-                    <input type="submit" className="btn submit" value="Login" />
-                    <p className="field">
-                        <span>If you don't have profile click <Link to="/register">here</Link></span>
-                    </p>
+                  />
+                  </div>
                 </div>
-            </form>
-        </section>
-    );
-}
+      
+        
+        
+                <div className="flex items-center">
+                  <input
+                    id="terms-and-privacy"
+                    name="terms-and-privacy"
+                    type="checkbox"
+                    className=""
+                  />
+                  <label
+                    htmlFor="terms-and-privacy"
+                    className="ml-2 block text-sm text-gray-900 dark:text-green-100"
+                  >
+                    I agree to the
+                    <a href="#" className="text-indigo-600 hover:text-indigo-500 dark:text-green-300">
+                      Terms
+                    </a>
+                    and
+                    <a href="#" className="text-indigo-600 hover:text-indigo-500 dark:text-green-300">
+                      Privacy Policy
+                    </a>
+                    .
+                  </label>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white"
+                  >
+                    login
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        
+        )
+    }

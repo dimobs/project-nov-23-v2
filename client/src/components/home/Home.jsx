@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import withAuth from "../../HOC/withAuth";
 import * as gameService from '../../services/gameService';
-import LatestGame from "./latest-game/LatestGame";
+import LatestGame from "../latest-game/LatestGame";
 
 function Home({
     _id,
@@ -16,7 +16,7 @@ function Home({
     }, [])
 
     return (
-        <section id="welcome-world">
+        <section id="welcome-world" className="bg-gradient-to-t from-orange-400 h-96 min-h-0 hover:min-h-full dark:bg-gray-800">
 
             <div className="welcome-message">
                 <h2>ALL new games are</h2>

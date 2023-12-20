@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Path from "../../../paths";
-import { pathToUrl } from "../../../utils/pathUtils";
+import Path from "../../paths";
+import { pathToUrl } from "../../utils/pathUtils";
 
 export default function LatestGame({
     _id,

@@ -13,6 +13,9 @@ import Register from './components/register/Register';
 import GameEdit from './components/game-edit/GameEdit';
 import ErrorBoundary from './components/ErrorBoundary';
 import AuthGuard from './components/guards/AuthGuard';
+import AboutUs from './components/AboutUs/AboutUs';
+import CreateRoom from './components/Administrator/createRoom';
+import AllRooms from './home/All-rooms';
 // import GameDetails from './components/game-details/GameDetails';
 const GameDetails = lazy(() => import('./components/game-details/GameDetails'));
 
@@ -42,24 +45,31 @@ function App() {
     return (
         <ErrorBoundary>
             <AuthProvider>
-            <div id="box" className='h-screen bg-white dark:bg-slate-900 dark:text-white flex justify-center items-center' >
+            {/* <div id="box" className='h-screen bg-white dark:bg-slate-900 dark:text-white flex justify-center items-center' > */}
+            <div id="box" className='dark:text-green-100 white dark:bg-slate-500' >
                     <Header />
+                </div>
                     <Suspense fallback={<h1>Loading...</h1>}>
+                        <div className=" dark:text-white dark:bg-slate-700 ">
+
                         <Routes>
-                            <Route path={Path.Home} element={<Home />} />
+                            {/* <Route path={Path.Home} element={<Home />} /> */}
+                            <Route path='/' element={<AllRooms />} />
                             <Route path="/games" element={<GameList />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/games/:gameId" element={<GameDetails />} />
+                            <Route path='/about' element={<AboutUs />} />
 
                             <Route element={<AuthGuard />}>
                                 <Route path="/games/create" element={<GameCreate />} />
+                                <Route path="/admin/createRoom" element={<CreateRoom />} />
                                 <Route path={Path.GameEdit} element={<GameEdit />} />
                                 <Route path={Path.Logout} element={<Logout />} />
                             </Route>
                         </Routes>
+                        </div>
                     </Suspense>
-                </div>
             </AuthProvider>
         </ErrorBoundary>
     )
