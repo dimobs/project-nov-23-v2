@@ -1,15 +1,17 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // import withAuth from "../../HOC/withAuth";
-// import * as gameService from '../../services/gameService';
+import * as roomService from '../services/roomService';
 // import LatestGame from "./latest-game/LatestGame";
 
-export default function AllRooms() {
-    // const [latestGames, setLatestGames] = useState([]);
+import RoomItem from "../components/Administrator/RoomItem";
 
-    // useEffect(() => {
-    //     gameService.getLatest()
-    //         .then(result => setLatestGames(result));
-    // }, [])
+export default function AllRooms() {
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        roomService.getAll()
+            .then(result => setRooms(result));
+    }, [])
 
     return (
         <>
@@ -30,106 +32,14 @@ export default function AllRooms() {
                     </span>
                   </div>
                   <div className="flex flex-wrap w-full">
-                    <div className="flex flex-col mr-5 text-center mb-11 lg:mr-16">
-                      <div className="inline-block mb-4 relative shrink-0 rounded-[.95rem]">
-                        <img
-                          className="inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]"
-                          src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/avatars/avatar11.jpg"
-                          alt="avarat image"
-                        />
-                      </div>
-                      <div className="text-center">
-                        <a
-                          href="javascript:void(0)"
-                          className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out"
-                        >
-                          Samantha Reynolds
-                        </a>
-                        <span className="block font-medium text-muted">
-                          Marketing Manager
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex flex-col mr-5 text-center mb-11 lg:mr-16">
-                      <div className="inline-block mb-4 relative shrink-0 rounded-[.95rem]">
-                        <img
-                          className="inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]"
-                          src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/avatars/avatar2.jpg"
-                          alt="avarat image"
-                        />
-                      </div>
-                      <div className="text-center">
-                        <a
-                          href="javascript:void(0)"
-                          className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out"
-                        >
-                          Benjamin Martinez
-                        </a>
-                        <span className="block font-medium text-muted">
-                          Sales Executive
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex flex-col mr-5 text-center mb-11 lg:mr-16">
-                      <div className="inline-block mb-4 relative shrink-0 rounded-[.95rem]">
-                        <img
-                          className="inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]"
-                          src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/avatars/avatar5.jpg"
-                          alt="avarat image"
-                        />
-                      </div>
-                      <div className="text-center">
-                        <a
-                          href="javascript:void(0)"
-                          className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out"
-                        >
-                          Emily Turner
-                        </a>
-                        <span className="block font-medium text-muted">
-                          Customer Support
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex flex-col mr-5 text-center mb-11 lg:mr-16">
-                      <div className="inline-block mb-4 relative shrink-0 rounded-[.95rem]">
-                        <img
-                          className="inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]"
-                          src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/avatars/avatar24.jpg"
-                          alt="avarat image"
-                        />
-                      </div>
-                      <div className="text-center">
-                        <a
-                          href="javascript:void(0)"
-                          className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out"
-                        >
-                          Jason Anderson
-                        </a>
-                        <span className="block font-medium text-muted">
-                          Development Engineer
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex flex-col mr-5 text-center mb-11 lg:mr-16">
-                      <div className="inline-block mb-4 relative shrink-0 rounded-[.95rem]">
-                        <img
-                          className="inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]"
-                          src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/avatars/avatar23.jpg"
-                          alt="avarat image"
-                        />
-                      </div>
-                      <div className="text-center">
-                        <a
-                          href="javascript:void(0)"
-                          className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out"
-                        >
-                          Olivia Carter
-                        </a>
-                        <span className="block font-medium text-muted">
-                          Creative Director
-                        </span>
-                      </div>
-                    </div>
+                  {rooms.map(r => 
+<RoomItem
+key={r.name}
+name={r.name}
+description={r.description}
+url={r.url}
+/>
+  )}
                   </div>
                 </div>
               </div>

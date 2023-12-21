@@ -29,7 +29,6 @@ export const getLatest = async () => {
 }
 
 export const create = async (roomData) => {
-
     const result = await request.post(baseUrl, roomData);
 
     return result;

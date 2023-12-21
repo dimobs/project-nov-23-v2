@@ -2,7 +2,7 @@ const buildOptions = (data) => {
     const options = {};
 
     if (data) {
-     console.log(data);
+     console.log('client/src/lib/request', data);
         options.body = JSON.stringify(data);
         options.headers = {
             'content-type': 'application/json'

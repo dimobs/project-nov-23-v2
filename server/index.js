@@ -7,9 +7,25 @@ const dataController = require('./controllers/dataController');
 const roomController = require('./controllers/roomController')
 const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
+const uniqid = require('uniqid')
 
 
 const connectionString = 'mongodb://localhost:27017/furniture4';
+
+const products = [ 
+    {
+        id: 'ssda3',
+    name: 'Room1',
+    descriotion: 'Some description',
+    url: 'http://dir.bg'
+},
+{
+    id: 'ssda4',
+    name: 'Room2',
+    descriotion: 'Some description2',
+    url: 'http://omg.bg'
+},
+];
 
 start();
 
@@ -31,13 +47,7 @@ async function start() {
 
     app.use('/users', authController);
     app.use('/data/catalog', dataController);
-    // app.use('/data/rooms', roomController);
-
-    app.post('/data/rooms', (req, res) => {
-        console.log(req.body);
-        res.end();
-    })
+    app.use('/data/rooms', roomController);
 
 app.listen(config.PORT, () => console.log(`http://localhost:${config.PORT} App is running on `));
-
 }
