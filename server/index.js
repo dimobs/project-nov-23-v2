@@ -7,7 +7,6 @@ const dataController = require('./controllers/dataController');
 const roomController = require('./controllers/roomController')
 const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
-const uniqid = require('uniqid')
 
 
 const connectionString = 'mongodb://localhost:27017/furniture4';

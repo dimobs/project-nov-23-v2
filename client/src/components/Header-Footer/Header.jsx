@@ -30,8 +30,6 @@ useEffect(() => {
     //        setDarkMode(true)
     }else {
         setDarkMode(localStorage.getItem("darkMode") === "true");
-        console.log(localStorage.getItem("darkMode") === "true");
-        console.log(setDarkMode);
     }
 }, [darkMode]);
 

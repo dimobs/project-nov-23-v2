@@ -4,12 +4,11 @@ export default function TodoList({
     id,
     todoDescript,
     completed,
-    chnageStatusHandler
-
+    deleteItemHandler
 }) {
 
    const changeStatus = () => {
-    chnageStatusHandler(id);
+    deleteItemHandler(id);
    }
 
     return (

@@ -8,16 +8,17 @@ export default function CreateRoom () {
 const navigate = useNavigate();
 const [rooms, setRoom] = useState([]);
 
+
 useEffect(() => {
   try {
 fetch('http://localhost:3030/data/rooms')
-.then(res => res.json()
+.then(res => res.json())
 .then(data => setRoom(Object.values(data)))
-)
   }catch (err) {
     console.log(err);
   }
-},[rooms])
+},[]);
+
 const createRoomsSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -32,6 +33,11 @@ const createRoomsSubmitHandler = async (e) => {
     }
 
 
+};
+
+const deleteItemHandler = (roomId) => {
+  setRoom(rooms.filter(r => r.id !==roomId))
+  // setRoom(rooms.filter(r => r.id !== id));
 }
 
     return (
@@ -74,14 +80,16 @@ const createRoomsSubmitHandler = async (e) => {
                 </span>
               </div>
               <div className="flex flex-wrap w-full">
-              {rooms.map(r => 
-<RoomItem 
-key={r.name}
-name={r.name}
-description={r.description}
-url={r.url}
-/>
-  )}
+              {rooms.map(r => (
+                  <RoomItem 
+                  key={r.id}
+                  id={r.id}
+                  name={r.name}
+                  description={r.description}
+                  url={r.url}
+                  deleteItemHandler={deleteItemHandler}
+                  />
+                    ))}
   </div>
             </div>
           </div>
