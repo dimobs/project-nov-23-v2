@@ -15,6 +15,7 @@ export default function RoomDetails() {
     useEffect(() => {
         roomService.getOne(id)
             .then(result => {
+                console.log(result);
                 setRoom(result);
             });
     }, [id]);
