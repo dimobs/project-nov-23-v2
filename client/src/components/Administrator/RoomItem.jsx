@@ -1,14 +1,12 @@
+import {Link} from 'react-router-dom'
+
 export default function RoomItem ({
   id,
   name,
   description,
   url,
-  deleteItemHandler
 }) {
 
-  const onDelItem = () => {
-    deleteItemHandler(id);
-  };
 
   return (
     <>
@@ -22,20 +20,18 @@ export default function RoomItem ({
                     />
                   </div>
                   <div className="text-center">
-                    <a
+                    <a style={{color: 'green'}}
                       href="javascript:void(0)"
                       className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out"
                     >
-                     {id}
-                    {name}
+                    {name} {id}
                     </a>
                     <span className="block font-medium text-muted">
                      {description}
                     </span>
                   </div>
                   <div className="flex items-center">
-                  <button onClick={onDelItem} className="mr-10 inline-block">Delete</button>
-                  {/* <button className="inline">Edit</button> */}
+                  <Link to={`/rooms/${id}`}  className="mr-10 inline-block">Details</Link>
                   </div>
                 </div>
         

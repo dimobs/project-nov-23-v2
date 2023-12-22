@@ -34,7 +34,8 @@ export default function AllRooms() {
                   <div className="flex flex-wrap w-full">
                   {rooms.map(r => 
 <RoomItem
-key={r.name}
+key={r.id}
+id={r.id}
 name={r.name}
 description={r.description}
 url={r.url}

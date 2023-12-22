@@ -35,10 +35,10 @@ const createRoomsSubmitHandler = async (e) => {
 
 };
 
-const deleteItemHandler = (roomId) => {
-  setRoom(rooms.filter(r => r.id !==roomId))
-  // setRoom(rooms.filter(r => r.id !== id));
-}
+// const deleteItemHandler = (roomId) => {
+//   setRoom(rooms.filter(r => r.id !==roomId))
+//   // setRoom(rooms.filter(r => r.id !== id));
+// }
 
     return (
 
@@ -51,9 +51,9 @@ const deleteItemHandler = (roomId) => {
       Name: <input type="text" name="name"   className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name room..."/>
     </label>
 
-    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your description:</label>
+    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your description:
     <textarea id="message" name="description" rows="4" className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your description..."></textarea>
-
+    </label>
     
     <label className="m-3 block text-sm font-medium text-gray-700 dark:text-green-100">
       url: <input type="text" name="url"   className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your url resource..."/>
@@ -87,9 +87,11 @@ const deleteItemHandler = (roomId) => {
                   name={r.name}
                   description={r.description}
                   url={r.url}
-                  deleteItemHandler={deleteItemHandler}
+                  // deleteItemHandler={deleteItemHandler}
                   />
-                    ))}
+
+                  ))}
+                  {rooms.length === 0 && <h2 style={{color: 'red'}}>No rooms added yet! </h2>}
   </div>
             </div>
           </div>

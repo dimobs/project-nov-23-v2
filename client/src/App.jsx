@@ -4,7 +4,7 @@ import { AuthProvider } from './contexts/authContext';
 import '../src/input.css'
 import Path from './paths';
 import Header from './components/Header-Footer/Header'
-import Home from "./components/home/Home"
+// import Home from "./components/home/Home"
 import GameList from './components/game-list/GameList';
 import GameCreate from './components/game-create/GameCreate';
 import Login from './components/login/Login';
@@ -16,6 +16,7 @@ import AuthGuard from './components/guards/AuthGuard';
 import AboutUs from './components/AboutUs/AboutUs';
 import CreateRoom from './components/Administrator/createRoom';
 import AllRooms from './home/All-rooms';
+import RoomDetails from './components/Administrator/room-edit/RoomDetails';
 // import GameDetails from './components/game-details/GameDetails';
 const GameDetails = lazy(() => import('./components/game-details/GameDetails'));
 
@@ -64,6 +65,7 @@ function App() {
                             <Route element={<AuthGuard />}>
                                 <Route path="/games/create" element={<GameCreate />} />
                                 <Route path="/admin/createRoom" element={<CreateRoom />} />
+                                <Route path="/rooms/:id" element={<RoomDetails />} />
                                 <Route path={Path.GameEdit} element={<GameEdit />} />
                                 <Route path={Path.Logout} element={<Logout />} />
                             </Route>
