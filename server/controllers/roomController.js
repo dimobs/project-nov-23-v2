@@ -1,6 +1,6 @@
 const roomController = require('express').Router();
 const { hasUser } = require('../middlewares/guards');
-const Rooms = require('../room');
+const Rooms = require('../rooms');
 
 const { getAll, create, getById, update, deleteById, getByUserId } = require('../services/itemService');
 const { parseError } = require('../util/parser');
@@ -41,9 +41,14 @@ roomController.get('/', (req, res) => {
     res.json(Rooms)
    });
 
-//    dataController.get('/:id', async (req, res, next) => {
-//     const room = await getById(req.params.id);
-//     res.json(Rooms);
-// });
+   roomController.get('/:id', (req, res) => {
+    // const room = Room. (req.params.id);
+    try {
+        const result = Rooms.find(r => r.id === req.params.id)
+        res.json(result);
+    }catch(err) {
+        console.log('Wrong or incomplete item!');
+    }
+});
 
 module.exports = roomController;
