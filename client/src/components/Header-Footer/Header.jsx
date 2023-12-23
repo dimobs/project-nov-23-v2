@@ -92,7 +92,7 @@ return (
         <div className="inline"
           onClick={switchmode} > {!darkMode 
              ? <svg xmlns="http:www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" data-slot="icon" className="w-5 h-5">
-             <path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z" clip-rule="evenodd" />
+             <path fillRule="evenodd" d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z" clipRule="evenodd" />
            </svg>
           
              : 
@@ -135,7 +135,7 @@ return (
 
     </div>
     <div id="user">
-      <Link to="javascript:void(0)" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout {email}</Link>
+      <Link to="" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout {email}</Link>
     </div>
   </div>
 </nav>

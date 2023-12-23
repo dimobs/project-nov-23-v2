@@ -1,23 +1,22 @@
-import { useNavigate, useParams } from 'react-router-dom';
-
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import * as roomService from '../../../services/roomService';
 import { useEffect, useState } from 'react';
 
-export default function RoomDetails() {
-    const navigate = useNavigate();
-    const { id } = useParams();
-    const [room, setRoom] = useState({
-        name: '',
-        description: '',
-        url: '',
-    });
 
-    useEffect(() => {
+export default function RoomDetails() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [room, setRoom] = useState({
+    name: '',
+    description: '',
+    url: '',
+  });
+  
+  useEffect(() => {
         roomService.getOne(id)
             .then(result => {
-                console.log(result);
                 setRoom(result);
-            });
+            })
     }, [id]);
 
     const editRoomSubmitHandler = async (e) => {
@@ -41,6 +40,14 @@ export default function RoomDetails() {
             [e.target.name]: e.target.value
         }));
     };
+
+    const deleteButtonClickHandler = async () => {
+      const hasConfirmed = confirm(`Are you sure you want to delete ${room.name} `);
+
+      if (hasConfirmed) {
+        await roomService.remove(id)
+      }
+    }
 
 return (
 
@@ -196,12 +203,23 @@ return (
       </div>
     </div>
     <div className="p-6 pt-3">
-      <button
+    <Link>  <button
         className="block w-full select-none rounded-lg bg-pink-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
         type="button"
         data-ripple-light="true"
       >
-        Reserve
+        Edit
+      </button>
+      </Link>
+    </div>
+    <div className="p-6 pt-3">
+      <button
+        className="block w-full select-none rounded-lg bg-pink-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        type="button"
+        data-ripple-light="true"
+        onClick={deleteButtonClickHandler}
+      >
+        Delete
       </button>
     </div>
   </div>

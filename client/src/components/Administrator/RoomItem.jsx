@@ -21,7 +21,7 @@ export default function RoomItem ({
                   </div>
                   <div className="text-center">
                     <a style={{color: 'green'}}
-                      href="javascript:void(0)"
+                      // href="javascript:void(0)"
                       className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out"
                     >
                     {name} {id}

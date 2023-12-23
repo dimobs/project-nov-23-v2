@@ -4,13 +4,18 @@ import * as roomService from '../services/roomService';
 // import LatestGame from "./latest-game/LatestGame";
 
 import RoomItem from "../components/Administrator/RoomItem";
+import Spinner from "../components/Administrator/Spinner";
 
 export default function AllRooms() {
     const [rooms, setRooms] = useState([]);
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
+      setIsLoading(true);
+
         roomService.getAll()
-            .then(result => setRooms(result));
+            .then(result => setRooms(result))
+            .finally(() => setIsLoading(false))
     }, [])
 
     return (
@@ -41,6 +46,8 @@ description={r.description}
 url={r.url}
 />
   )}
+
+  {isLoading && <Spinner />}
                   </div>
                 </div>
               </div>
