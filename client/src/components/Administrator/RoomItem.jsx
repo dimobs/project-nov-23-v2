@@ -24,14 +24,14 @@ export default function RoomItem ({
                       // href="javascript:void(0)"
                       className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out"
                     >
-                    {name} {id}
+                    {name}
                     </a>
                     <span className="block font-medium text-muted">
                      {description}
                     </span>
                   </div>
                   <div className="flex items-center">
-                  <Link to={`/rooms/${id}`}  className="mr-10 inline-block">Details</Link>
+                  <Link to={`/rooms/${id}`}    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white" >Details</Link>
                   </div>
                 </div>
         

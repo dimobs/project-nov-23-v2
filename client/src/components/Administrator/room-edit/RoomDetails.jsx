@@ -45,15 +45,19 @@ export default function RoomDetails() {
       const hasConfirmed = confirm(`Are you sure you want to delete ${room.name} `);
 
       if (hasConfirmed) {
-        await roomService.remove(id)
+        await roomService.remove(id).catch
+
+        navigate('/admi/createRoom')
+      }else {
+       navigate('/') 
       }
     }
 
 return (
 
 <>
-<div className='origin-center justify-center bg-center place-self-center origin-center align-middle place-items-center bg-slate-500' >
-  <div className="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg  dark:bg-black ">
+<div className=' bg-center place-self-center origin-center align-middle place-items-center bg-slate-500 pt-10' >
+  <div className="w-full pt-5 px-4 mb-8 mx-auto relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-orange-900  dark:bg-black ">
     <div className="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
       <img
         src={room.url}
@@ -224,33 +228,7 @@ return (
     </div>
   </div>
   <div className="w-full pt-5 px-4 mb-8 mx-auto ">
-    <div className="text-sm text-gray-700 py-1">
-      Made with{" "}
-      <a
-        className="text-gray-700 font-semibold"
-        href="https://www.material-tailwind.com/docs/html/card?ref=tailwindcomponents"
-        target="_blank"
-      >
-        Material Tailwind
-      </a>{" "}
-      by{" "}
-      <a
-        href="https://www.creative-tim.com?ref=tailwindcomponents"
-        className="text-gray-700 font-semibold"
-        target="_blank"
-      >
-        {" "}
-        Creative Tim
-      </a>
-      .
-    </div>
   </div>
-  {/* stylesheet */}
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
-  />
-  {/* from cdn */}
   </div>
 </>
 

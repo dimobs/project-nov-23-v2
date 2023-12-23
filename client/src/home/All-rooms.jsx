@@ -28,12 +28,15 @@ export default function AllRooms() {
                 <div>
                   <div className="mb-9">
                     <h1 className="mb-2 text-[1.75rem] font-semibold text-dark">
-                      Our Executive Team
+                    ulitsa "Tsar Asen I" 95, 8000 Burgas City, Bulgaria
                     </h1>
                     <span className="text-[1.15rem] font-medium text-muted">
                       {" "}
-                      Meet our talented team, a dynamic group of experts driven by
-                      passion and innovation.{" "}
+                      Set in Burgas City, 1.6 km from Burgas Central Beach and 2.2 km from North Beach Burgas, Sweet Home offers air-conditioned accommodation with a terrace and free WiFi. This apartment provides accommodation with a balcony. Poda Birdwatching Spot is 11 km away and Burgas Saltworks is 11 km from the apartment.
+
+The spacious apartment has 2 bedrooms, a flat-screen TV with cable channels, a fully equipped kitchen with a dishwasher and an oven, a washing machine, and 1 bathroom with a shower. Additional in-room amenities include chocolates or cookies.
+
+Popular points of interest near the apartment include Burgas Opera House, Burgas Central Railway Station and Yug (South) Bus Station. The nearest airport is Burgas Airport, 15 km from Sweet Home.{" "}
                     </span>
                   </div>
                   <div className="flex flex-wrap w-full">
@@ -56,23 +59,23 @@ url={r.url}
         </div>
         <div className="flex flex-wrap -mx-3 mb-5">
           <div className="w-full max-w-full sm:w-3/4 mx-auto text-center">
-            <p className="text-sm text-slate-500 py-1">
+            <p className="text-sm text-slate-500 py-1 dark:text-slate-400">
               {" "}
-              Tailwind CSS Component from{" "}
+         This project was created by{" "}
               <a
-                href="https://www.loopple.com/theme/riva-dashboard-tailwind?ref=tailwindcomponents"
-                className="text-slate-700 hover:text-slate-900"
+                href="https://portfolio-dimo.web.app/"
+                className="text-slate-700 hover:text-slate-900 dark:text-slate-200"
                 target="_blank"
               >
-                Riva Dashboard
+               Dimo Karachorbadzhiev
               </a>{" "}
-              by{" "}
+              Go to...{" "}
               <a
-                href="https://www.loopple.com"
-                className="text-slate-700 hover:text-slate-900"
+                href="https://www.linkedin.com/in/dimo-karachorbadzhiev-313418123/"
+                className="text-slate-700 hover:text-slate-900 dark:text-slate-200"
                 target="_blank"
               >
-                Loopple Builder
+                LinkIn
               </a>
               .{" "}
             </p>
