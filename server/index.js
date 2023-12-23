@@ -9,23 +9,6 @@ const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
 
 
-const connectionString = 'mongodb://localhost:27017/furniture4';
-
-const products = [ 
-    {
-        id: 'ssda3',
-    name: 'Room1',
-    descriotion: 'Some description',
-    url: 'http://dir.bg'
-},
-{
-    id: 'ssda4',
-    name: 'Room2',
-    descriotion: 'Some description2',
-    url: 'http://omg.bg'
-},
-];
-
 start();
 
 async function start() {
