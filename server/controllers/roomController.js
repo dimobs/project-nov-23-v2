@@ -3,9 +3,10 @@ const roomController = require('express').Router();
 const { hasUser } = require('../middlewares/guards');
 const Rooms = require('../controllers/rooms');
 const path = require('path');
-const { getAll, create, getById, update, deleteById, getByUserId } = require('../services/itemService');
+const { getAll, create, getById, update, deleteById, getByUserId } = require('../services/roomService');
 const { parseError } = require('../util/parser');
 const uniqid = require('uniqid');
+const { log } = require('console');
 const roomsFilePath = path.join(__dirname, 'rooms.js')
 
 // roomController.post('/', (req, res) => {
@@ -68,10 +69,17 @@ roomController.post('/', (req, res) => {
             }
           });
 
-roomController.get('/', (req, res) => {
-    res.json(Rooms)
+roomController.get('/', async (req, res) => {
+    let rooms = [];
+    if (req.query.where) {
+        const roomId = JSON.parse(req.query.where.split('=')[1]);
+        rooms = await getByRoomId(roomId)
+    }else {
+        rooms = await getAll();
+    }
+    res.json(rooms);
    });
-
+ 
    roomController.get('/:id', (req, res) => {
     // const room = Room. (req.params.id);
     try {
@@ -86,6 +94,21 @@ roomController.delete('/:id', hasUser(), (req, res) => {
     const roomIndex = Rooms.findIndex(x => x.id === req.params.id);
     Rooms.splice(roomIndex, 1);
     res.status(202).end();
+});
+
+roomController.put('/:id', hasUser(), async (req, res, next) => {
+    // const room = await getById(req.params.id);
+    // if (req.user._id != item._ownerId) {
+    //     return res.status(403).json({ message: 'You cannot modify this record' });
+    // }
+
+    try {
+        const result = await update(req.params.id, req.body);
+        res.json(result);
+    } catch (err) {
+        const message = parseError(err);
+        res.status(400).json({ message });
+    }
 });
 
 module.exports = roomController;

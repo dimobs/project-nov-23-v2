@@ -17,7 +17,7 @@ fetch('http://localhost:3030/data/rooms')
   }catch (err) {
     console.log(err);
   }
-},[]);
+},[rooms]);
 
 const createRoomsSubmitHandler = async (e) => {
     e.preventDefault();

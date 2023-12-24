@@ -8,8 +8,8 @@ export const getAll = async () => {
     return result;
 };
 
-export const getOne = async (gameId) => {
-    const result = await request.get(`${baseUrl}/${gameId}`, );
+export const getOne = async (id) => {
+    const result = await request.get(`${baseUrl}/${id}`, );
 
     return result;
 }

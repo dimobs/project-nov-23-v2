@@ -17,6 +17,7 @@ import AboutUs from './components/AboutUs/AboutUs';
 import CreateRoom from './components/Administrator/createRoom';
 import AllRooms from './home/All-rooms';
 import RoomDetails from './components/Administrator/room-edit/RoomDetails';
+import RoomEdit from './components/Administrator/room-edit/roomEdit';
 // import GameDetails from './components/game-details/GameDetails';
 const GameDetails = lazy(() => import('./components/game-details/GameDetails'));
 
@@ -66,6 +67,7 @@ function App() {
                                 <Route path="/games/create" element={<GameCreate />} />
                                 <Route path="/admin/createRoom" element={<CreateRoom />} />
                                 <Route path="/rooms/:id" element={<RoomDetails />} />
+                                <Route path='/admin/edit-room/:id' element={<RoomEdit />} />
                                 <Route path={Path.GameEdit} element={<GameEdit />} />
                                 <Route path={Path.Logout} element={<Logout />} />
                             </Route>

@@ -16,7 +16,7 @@ export default function AllRooms() {
         roomService.getAll()
             .then(result => setRooms(result))
             .finally(() => setIsLoading(false))
-    }, [])
+    }, [rooms])
 
     return (
         <>
@@ -49,7 +49,7 @@ description={r.description}
 url={r.url}
 />
   )}
-
+{rooms.length === 0 && <h2 style={{color:"red", fontSize:"32px"}}>No rooms added yet!</h2>}
   {isLoading && <Spinner />}
                   </div>
                 </div>

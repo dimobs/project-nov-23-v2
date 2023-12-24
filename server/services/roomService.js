@@ -1,8 +1,9 @@
-const Item = require('../models/Item');
-
+const Rooms = require('../controllers/rooms');
+const path = require('path');
+const roomsFilePath = path.join(__dirname, 'rooms.js')
 
 async function getAll() {
-    return Item.find({});
+    return Rooms;
 }
 
 async function getByUserId(userId) {
@@ -17,18 +18,15 @@ async function create(item) {
     return Item.create(item);
 }
 
-async function update(id, item) {
-    const existing = await Item.findById(id);
-
-    existing.make = item.make;
-    existing.model = item.model;
-    existing.year = item.year;
-    existing.description = item.description;
-    existing.price = item.price;
-    existing.img = item.img;
-    existing.material = item.material;
-
-    return existing.save();
+async function update(id, editData) {
+    const existing = Rooms.findIndex(r => r.id === id)
+    Rooms.splice(existing, 1, editData )
+    
+    // existing.name = editData.name;
+    // existing.description = editData.description;
+    // existing.url = editData.url;
+    console.log(editData);
+    return existing;
 }
 
 async function deleteById(id) {
