@@ -28,11 +28,11 @@ export default function RoomEdit() {
         try {
             await roomService.edit(id, values);
 
-            navigate('/');
-        } catch (err) {
+          } catch (err) {
             // Error notification
             console.log(err);
-        }
+          }
+          navigate('/admin/createRoom');
     }
 
     const onChange = (e) => {
@@ -98,29 +98,6 @@ export default function RoomEdit() {
         </div>
         </form>
         </div>
-      
-        <div className="flex flex-wrap -mx-3 mb-5">
-            <div className="w-full max-w-full px-3 mb-6  mx-auto">
-              <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-dashed border-stone-200 bg-white m-5 dark:bg-black ">
-                {/* card body  */}
-                <div className="flex-auto block py-8 px-9">
-                  <div>
-                    <div className="mb-0">
-                      <h1 className="mb-2 text-[1.75rem] font-semibold text-dark">
-                        Our Executive Team
-                      </h1>
-                      <span className="text-[1.15rem] font-medium text-muted">
-                        {" "}
-                        Meet our talented team, a dynamic group of experts driven by
-                        passion and innovation.{" "}
-                      </span>
-                    </div>
-                     </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      
         </div>
           )
       }

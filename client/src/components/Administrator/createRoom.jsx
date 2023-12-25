@@ -43,7 +43,7 @@ const createRoomsSubmitHandler = async (e) => {
     return (
 
 <div className="max-w-6xl mx-auto">
-     <h1  className="text-center text-5xl mb-10 ">Admin Panel / Create Room in data</h1>
+     <h1  className="text-center text-5xl mb-10 ">Admin Panel / Create Room </h1>
   <div className=" bg-slate-100s dark:bg-slate-600 dark:text-green-100 py-8 px-6 shadow rounded-lg sm:px-10">
     <form  onSubmit={createRoomsSubmitHandler} className="m-20 padd block text-xs font-medium text-gray-700 dark:text-green-100">
   <div>
