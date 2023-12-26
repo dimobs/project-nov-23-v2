@@ -1,13 +1,13 @@
 const fs = require('fs');
 const roomController = require('express').Router();
 const { hasUser } = require('../middlewares/guards');
-const Rooms = require('../controllers/rooms');
+const Rooms = require('../rooms');
 const path = require('path');
 const { getAll, create, getById, update, deleteById, getByUserId } = require('../services/roomService');
 const { parseError } = require('../util/parser');
 const uniqid = require('uniqid');
 const { log } = require('console');
-const roomsFilePath = path.join(__dirname, 'rooms.js')
+const roomsFilePath = path.join('rooms.js')
 
 // roomController.post('/', (req, res) => {
 
