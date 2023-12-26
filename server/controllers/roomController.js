@@ -60,7 +60,7 @@ roomController.post('/', (req, res) => {
 
         existingRoom.push(newRoom);
         fs.writeFileSync(roomsFilePath, `module.exports = ${JSON.stringify(existingRoom, null, 2)};`, 'utf8');
-
+      
         res.status(201).json({ message: 'Room added successfully', room: newRoom });
 
     } catch (error) {
