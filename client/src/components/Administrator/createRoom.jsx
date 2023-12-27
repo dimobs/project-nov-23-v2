@@ -2,12 +2,25 @@ import { useNavigate } from 'react-router-dom';
 import * as roomService from '../../services/roomService';
 import { useEffect, useState } from 'react';
 import RoomItem from './RoomItem';
+import FocusImput from "../../hooks/focusInputForm";
 
+const FORM_INITIAL_STATE = {
+  name:"",
+  description:"",
+  url:"",
+  option: {
+    icon1:false,
+    icon2:false,
+    icon3:false
+  }
+};
 
 export default function CreateRoom () {
+  const inputFiled = FocusImput();
+  const [formValues, setFormValues] = useState(FORM_INITIAL_STATE);
+const [errors, setErrors] = useState([]);
 const navigate = useNavigate();
 const [rooms, setRoom] = useState([]);
-
 
 useEffect(() => {
   try {
@@ -24,9 +37,9 @@ const createRoomsSubmitHandler = async (e) => {
 
     const roomData = Object.fromEntries(new FormData(e.currentTarget));
       
-    
     try {
           await roomService.create(roomData);
+          resetFormHandler();
         navigate('/admin/createRoom');
     }catch (err) {
         console.log(err);
@@ -40,6 +53,19 @@ const createRoomsSubmitHandler = async (e) => {
 //   // setRoom(rooms.filter(r => r.id !== id));
 // }
 
+const reserFromHandler = () => {
+
+}
+
+const submitHandler = () => {
+  reserFromHandler();
+}
+
+const resetFormHandler = () => {
+  setFormValues(FORM_INITIAL_STATE);
+  setErrors({});
+};
+
     return (
 
 <div className="max-w-6xl mx-auto">
@@ -48,7 +74,12 @@ const createRoomsSubmitHandler = async (e) => {
     <form  onSubmit={createRoomsSubmitHandler} className="m-20 padd block text-xs font-medium text-gray-700 dark:text-green-100">
   <div>
     <label className="m-3 block text-sm font-medium text-gray-700 dark:text-green-100">
-      Name: <input type="text" name="name"   className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name room..."/>
+      Name: <input
+      type="text"
+      name="name"
+      className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name room..." 
+      ref={inputFiled} 
+      />
     </label>
 
     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your description:
@@ -58,7 +89,8 @@ const createRoomsSubmitHandler = async (e) => {
     <label className="m-3 block text-sm font-medium text-gray-700 dark:text-green-100">
       url: <input type="text" name="url"   className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your url resource..."/>
     </label>
-    <button  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white">+Create room</button>
+    <button className="mb-5 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white">+Create room</button>
+    <button onClick={submitHandler}  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white">Reset</button>
   </div>
   </form>
   </div>

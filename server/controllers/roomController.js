@@ -47,10 +47,23 @@ const roomsFilePath = path.join('rooms.js')
 //       res.status(201).json(newData)
 // });
 
+roomController.get('/', async (req, res) => {
+
+    let rooms = [];
+    if (req.query.where) {
+        const roomId = JSON.parse(req.query.where.split('=')[1]);
+        rooms = await getByRoomId(roomId)
+    } else {
+        rooms = await getAll();
+    }
+    res.json(rooms);
+});
 
 roomController.post('/', (req, res) => {
+    console.log('wrong');
     try {
-        const existingRoom = require(roomsFilePath);
+        const existingRoom = require('./rooms');
+        
         const newRoom = {
             id: uniqid(),
             name: req.body.name,
@@ -69,17 +82,6 @@ roomController.post('/', (req, res) => {
     }
 });
 
-roomController.get('/', async (req, res) => {
-
-    let rooms = [];
-    if (req.query.where) {
-        const roomId = JSON.parse(req.query.where.split('=')[1]);
-        rooms = await getByRoomId(roomId)
-    } else {
-        rooms = await getAll();
-    }
-    res.json(rooms);
-});
 
 roomController.get('/:id', (req, res) => {
     // const room = Room. (req.params.id);
@@ -89,12 +91,6 @@ roomController.get('/:id', (req, res) => {
     } catch (err) {
         console.log('Wrong or incomplete item!');
     }
-});
-
-roomController.delete('/:id', hasUser(), (req, res) => {
-    const roomIndex = Rooms.findIndex(x => x.id === req.params.id);
-    Rooms.splice(roomIndex, 1);
-    res.status(202).end();
 });
 
 roomController.put('/:id', hasUser(), async (req, res, next) => {
@@ -107,8 +103,6 @@ roomController.put('/:id', hasUser(), async (req, res, next) => {
     edutData.url = req.body.url;
 
     const index = Rooms.findIndex(i => i.id === req.params.id);
-
-   
 
     if (index !== -1) {
         Rooms[index] = { ...Rooms[index], ...edutData }
@@ -124,8 +118,15 @@ roomController.put('/:id', hasUser(), async (req, res, next) => {
         res.status(404).json({ message: 'Record not found' });
     }
 
-
 });
+
+roomController.delete('/:id', hasUser(), (req, res) => {
+    const roomIndex = Rooms.findIndex(x => x.id === req.params.id);
+    Rooms.splice(roomIndex, 1);
+    res.status(202).end();
+});
+
+
 // console.log(req.body);
 // const room = await getById(req.params.id);
 // if (req.user._id != item._ownerId) {

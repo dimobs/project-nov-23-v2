@@ -32,4 +32,5 @@ async function start() {
     app.use('/data/rooms', roomController);
 
 app.listen(config.PORT, () => console.log(`http://localhost:${config.PORT} App is running on `));
+// app.listen(config.PORT, () => console.log(`http://192.168.50.206:${config.PORT} App is running on `));
 }
