@@ -42,7 +42,7 @@ export default function RoomDetails() {
     };
 
     const deleteButtonClickHandler = async () => {
-      const hasConfirmed = confirm(`Are you sure you want to delete ${room.name} `);
+      const hasConfirmed = confirm(`Are you sure you want to delete Room ${room.name}?`);
 
       if (hasConfirmed) {
         await roomService.remove(id).catch

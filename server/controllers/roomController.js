@@ -1,144 +1,122 @@
-const fs = require('fs');
 const roomController = require('express').Router();
-const { hasUser } = require('../middlewares/guards');
-// const Rooms = require('../rooms');
+const fs = require('fs/promises'); // Using promises version for async/await
 const path = require('path');
-const { getAll, create, getById, update, deleteById, getByUserId } = require('../services/roomService');
-const { parseError } = require('../util/parser');
+const dataFilePath = path.join(__dirname, '../data/rooms.json');
 const uniqid = require('uniqid');
-const roomsFilePath = require('./data/rooms');
+const {hasUser} = require('../middlewares/guards');
 
-// roomController.post('/', (req, res) => {
-
-//      function readDataFromFile() {
-//         try {
-//           const fileContent = fs.readFileSync(filePath, 'utf8');
-//           return JSON.parse(fileContent);
-//         } catch (error) {
-//           // If the file doesn't exist or there's an error reading it, return an empty array
-//           return [];
-//         }
-//       }
-
-//       // Function to write data to the file
-//       function writeDataToFile(data) {
-//         fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
-//       }
-
-//       // Sample data received from the server
-//       const newData = {
-//         id: uniqid(),
-//         name: req.body.name,
-//         description: req.body.description,
-//         url: req.body.url
-//     };
-
-//       // Read existing data from the file
-//       const existingData = readDataFromFile();
-
-//       // Add the new data to the existing data
-//       existingData.push(newData);
-
-//       // Write the updated data back to the file
-//       writeDataToFile(existingData);
-
-//       console.log('Data saved successfully.');
-//       res.status(201).json(newData)
-// });
-
-roomController.get('/', async (req, res) => {
-
-    let rooms = [];
-    if (req.query.where) {
-        const roomId = JSON.parse(req.query.where.split('=')[1]);
-        rooms = await getByRoomId(roomId)
-    } else {
-        rooms = await getAll();
-    }
-    res.json(rooms);
-});
-
-roomController.post('/', hasUser(), (req, res) => {
+// Create a new room
+roomController.post('/', hasUser(), async (req, res) => {
     try {
-        const existingRoom = roomsFilePath;
-        const newRoom = {
-            id: uniqid(),
-            name: req.body.name,
-            description: req.body.description,
-            url: req.body.url
+        const { name, description, url } = req.body;
+        const rooms = await readDataFile();
+
+        const newRoom = { 
+          id: uniqid(),
+          name, 
+          description, url 
         };
-        existingRoom.push(newRoom);
-        fs.writeFileSync('./data/rooms.js', `module.exports = ${JSON.stringify(existingRoom, null, 2)};`, 'utf8');
-    
-        res.status(201).json({ message: 'Room added successfully', room: newRoom });
+        rooms.push(newRoom);
 
+        await writeDataFile(rooms);
+
+        res.status(201).json(newRoom);
     } catch (error) {
-        res.status(500).json({ message: 'Internal Server Error' });
-        console.error('Error adding room:', error.message);
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-
-roomController.get('/:id', (req, res) => {
-    // const room = Room. (req.params.id);
+//Read - Get all rooms
+roomController.get('/', async (req, res) => {
     try {
-        const result = roomsFilePath.find(r => r.id === req.params.id)
-        res.json(result);
-    } catch (err) {
-        console.log('Wrong or incomplete item!');
+        const rooms = await readDataFile();
+        res.json(rooms);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-roomController.put('/:id', hasUser(), async (req, res, next) => {
+// Get a specific room by ID
+roomController.get('/:id', async (req, res) => {
+    try {
+        const rooms = await readDataFile();
+        const room = rooms.find(r => r.id === req.params.id);
 
-    //sanitaizing
-    const editData = {};
-    editData.id = req.params.id
-    editData.name = req.body.name;
-    editData.description = req.body.description;
-    editData.url = req.body.url;
-
-    const index = roomsFilePath.findIndex(i => i.id === req.params.id);
-
-    if (index !== -1) {
-        roomsFilePath[index] = { ...roomsFilePath[index], ...editData }
-        try {
-            fs.writeFileSync('./data/rooms.js', `module.exports = ${JSON.stringify(roomsFilePath, null, 2)};`, 'utf8');
-            res.status(200).json({ message: 'Record updated successfully', data: roomsFilePath.find(item => item.id === req.params.id) });
-        } catch (error) {
-            console.error('Error updating record:', error);
-            res.status(500).json({ message: 'Internal server error' });
+        if (!room) {
+            return res.status(404).json({ error: 'Room not found' });
         }
-    } else {
-        res.status(404).json({ message: 'Record not found' });
+
+        res.json(room);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-
 });
 
-roomController.delete('/:id', hasUser(), (req, res) => {
-    const roomIndex = roomsFilePath.findIndex(x => x.id === req.params.id);
-    roomsFilePath.splice(roomIndex, 1);
-    res.status(202).end();
+// Update a room by ID
+roomController.put('/:id', hasUser(), async (req, res) => {
+    try {
+        const { name, description, url } = req.body;
+        let rooms = await readDataFile();
+
+        const index = rooms.findIndex(r => r.id === req.params.id);
+
+        if (index === -1) {
+            return res.status(404).json({ error: 'Room not found' });
+        }
+
+        rooms[index] = { ...rooms[index], name, description, url };
+
+        await writeDataFile(rooms);
+
+        res.json(rooms[index]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
+// Delete a room by ID
+roomController.delete('/:id', hasUser(), async (req, res) => {
+    try {
+        let rooms = await readDataFile();
 
-// console.log(req.body);
-// const room = await getById(req.params.id);
-// if (req.user._id != item._ownerId) {
-//     return res.status(403).json({ message: 'You cannot modify this record' });
-// }
+        const index = rooms.findIndex(r => r.id === req.params.id);
 
-//     try {
-//         const result = await update(req.params.id, req.body);
-//         return result
-//         // res.json(result);
-//     } catch (err) {
-//         const message = parseError(err);
-//         res.status(400).json({ message });
-//     }
-// });
+        if (index === -1) {
+            return res.status(404).json({ error: 'Room not found' });
+        }
+
+        const deletedRoom = rooms.splice(index, 1)[0];
+
+        await writeDataFile(rooms);
+
+        res.json(deletedRoom);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Helper function to read data from the file
+async function readDataFile() {
+    try {
+        const data = await fs.readFile(dataFilePath, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        // If the file doesn't exist, return an empty array
+        if (error.code === 'ENOENT') {
+            return [];
+        }
+        throw error;
+    }
+}
+
+// Helper function to write data to the file
+async function writeDataFile(data) {
+    await fs.writeFile(dataFilePath, JSON.stringify(data, null, 2), 'utf-8');
+}
 
 module.exports = roomController;
-
-
-
