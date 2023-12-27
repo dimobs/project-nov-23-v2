@@ -1,4 +1,4 @@
-const Rooms = require('../rooms');
+const Rooms = require('../controllers/data/rooms');
 const path = require('path');
 const roomsFilePath = path.join(__dirname, 'rooms.js')
 const fs = require('fs');

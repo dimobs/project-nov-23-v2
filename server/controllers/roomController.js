@@ -1,13 +1,12 @@
 const fs = require('fs');
 const roomController = require('express').Router();
 const { hasUser } = require('../middlewares/guards');
-const Rooms = require('../rooms');
+// const Rooms = require('../rooms');
 const path = require('path');
 const { getAll, create, getById, update, deleteById, getByUserId } = require('../services/roomService');
 const { parseError } = require('../util/parser');
 const uniqid = require('uniqid');
-const { log } = require('console');
-// const roomsFilePath = require('./rooms.js')
+const roomsFilePath = require('./data/rooms');
 
 // roomController.post('/', (req, res) => {
 
@@ -61,16 +60,15 @@ roomController.get('/', async (req, res) => {
 
 roomController.post('/', hasUser(), (req, res) => {
     try {
-        const existingRoom = require(Rooms);
+        const existingRoom = roomsFilePath;
         const newRoom = {
             id: uniqid(),
             name: req.body.name,
             description: req.body.description,
             url: req.body.url
         };
-
         existingRoom.push(newRoom);
-        fs.writeFileSync('../rooms.js', `module.exports = ${JSON.stringify(existingRoom, null, 2)};`, 'utf8');
+        fs.writeFileSync('./data/rooms.js', `module.exports = ${JSON.stringify(existingRoom, null, 2)};`, 'utf8');
     
         res.status(201).json({ message: 'Room added successfully', room: newRoom });
 
@@ -84,7 +82,7 @@ roomController.post('/', hasUser(), (req, res) => {
 roomController.get('/:id', (req, res) => {
     // const room = Room. (req.params.id);
     try {
-        const result = Rooms.find(r => r.id === req.params.id)
+        const result = roomsFilePath.find(r => r.id === req.params.id)
         res.json(result);
     } catch (err) {
         console.log('Wrong or incomplete item!');
@@ -100,13 +98,13 @@ roomController.put('/:id', hasUser(), async (req, res, next) => {
     editData.description = req.body.description;
     editData.url = req.body.url;
 
-    const index = Rooms.findIndex(i => i.id === req.params.id);
+    const index = roomsFilePath.findIndex(i => i.id === req.params.id);
 
     if (index !== -1) {
-        Rooms[index] = { ...Rooms[index], ...editData }
+        roomsFilePath[index] = { ...roomsFilePath[index], ...editData }
         try {
-            fs.writeFileSync('../rooms.js', `module.exports = ${JSON.stringify(Rooms, null, 2)};`, 'utf8');
-            res.status(200).json({ message: 'Record updated successfully', data: Rooms.find(item => item.id === req.params.id) });
+            fs.writeFileSync('./data/rooms.js', `module.exports = ${JSON.stringify(roomsFilePath, null, 2)};`, 'utf8');
+            res.status(200).json({ message: 'Record updated successfully', data: roomsFilePath.find(item => item.id === req.params.id) });
         } catch (error) {
             console.error('Error updating record:', error);
             res.status(500).json({ message: 'Internal server error' });
@@ -118,8 +116,8 @@ roomController.put('/:id', hasUser(), async (req, res, next) => {
 });
 
 roomController.delete('/:id', hasUser(), (req, res) => {
-    const roomIndex = Rooms.findIndex(x => x.id === req.params.id);
-    Rooms.splice(roomIndex, 1);
+    const roomIndex = roomsFilePath.findIndex(x => x.id === req.params.id);
+    roomsFilePath.splice(roomIndex, 1);
     res.status(202).end();
 });
 
