@@ -1,7 +1,7 @@
 import * as request from "../lib/request";
 
-// const baseUrl = 'http://localhost:3030/data/rooms'
-const baseUrl = 'http://192.168.50.206:3030/data/rooms'
+const baseUrl = 'http://localhost:3030/data/rooms'
+// const baseUrl = 'http://192.168.50.206:3030/data/rooms'
 
 
 export const getAll = async () => {
@@ -24,7 +24,6 @@ export const getLatest = async () => {
     // });
 
     const query = encodeURIComponent(`offset=0&pageSize=3`);
-    console.log(query);
     const result = await request.get(`${baseUrl}?sortBy=_createdOn%20desc&${query}`);
 
     return result;

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 // import withAuth from "../../HOC/withAuth";
 import * as roomService from '../services/roomService';
 // import LatestGame from "./latest-game/LatestGame";
-
 import RoomItem from "../components/Administrator/RoomItem";
 import Spinner from "../components/Administrator/Spinner";
 
@@ -16,7 +15,7 @@ export default function AllRooms() {
         roomService.getAll()
             .then(result => setRooms(result))
             .finally(() => setIsLoading(false))
-    }, [rooms])
+    }, [])
 
     return (
         <>

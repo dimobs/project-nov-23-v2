@@ -7,7 +7,7 @@ const { getAll, create, getById, update, deleteById, getByUserId } = require('..
 const { parseError } = require('../util/parser');
 const uniqid = require('uniqid');
 const { log } = require('console');
-const roomsFilePath = path.join('rooms.js')
+// const roomsFilePath = require('./rooms.js')
 
 // roomController.post('/', (req, res) => {
 
@@ -59,11 +59,9 @@ roomController.get('/', async (req, res) => {
     res.json(rooms);
 });
 
-roomController.post('/', (req, res) => {
-    console.log('wrong');
+roomController.post('/', hasUser(), (req, res) => {
     try {
-        const existingRoom = require('./rooms');
-        
+        const existingRoom = require(Rooms);
         const newRoom = {
             id: uniqid(),
             name: req.body.name,
@@ -72,8 +70,8 @@ roomController.post('/', (req, res) => {
         };
 
         existingRoom.push(newRoom);
-        fs.writeFileSync(roomsFilePath, `module.exports = ${JSON.stringify(existingRoom, null, 2)};`, 'utf8');
-      
+        fs.writeFileSync('../rooms.js', `module.exports = ${JSON.stringify(existingRoom, null, 2)};`, 'utf8');
+    
         res.status(201).json({ message: 'Room added successfully', room: newRoom });
 
     } catch (error) {
@@ -96,19 +94,18 @@ roomController.get('/:id', (req, res) => {
 roomController.put('/:id', hasUser(), async (req, res, next) => {
 
     //sanitaizing
-    const edutData = {};
-    edutData.id = req.params.id
-    edutData.name = req.body.name;
-    edutData.description = req.body.description;
-    edutData.url = req.body.url;
+    const editData = {};
+    editData.id = req.params.id
+    editData.name = req.body.name;
+    editData.description = req.body.description;
+    editData.url = req.body.url;
 
     const index = Rooms.findIndex(i => i.id === req.params.id);
 
     if (index !== -1) {
-        Rooms[index] = { ...Rooms[index], ...edutData }
-
+        Rooms[index] = { ...Rooms[index], ...editData }
         try {
-            fs.writeFileSync(roomsFilePath, `module.exports = ${JSON.stringify(Rooms, null, 2)};`, 'utf8');
+            fs.writeFileSync('../rooms.js', `module.exports = ${JSON.stringify(Rooms, null, 2)};`, 'utf8');
             res.status(200).json({ message: 'Record updated successfully', data: Rooms.find(item => item.id === req.params.id) });
         } catch (error) {
             console.error('Error updating record:', error);
