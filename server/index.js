@@ -1,5 +1,6 @@
 const express = require('express');
-const config = require('./config/config.json')[process.env.DE_ENV || 'development'];
+// const config = require('./config/config.json')[process.env.DE_ENV || 'development'];
+const config = require('./config/config.json')[process.env.PORT || 'development'];
 const initDB = require('./config/database');
 const cors = require('./middlewares/cors');
 const authController = require('./controllers/authController');
