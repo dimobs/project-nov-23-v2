@@ -12,7 +12,7 @@ export default function RoomItem ({
     <>
      
                 <div className="flex flex-col mr-5 text-center mb-11 lg:mr-16">
-                  <div className="inline-block mb-4 relative shrink-0 rounded-[.95rem]">
+                  <div className="inline-block mb-4 relative shrink-0 rounded-[.95rem] transition duration-1000 ease-out transform hover:scale-150">
                     <img
                       className="inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]"
                       src={url} 

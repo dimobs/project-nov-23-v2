@@ -7,7 +7,7 @@ import FocusImput from '../../../hooks/focusInputForm';
 export default function RoomEdit() {
   const inputField = FocusImput();
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { roomId } = useParams();
   const [room, setRoom] = useState({
     name: '',
     description: '',
@@ -15,12 +15,12 @@ export default function RoomEdit() {
   });
   
   useEffect(() => {
-        roomService.getOne(id)
+        roomService.getOne(roomId)
             .then(result => {
                 setRoom(result)
                
             })
-    }, [id]);
+    }, [roomId]);
 
     const editRoomSubmitHandler = async (e) => {
         e.preventDefault();
@@ -28,7 +28,7 @@ export default function RoomEdit() {
         const values = Object.fromEntries(new FormData(e.currentTarget));
 
         try {
-            await roomService.edit(id, values);
+            await roomService.edit(roomId, values);
 
           } catch (err) {
             // Error notification
@@ -48,7 +48,7 @@ export default function RoomEdit() {
       const hasConfirmed = confirm(`Are you sure you want to delete ${room.name} `);
 
       if (hasConfirmed) {
-        await roomService.remove(id).catch
+        await roomService.remove(roomId).catch
 
         navigate('/admin/createRoom')
       }else {

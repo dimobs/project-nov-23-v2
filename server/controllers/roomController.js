@@ -99,5 +99,4 @@ roomController.delete('/:id', hasUser(), async (req, res) => {
     }
 });
 
-
 module.exports = roomController;

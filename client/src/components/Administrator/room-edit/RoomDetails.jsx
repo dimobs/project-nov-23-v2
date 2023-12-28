@@ -1,11 +1,12 @@
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import * as roomService from '../../../services/roomService';
 import { useEffect, useState } from 'react';
+import * as commentServices from '../../../services/commentService';
 
 
 export default function RoomDetails() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { roomId } = useParams();
   const [room, setRoom] = useState({
     name: '',
     description: '',
@@ -14,14 +15,15 @@ export default function RoomDetails() {
   
   useEffect(() => {
     try {
-        roomService.getOne(id)
+        roomService.getOne(roomId)
             .then(result => {
                 setRoom(result);
+                // .then(setRoom) alternative
             })
           }catch(err){
     console.log(err);
           }
-    }, [id]);
+    }, [roomId]);
 
     const editRoomSubmitHandler = async (e) => {
         e.preventDefault();
@@ -29,7 +31,7 @@ export default function RoomDetails() {
         const values = Object.fromEntries(new FormData(e.currentTarget));
 
         try {
-            await roomService.edit(id, values);
+            await roomService.edit(roomId, values);
 
             navigate('/');
         } catch (err) {
@@ -49,18 +51,22 @@ export default function RoomDetails() {
       const hasConfirmed = confirm(`Are you sure you want to delete Room ${room.name}?`);
 
       if (hasConfirmed) {
-        await roomService.remove(id).catch
+        await roomService.remove(roomId).catch
 
         navigate('/admin/createRoom')
       }else {
        navigate('/') 
       }
+    };
+
+    const formSubmitAddComment = () => {
+console.log(room);
     }
 
 return (
 
 <>
-<div className=' bg-center place-self-center origin-center align-middle place-items-center bg-slate-500 pt-10' >
+<div className='flex bg-center  bg-slate-500 pt-10'>
   <div className="w-full pt-5 px-4 mb-8 mx-auto relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-orange-900  dark:bg-black ">
     <div className="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
       <img
@@ -211,7 +217,7 @@ return (
       </div>
     </div>
     <div className="p-6 pt-3">
-    <Link to={`/admin/edit-room/${id}`} > <button
+    <Link to={`/admin/edit-room/${roomId}`} > <button
         className="block w-full select-none rounded-lg bg-pink-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
         type="button"
         data-ripple-light="true"
@@ -231,8 +237,33 @@ return (
       </button>
     </div>
   </div>
-  <div className="w-full pt-5 px-4 mb-8 mx-auto ">
+{/* comments */}
+<div className="max-w-4xl py-16 xl:px-8 flex justify-center mx-auto">
+  <div className="w-full mt-16 md:mt-0 ">
+    <form 
+    className="relative z-10 h-auto p-8 py-0 overflow-hidden border-y-orange-500 border-b-2 border-gray-300 rounded-lg shadow-2xl px-7" 
+    onSubmit={formSubmitAddComment}
+    >
+      <h3 className="mb-6 text-2xl font-medium text-center dark:bg-slate-600 rounded-xl ">Write a comment</h3>
+      <textarea
+        type="text"
+        name="comment"
+        className="text-white w-full px-4 py-3 mb-4 dark:bg-slate-400 border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+        placeholder="Write your comment"
+        rows={5}
+        cols={33}
+        defaultValue={""}
+      />
+      <input
+        type="submit"
+        defaultValue="Submit comment"
+        name="submit"
+        className=" hover:ring-blue-500  text-white px-4 py-3 bg-blue-500 dark:bg-blue-900 dark:text-pink-500  rounded-lg mb-5"
+      />
+    </form>
   </div>
+</div>
+
   </div>
 </>
 
