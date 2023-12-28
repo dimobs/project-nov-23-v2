@@ -23,13 +23,19 @@ const navigate = useNavigate();
 const [rooms, setRoom] = useState([]);
 
 useEffect(() => {
+  const abortController = new AbortController();
   try {
-fetch('http://localhost:3030/data/rooms')
+fetch('http://localhost:3030/data/rooms', {signal: abortController.signal})
 .then(res => res.json())
 .then(data => setRoom(Object.values(data)))
+
   }catch (err) {
     console.log(err);
   }
+
+  return () => {
+  abortController.abort();
+}
 },[]);
 
 
@@ -40,7 +46,10 @@ const fromSubmitCreateRoomHandler = async (e) => {
       
     try {
           await roomService.create(roomData);
-          // resetFormHandler();
+          
+          setRoom(state => [...state, roomData]);
+          resetFormHandler();
+
         navigate('/admin/createRoom');
     }catch (err) {
         console.log(err);
@@ -73,7 +82,7 @@ const onChangeHangler = (e) => {
 <div className="max-w-6xl mx-auto">
      <h1  className="text-center text-4xl mb-0 ">Admin Panel / Create Room </h1>
   <div className=" bg-slate-100s dark:bg-slate-600 dark:text-green-100 py-0 px-6 shadow rounded-lg sm:px-10">
-    <form  onSubmit={fromSubmitCreateRoomHandler} className="m-0 padd block text-xs font-medium text-gray-700 dark:text-green-100">
+    <form onSubmit={fromSubmitCreateRoomHandler} className="m-0 padd block text-xs font-medium text-gray-700 dark:text-green-100">
   <div> 
     <label className="m-3 block text-sm font-medium text-gray-700 dark:text-green-100">
       Name: <input

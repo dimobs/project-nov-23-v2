@@ -13,10 +13,14 @@ export default function RoomDetails() {
   });
   
   useEffect(() => {
+    try {
         roomService.getOne(id)
             .then(result => {
                 setRoom(result);
             })
+          }catch(err){
+    console.log(err);
+          }
     }, [id]);
 
     const editRoomSubmitHandler = async (e) => {
