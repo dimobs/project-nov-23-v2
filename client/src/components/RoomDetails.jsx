@@ -3,9 +3,14 @@ import * as roomService from '../services/roomService';
 import { useEffect, useState } from 'react';
 import * as commentServices from '../services/commentService';
 // import commentItem from '../components/commetarItem';
+// import withAuth from "../../HOC/withAuth";
+import withAuth from '../HOC/withAuth';
 
 
-export default function RoomDetails() {
+function RDetails(
+  {email}
+) {
+  const user = email.split('@')[0]
   const navigate = useNavigate();
   const { roomId } = useParams();
   const [comments, setComments] = useState([]);
@@ -265,10 +270,13 @@ export default function RoomDetails() {
 <div className="max-w-4xl py-16 xl:px-8 flex justify-center mx-auto">
   <div className="w-full mt-16 md:mt-0 ">
     <form 
-    className="relative z-10 h-auto p-8 py-0 overflow-hidden border-y-orange-500 border-b-2 border-gray-300 rounded-lg shadow-2xl px-7" 
+    className="relative z-10 h-auto p-8 py-0 overflow-hidden border-y-orange-500 border-b-2 border-gray-300 rounded-sm shadow-2xl" 
     onSubmit={formSubmitAddComment}
     >
-      <h3 className="mb-6 text-2xl font-medium text-center dark:bg-slate-600 rounded-xl ">Write a comment</h3>
+      <h3 className="mb-6 text-xl font-medium text-center dark:bg-slate-600 rounded-xl ">Write a comment as <p className='mb-5 mr-5 text-white inline'
+      >
+        {user} 
+        </p></h3>
       <textarea
         type="text"
         name="hisComment"
@@ -278,17 +286,12 @@ export default function RoomDetails() {
         cols={33}
         // defaultValue={""}
       />
-        <input
-      className="text-orange-600 mr-4 dark:placeholder:text-orange-100  ml-5 py-2 mb-4 dark:bg-slate-400 border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
-      type="text"  
-      name="username"
-      placeholder='username'
-      />
       <input
         type="submit"
         defaultValue="Submit comment"
         name="submit"
-        className=" hover:ring-blue-500  text-white px-4 py-3 bg-blue-500 dark:bg-blue-900 dark:text-pink-500  rounded-lg mb-5"
+        className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-slate-400 border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+
       />
     
     </form>
@@ -300,3 +303,7 @@ export default function RoomDetails() {
 
     )
 }   
+
+const RoomDetails = withAuth(RDetails)
+
+export default RoomDetails;
