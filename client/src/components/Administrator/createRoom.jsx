@@ -45,9 +45,9 @@ const fromSubmitCreateRoomHandler = async (e) => {
     const roomData = Object.fromEntries(new FormData(e.currentTarget));
       
     try {
-          await roomService.create(roomData);
+          const newRoom = await roomService.create(roomData);
           
-          setRoom(state => [...state, roomData]);
+          setRoom(state => [...state, newRoom]);
           resetFormHandler();
 
         navigate('/admin/createRoom');

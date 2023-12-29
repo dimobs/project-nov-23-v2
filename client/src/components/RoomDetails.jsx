@@ -3,17 +3,12 @@ import * as roomService from '../services/roomService';
 import { useEffect, useState } from 'react';
 import * as commentServices from '../services/commentService';
 // import commentItem from '../components/commetarItem';
-const commentsData = [
-  {user: "Dimo", comment: "Some Coments"},
-  {user: "Ivan", comment: "Coments"},
-  {user: "Nqkoy", comment: "typ coment"},
-  {user: "Dimo", comment: "Some Coments"}
-]
+
 
 export default function RoomDetails() {
   const navigate = useNavigate();
   const { roomId } = useParams();
-  // const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([]);
   const [room, setRoom] = useState({
     name: '',
     description: '',
@@ -27,7 +22,7 @@ export default function RoomDetails() {
                 setRoom(result);
                 // .then(setRoom) alternative
         // commentServices.getAll()
-        //     .then(setComments);
+            // .then(setComments);
             });
 
           }catch(err){
@@ -67,22 +62,21 @@ export default function RoomDetails() {
       }else {
        navigate('/') 
       }
-    };
+    };  
 
+ 
     const formSubmitAddComment = async (e) => {
       e.preventDefault();
 
-      const formData = new FormData(e.currentTarget);
-
-    const newComment = await commentServices.create(
-        roomId, 
-        formData.get('username'),
-        formData.get('comment')
+     const newComment = await commentServices.create(
+      roomId,
+       Object.fromEntries(new FormData(e.currentTarget))
         );
-        console.log(newComment);
+
+        setComments(state => [...state, newComment]);
     }
 
-return (
+ return (
 
 <>
 <div className='flex bg-center  bg-slate-500 pt-10'>
@@ -257,12 +251,14 @@ return (
     </div>
   </div>
 {/* view Comment */}
-{(commentsData).map(({user, comment}) => (
-<p>{user}: {comment}</p>
+<ul>
+{(comments).map(({id, user, comment}) => (
+
+<li key={comment}> {id}: {user}: {comment}</li>
 )
 )}
-
-{commentsData.length === 0 && <p>No comments.</p>}
+</ul>
+{comments.length === 0 && <p>No comments added yet!.</p>}
 
 
 {/* add comments */}
@@ -275,12 +271,18 @@ return (
       <h3 className="mb-6 text-2xl font-medium text-center dark:bg-slate-600 rounded-xl ">Write a comment</h3>
       <textarea
         type="text"
-        name="comment"
+        name="hisComment"
         className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-slate-400 border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
         placeholder="Write your comment"
         rows={5}
         cols={33}
-        defaultValue={""}
+        // defaultValue={""}
+      />
+        <input
+      className="text-orange-600 mr-4 dark:placeholder:text-orange-100  ml-5 py-2 mb-4 dark:bg-slate-400 border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+      type="text"  
+      name="username"
+      placeholder='username'
       />
       <input
         type="submit"
@@ -288,13 +290,7 @@ return (
         name="submit"
         className=" hover:ring-blue-500  text-white px-4 py-3 bg-blue-500 dark:bg-blue-900 dark:text-pink-500  rounded-lg mb-5"
       />
-      <input
-      className="text-orange-600 dark:placeholder:text-orange-100  ml-5 py-2 mb-4 dark:bg-slate-400 border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
-      type="text"  
-      name="username"
-      placeholder='username'
-
-      />
+    
     </form>
   </div>
 </div>

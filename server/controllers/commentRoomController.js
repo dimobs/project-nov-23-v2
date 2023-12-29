@@ -4,7 +4,7 @@ const uniqid = require('uniqid');
 const {hasUser} = require('../middlewares/guards');
 
 // Create a new room
-commentRoomController.post('/', (req, res) => {
+commentRoomController.post('/', hasUser(), (req, res) => {
     try {
         // const { name, description, url } = req.body;
         // const rooms = await roomService.readDataFile();
