@@ -6,9 +6,9 @@ const cors = require('./middlewares/cors');
 const authController = require('./controllers/authController');
 const dataController = require('./controllers/dataController');
 const roomController = require('./controllers/roomController')
+const commentRoomController = require('./controllers/commentRoomController');
 const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
-
 
 start();
 
@@ -31,6 +31,9 @@ async function start() {
     app.use('/users', authController);
     app.use('/data/catalog', dataController);
     app.use('/data/rooms', roomController);
+    app.use('/data/rooms/comments', commentRoomController);
+
+
 
 app.listen(config.PORT, () => console.log(`http://localhost:${config.PORT} App is running on `));
 // app.listen(config.PORT, () => console.log(`http://192.168.50.206:${config.PORT} App is running on `));

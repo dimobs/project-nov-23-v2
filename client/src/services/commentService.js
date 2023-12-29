@@ -1,16 +1,17 @@
 import * as request from '../lib/request';
 
-const baseUrl = 'http://localhost:3030/data/comments';
+const baseUrl = 'http://localhost:3030/data/rooms/comments';
 
-export const getAll = async (roomId) => {
-    const query = new URLSearchParams({
-        where: `gameId="${roomId}"`,
-        load: `owner=_ownerId:users`,
-    });
+export const getAll = async (roomId, text) => {
+    // const query = new URLSearchParams({
+    //     where: `roomId="${roomId}"`,
+    //     load: `owner=_ownerId:users`,
+    // });
 
-    const result = await request.get(`${baseUrl}?${query}`);
+    // const result = await request.get(`${baseUrl}?${query}`);
+    const result = await request.get(baseUrl)
 
-    return result;
+    return Object.values(result);
 };
 
 export const create = async (roomId, text) => {

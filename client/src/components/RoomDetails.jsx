@@ -1,12 +1,19 @@
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import * as roomService from '../../../services/roomService';
+import * as roomService from '../services/roomService';
 import { useEffect, useState } from 'react';
-import * as commentServices from '../../../services/commentService';
-
+import * as commentServices from '../services/commentService';
+// import commentItem from '../components/commetarItem';
+const commentsData = [
+  {user: "Dimo", comment: "Some Coments"},
+  {user: "Ivan", comment: "Coments"},
+  {user: "Nqkoy", comment: "typ coment"},
+  {user: "Dimo", comment: "Some Coments"}
+]
 
 export default function RoomDetails() {
   const navigate = useNavigate();
   const { roomId } = useParams();
+  // const [comments, setComments] = useState([]);
   const [room, setRoom] = useState({
     name: '',
     description: '',
@@ -19,7 +26,10 @@ export default function RoomDetails() {
             .then(result => {
                 setRoom(result);
                 // .then(setRoom) alternative
-            })
+        // commentServices.getAll()
+        //     .then(setComments);
+            });
+
           }catch(err){
     console.log(err);
           }
@@ -59,8 +69,17 @@ export default function RoomDetails() {
       }
     };
 
-    const formSubmitAddComment = () => {
-console.log(room);
+    const formSubmitAddComment = async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.currentTarget);
+
+    const newComment = await commentServices.create(
+        roomId, 
+        formData.get('username'),
+        formData.get('comment')
+        );
+        console.log(newComment);
     }
 
 return (
@@ -237,7 +256,16 @@ return (
       </button>
     </div>
   </div>
-{/* comments */}
+{/* view Comment */}
+{(commentsData).map(({user, comment}) => (
+<p>{user}: {comment}</p>
+)
+)}
+
+{commentsData.length === 0 && <p>No comments.</p>}
+
+
+{/* add comments */}
 <div className="max-w-4xl py-16 xl:px-8 flex justify-center mx-auto">
   <div className="w-full mt-16 md:mt-0 ">
     <form 
@@ -248,7 +276,7 @@ return (
       <textarea
         type="text"
         name="comment"
-        className="text-white w-full px-4 py-3 mb-4 dark:bg-slate-400 border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+        className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-slate-400 border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
         placeholder="Write your comment"
         rows={5}
         cols={33}
@@ -259,6 +287,13 @@ return (
         defaultValue="Submit comment"
         name="submit"
         className=" hover:ring-blue-500  text-white px-4 py-3 bg-blue-500 dark:bg-blue-900 dark:text-pink-500  rounded-lg mb-5"
+      />
+      <input
+      className="text-orange-600 dark:placeholder:text-orange-100  ml-5 py-2 mb-4 dark:bg-slate-400 border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+      type="text"  
+      name="username"
+      placeholder='username'
+
       />
     </form>
   </div>

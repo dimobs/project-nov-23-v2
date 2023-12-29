@@ -16,8 +16,9 @@ import AuthGuard from './components/guards/AuthGuard';
 import AboutUs from './components/AboutUs/AboutUs';
 import CreateRoom from './components/Administrator/createRoom';
 import AllRooms from './home/All-rooms';
-import RoomDetails from './components/Administrator/room-edit/RoomDetails';
+// import RoomDetails from './components/Administrator/room-edit/RoomDetails';
 import RoomEdit from './components/Administrator/room-edit/roomEdit';
+import RoomDetails from './components/RoomDetails';
 // import GameDetails from './components/game-details/GameDetails';
 // const GameDetails = lazy(() => import('./components/game-details/GameDetails'));
 
