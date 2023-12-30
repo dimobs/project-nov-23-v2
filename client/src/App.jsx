@@ -64,11 +64,11 @@ function App() {
                             <Route path="/register" element={<Register />} />
                             {/* <Route path="/games/:gameId" element={<GameDetails />} /> */}
                             <Route path='/about' element={<AboutUs />} />
+                                <Route path="/rooms/:roomId" element={<RoomDetails />} />
 
                             <Route element={<AuthGuard />}>
                                 <Route path="/games/create" element={<GameCreate />} />
                                 <Route path="/admin/createRoom" element={<CreateRoom />} />
-                                <Route path="/rooms/:roomId" element={<RoomDetails />} />
                                 <Route path='/admin/edit-room/:roomId' element={<RoomEdit />} />
                                 {/* <Route path={Path.GameEdit} element={<GameEdit />} /> */}
                                 <Route path={Path.Logout} element={<Logout />} />
