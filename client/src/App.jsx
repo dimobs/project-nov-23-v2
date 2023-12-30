@@ -19,6 +19,7 @@ import AllRooms from './home/All-rooms';
 // import RoomDetails from './components/Administrator/room-edit/RoomDetails';
 import RoomEdit from './components/Administrator/room-edit/roomEdit';
 import RoomDetails from './components/RoomDetails';
+import Footer from './components/Header-Footer/Footer';
 // import GameDetails from './components/game-details/GameDetails';
 // const GameDetails = lazy(() => import('./components/game-details/GameDetails'));
 
@@ -75,6 +76,9 @@ function App() {
                         </Routes>
                         </div>
                     </Suspense>
+                    <div id="box" className='dark:text-green-100 white dark:bg-slate-500' >
+                    <Footer />
+                </div>
             </AuthProvider>
         </ErrorBoundary>
     )
