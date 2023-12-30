@@ -1,3 +1,5 @@
+https://github.com/MarsX-dev/floatui - floatui.com/ templates
+
 https://github.com/msnegurski/tailwind-react-datepicker calendar picker
 
 reason for render

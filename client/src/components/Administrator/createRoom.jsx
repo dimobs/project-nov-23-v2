@@ -8,11 +8,7 @@ const FORM_INITIAL_STATE = {
   name:"",
   description:"",
   url:"",
-  option: {
-    icon1:false,
-    icon2:false,
-    icon3:false
-  }
+ 
 };
 
 export default function CreateRoom () {
@@ -23,9 +19,11 @@ const navigate = useNavigate();
 const [rooms, setRoom] = useState([]);
 
 useEffect(() => {
-  const abortController = new AbortController();
+  // const abortController = new AbortController();
   try {
-fetch('http://localhost:3030/data/rooms', {signal: abortController.signal})
+fetch('http://localhost:3030/data/rooms', 
+// {signal: abortController.signal}
+)
 .then(res => res.json())
 .then(data => setRoom(Object.values(data)))
 
@@ -33,9 +31,9 @@ fetch('http://localhost:3030/data/rooms', {signal: abortController.signal})
     console.log(err);
   }
 
-  return () => {
-  abortController.abort();
-}
+  // return () => {
+  // abortController.abort();
+// }
 },[]);
 
 
@@ -54,8 +52,6 @@ const fromSubmitCreateRoomHandler = async (e) => {
     }catch (err) {
         console.log(err);
     }
-
-
 };
 
 // const deleteItemHandler = (roomId) => {
@@ -83,9 +79,10 @@ const onChangeHangler = (e) => {
      <h1  className="text-center text-4xl mb-0 ">Admin Panel / Create Room </h1>
   <div className=" bg-slate-100s dark:bg-slate-600 dark:text-green-100 py-0 px-6 shadow rounded-lg sm:px-10">
     <form onSubmit={fromSubmitCreateRoomHandler} className="m-0 padd block text-xs font-medium text-gray-700 dark:text-green-100">
-  <div> 
+    <div> 
     <label className="m-3 block text-sm font-medium text-gray-700 dark:text-green-100">
-      Name: <input
+      Name: 
+      <input
       type="text"
       name="name"
       className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name room..." 
@@ -95,7 +92,8 @@ const onChangeHangler = (e) => {
       />
     </label>
 
-    <label className="block text-sm font-medium text-gray-900 dark:text-gray-400">Your description:
+    <label className="block text-sm font-medium text-gray-900 dark:text-gray-400">
+    Your description:
     <textarea 
     id="message" 
     name="description" 
@@ -117,11 +115,20 @@ const onChangeHangler = (e) => {
       />
     </label>
     <div className='flex gap-10'>
-    <button className="mb-5 w-36 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white">+Create room</button>
-    <button onClick={resetFormHandler} className="mb-5 w-36 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white">Reset</button>
+    <button className="mb-5 w-36 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white"
+    >
+    +Create room
+    </button>
+   
     </div>
-  </div>
-  </form>
+    </div>
+    </form>
+    {/* <button 
+    onClick={() => setFormValues(FORM_INITIAL_STATE)} 
+    className="mb-5 w-36 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white"
+    >
+    Reset
+    </button> */}
   </div>
 
   <div className="flex flex-wrap -mx-96 mb-5">
