@@ -8,9 +8,8 @@ import withAuth from '../HOC/withAuth';
 
 
 function RDetails(
-  {email}
+
 ) {
-  const user = email.split('@')[0]
   const navigate = useNavigate();
   const { roomId } = useParams();
   const [comments, setComments] = useState([]);

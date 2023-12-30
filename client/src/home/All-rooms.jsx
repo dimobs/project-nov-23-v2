@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-// import withAuth from "../../HOC/withAuth";
+import withAuth from "../HOC/withAuth";
 import * as roomService from '../services/roomService';
 // import LatestGame from "./latest-game/LatestGame";
 import RoomItem from "../components/Administrator/RoomItem";
 import Spinner from "../components/Administrator/Spinner";
 
-export default function AllRooms() {
+function Rooms(
+{email}
+) {
+const user = email.split('@')[0];
     const [rooms, setRooms] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
 
@@ -21,7 +24,8 @@ export default function AllRooms() {
         <>
         <div className="flex flex-wrap -mx-3 mb-5">
           <div className="w-full max-w-full px-3 mb-6  mx-auto">
-            <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-dashed border-stone-200 bg-white m-5 dark:bg-black">
+            <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border  border-stone-200 bg-white m-5 dark:bg-secondary-dark">
+
               {/* card body  */}
               <div className="flex-auto block py-8 px-9">
                 <div>
@@ -56,8 +60,55 @@ url={r.url}
             </div>
           </div>
         </div>
+        {/* view Comment */}
+{/* <ul>
+{(comments).map(({id, user, comment}) => (
+
+<li key={comment}> {id}: {user}: {comment}</li>
+)
+)}
+</ul> */}
+{/* {comments.length === 0 && <p>No comments added yet!.</p>} */}
+
+
+{/* add comments */}
+<div className="max-w-4xl py-16 xl:px-8 flex justify-center mx-auto" >
+  <div className="w-full mt-16 md:mt-0 ">
+    <form 
+    className="relative z-10 h-auto p-8 py-0 overflow-hidden  border-y-orange-500 border-b-2 rounded-sm shadow-2xl" 
+    // onSubmit={formSubmitAddComment}
+    >
+      <h3 className="mb-6 text-xl font-medium text-center dark:bg-secondary-dark rounded-xl ">
+        Write a comment as 
+        <p className='mb-5 mr-5 text-white inline'
+      >
+        {user} && {'anonimous'}
+        </p></h3>
+      <textarea
+        type="text"
+        name="hisComment"
+        className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-secondary-dark border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+        placeholder="Write your comment"
+        rows={5}
+        cols={33}
+        // defaultValue={""}
+      />
+      <input
+        type="submit"
+        defaultValue="Submit comment"
+        name="submit"
+        className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-secondary-dark border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+      />
+    
+    </form>
+  </div>
+</div>
      
       </>
       
     );
 }
+
+const AllRooms = withAuth(Rooms)
+
+export default AllRooms;

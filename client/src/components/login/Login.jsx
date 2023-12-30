@@ -19,24 +19,23 @@ export default function Login() {
     const imputField = FocusImput();
 
     return (
-        <div className="dark:bg-slate-900 dark:text-white min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-md">
+           <div className="dark:bg-slate-900 dark:text-white min-h-screen bg-gray-100 flex-col justify-center py-1 px-6 lg:px-8"> 
+          <div className="sm:mx-auto sm:w-full sm:max-w-md mt-10 ">
             <img
               className="mx-auto h-12 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              src="svg/home-1-svgrepo-com.svg"
               alt="Workflow"
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 shadow-inner dark:text-white">
             Login
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600 max-w dark:text-green-300">
-              Not registered?
-              <a
-                href="\register"
+              Not registered?      
+              <Link to='/register'
                 className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-orange-200 dark:hover:text-indigo-100"
               >
                 Login
-              </a>
+              </Link>
             </p>
           </div>
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

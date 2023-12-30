@@ -50,8 +50,8 @@ function App() {
         <ErrorBoundary>
             <AuthProvider>
             {/* <div id="box" className='h-screen bg-white dark:bg-slate-900 dark:text-white flex justify-center items-center' > */}
-            <div id="box" className='dark:text-green-100 white dark:bg-slate-500' >
-                    <Header />
+            <div id="box" className='dark:text-green-100 white dark:bg-slate-500 ' >
+                    <Header/>
                 </div>
                     <Suspense fallback={<h1>Loading...</h1>}>
                         <div className=" dark:text-white dark:bg-slate-700 ">
@@ -77,11 +77,11 @@ function App() {
                         </div>
                     </Suspense>
                     <div id="box" className='dark:text-green-100 white dark:bg-slate-500' >
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             </AuthProvider>
         </ErrorBoundary>
     )
 }
 
-export default App
+export default App;

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import AuthContext from "../../contexts/authContext";
 import useForm from "../../hooks/useForm";
 import FocusImput from '../../hooks/focusInputForm'
+import { Link } from "react-router-dom";
 
 const RegisterFormKeys = {
     Email: 'email',
@@ -24,7 +25,7 @@ return (
   <div className="sm:mx-auto sm:w-full sm:max-w-md">
     <img
       className="mx-auto h-12 w-auto"
-      src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+      src="svg/home-1-svgrepo-com.svg"
       alt="Workflow"
     />
     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 shadow-inner dark:text-white" >
@@ -32,12 +33,12 @@ return (
     </h2>
     <p className="mt-2 text-center text-sm text-gray-600 max-w dark:text-green-300">
       Already registered?
-      <a
-        href="\login"
+      <Link 
+        to="/login"
         className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-orange-200 dark:hover:text-indigo-100"
       >
         Sign in
-      </a>
+      </Link>
     </p>
   </div>
   <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
