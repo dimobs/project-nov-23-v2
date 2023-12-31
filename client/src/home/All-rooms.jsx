@@ -4,11 +4,14 @@ import * as roomService from '../services/roomService';
 // import LatestGame from "./latest-game/LatestGame";
 import RoomItem from "../components/Administrator/RoomItem";
 import Spinner from "../components/Administrator/Spinner";
-
 function Rooms(
-{email}
-) {
-const user = email.split('@')[0];
+  {email}
+  ) {
+    
+    const user = []
+    if(email){
+     user.push(email.split('@')[0]);
+    }
     const [rooms, setRooms] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
 
@@ -61,15 +64,13 @@ url={r.url}
           </div>
         </div>
         {/* view Comment */}
-{/* <ul>
-{(comments).map(({id, user, comment}) => (
+ <ul>
+{/* {(user).map(({id, user, comment}) => (
 
 <li key={comment}> {id}: {user}: {comment}</li>
 )
-)}
-</ul> */}
-{/* {comments.length === 0 && <p>No comments added yet!.</p>} */}
-
+)} */}
+</ul> 
 
 {/* add comments */}
 <div className="max-w-4xl py-16 xl:px-8 flex justify-center mx-auto" >
@@ -82,7 +83,8 @@ url={r.url}
         Write a comment as 
         <p className='mb-5 mr-5 text-white inline'
       >
-        {user} && {'anonimous'}
+        {` ${user}` }
+        {user.length ===0 && <p>Anonimous</p>}
         </p></h3>
       <textarea
         type="text"

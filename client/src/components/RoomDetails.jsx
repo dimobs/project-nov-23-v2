@@ -12,7 +12,7 @@ function RDetails(
 ) {
   const navigate = useNavigate();
   const { roomId } = useParams();
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
   const [room, setRoom] = useState({
     name: '',
     description: '',
