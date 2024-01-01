@@ -4,7 +4,9 @@ const {hasUser} = require('../middlewares/guards');
 const service = require('../services/commentRoomService');
 
 // Create a new comment
-commentRoomController.post('/', hasUser(), async (req, res) => {
+commentRoomController.post('/', 
+hasUser(), 
+async (req, res) => {
     try {
         const { userId, data } = req.body;
         const comments = await service.readDataFile();
@@ -28,9 +30,10 @@ commentRoomController.post('/', hasUser(), async (req, res) => {
 
 // Read - Get all comments
 commentRoomController.get('/', async (req, res) => {
+    console.log('from comment');
     try {
-        const commens = await service.readDataFile();
-        res.json(commens);
+        const rooms = await roomService.readDataFile();
+        res.json(rooms);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import withAuth from "../HOC/withAuth";
 import * as roomService from '../services/roomService';
-import * as coomentService from '../services/commentService';
+import * as commentService from '../services/commentService';
 // import LatestGame from "./latest-game/LatestGame";
 import RoomItem from "../components/Administrator/RoomItem";
 import Spinner from "../components/Administrator/Spinner";
+import { useParams } from "react-router-dom";
 
 
 function Rooms(
@@ -17,24 +18,39 @@ function Rooms(
      user.push(email.split('@')[0]);
     }
     const [rooms, setRooms] = useState([]);
-    const comments, setComments] = useState([]);
-    const [isLoading, setIsLoading] = useState(false)
+    const [comments, setComments] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    // const [roomId] = useParams();
+
 
     useEffect(() => {
-      setIsLoading(t  rue);
+      setIsLoading(true);
 
         roomService.getAll()
             .then(result => setRooms(result))
+        commentService.getAll()
+        .then(c => console.log(Object.values(c)))
             .finally(() => setIsLoading(false))
+            // try {
+            //   fetch('http://localhost:3030/data/rooms/comments')
+            //   .then(res => res.json())
+            //   .then(data => console.log(Object.values(data)))
+            // }catch (err) {
+
+            //   console.log(err);
+            // }
+
     }, []);
 
-const formSubmitAddComment = (e) => {
+const formSubmitAddComment = async (e) => {
   e.preventDefault();
 
   const data = Object.fromEntries(new FormData(e.currentTarget));
+
 try {
-  coomentService.create(userId, data) 
-}catch (err) {
+ const newComment = await commentService.create(userId, data);
+ setComments(state => [...state, newComment]);
+ }catch (err) {
   console.log(err);
 }
 }
@@ -81,11 +97,10 @@ url={r.url}
         </div>
         {/* view Comment */}
  <ul>
-{/* {(user).map(({id, user, comment}) => (
-
-<li key={comment}> {id}: {user}: {comment}</li>
-)
-)} */}
+{comments.map(c => (
+ 
+  <li>{c.text}</li>
+))}
 </ul> 
 
 {/* add comments */}
@@ -117,7 +132,6 @@ url={r.url}
         name="submit"
         className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-secondary-dark border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
       />
-    
     </form>
   </div>
 </div>

@@ -4,7 +4,9 @@ const uniqid = require('uniqid');
 const {hasUser} = require('../middlewares/guards');
 
 // Create a new room
-roomController.post('/', hasUser(), async (req, res) => {
+roomController.post('/', 
+hasUser(), 
+async (req, res) => {
     try {
     
         const { name, description, url } = req.body;
@@ -29,6 +31,7 @@ roomController.post('/', hasUser(), async (req, res) => {
 
 //Read - Get all rooms
 roomController.get('/', async (req, res) => {
+    console.log('from froom');
     try {
         const rooms = await roomService.readDataFile();
         res.json(rooms);
