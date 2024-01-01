@@ -10,35 +10,34 @@ import Spinner from "../components/Administrator/Spinner";
 function Rooms(
   {userId, 
     email}
-  ) {    
-    const user = []
+  ) {   
+
+    const user = [];
     if(email){
      user.push(email.split('@')[0]);
     }
     const [rooms, setRooms] = useState([]);
+    const comments, setComments] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-      setIsLoading(true);
+      setIsLoading(t  rue);
 
         roomService.getAll()
             .then(result => setRooms(result))
             .finally(() => setIsLoading(false))
-    }, [])
+    }, []);
 
 const formSubmitAddComment = (e) => {
   e.preventDefault();
 
   const data = Object.fromEntries(new FormData(e.currentTarget));
 try {
-  coomentService.create(userId, data)
-  
+  coomentService.create(userId, data) 
 }catch (err) {
   console.log(err);
 }
-
 }
-
 
     return (
         <>
