@@ -17,12 +17,7 @@ export const getOne = async (id) => {
 }
 
 export const getLatest = async () => {
-    // const query = new URLSearchParams({
-    //     sortBy: `_createdOn desc`,
-    //     offset: 0,
-    //     pageSize: 3,
-    // });
-
+   
     const query = encodeURIComponent(`offset=0&pageSize=3`);
     const result = await request.get(`${baseUrl}?sortBy=_createdOn%20desc&${query}`);
 

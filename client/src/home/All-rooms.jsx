@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import withAuth from "../HOC/withAuth";
 import * as roomService from '../services/roomService';
+import * as coomentService from '../services/commentService';
 // import LatestGame from "./latest-game/LatestGame";
 import RoomItem from "../components/Administrator/RoomItem";
 import Spinner from "../components/Administrator/Spinner";
 function Rooms(
   {email}
-  ) {
-    
+  ) {    
     const user = []
     if(email){
      user.push(email.split('@')[0]);
@@ -22,6 +22,21 @@ function Rooms(
             .then(result => setRooms(result))
             .finally(() => setIsLoading(false))
     }, [])
+
+const formSubmitAddComment = (e) => {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(e.currentTarget));
+
+try {
+
+  
+}catch (err) {
+  console.log(err);
+}
+
+}
+
 
     return (
         <>
@@ -75,9 +90,9 @@ url={r.url}
 {/* add comments */}
 <div className="max-w-4xl py-16 xl:px-8 flex justify-center mx-auto" >
   <div className="w-full mt-16 md:mt-0 ">
-    <form 
+    <form  
     className="relative z-10 h-auto p-8 py-0 overflow-hidden  border-y-orange-500 border-b-2 rounded-sm shadow-2xl" 
-    // onSubmit={formSubmitAddComment}
+    onSubmit={formSubmitAddComment}
     >
       <h3 className="mb-6 text-xl font-medium text-center dark:bg-secondary-dark rounded-xl ">
         Write a comment as 
@@ -88,7 +103,7 @@ url={r.url}
         </p></h3>
       <textarea
         type="text"
-        name="hisComment"
+        name="comment"
         className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-secondary-dark border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
         placeholder="Write your comment"
         rows={5}
