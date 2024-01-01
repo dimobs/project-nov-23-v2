@@ -14,11 +14,10 @@ export const getAll = async (roomId, text) => {
     return Object.values(result);
 };
 
-export const create = async (roomId, {hisComment, username}) => {
+export const create = async (userId, data) => {
     const newComment = await request.post(baseUrl, {
-        roomId,
-        hisComment,
-        username
+        userId,
+        data,
     });
 
     return newComment;

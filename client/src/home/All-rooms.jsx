@@ -5,8 +5,11 @@ import * as coomentService from '../services/commentService';
 // import LatestGame from "./latest-game/LatestGame";
 import RoomItem from "../components/Administrator/RoomItem";
 import Spinner from "../components/Administrator/Spinner";
+
+
 function Rooms(
-  {email}
+  {userId, 
+    email}
   ) {    
     const user = []
     if(email){
@@ -29,7 +32,7 @@ const formSubmitAddComment = (e) => {
   const data = Object.fromEntries(new FormData(e.currentTarget));
 
 try {
-
+  coomentService.create(userId, data)
   
 }catch (err) {
   console.log(err);
