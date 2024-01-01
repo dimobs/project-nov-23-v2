@@ -26,16 +26,16 @@ commentRoomController.post('/', hasUser(), async (req, res) => {
     }
 });
 
-//Read - Get all rooms
-// commentRoomController.get('/', async (req, res) => {
-//     try {
-//         const rooms = await roomService.readDataFile();
-//         res.json(rooms);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
+// Read - Get all comments
+commentRoomController.get('/', async (req, res) => {
+    try {
+        const commens = await service.readDataFile();
+        res.json(commens);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 // Get a specific room by ID
 // commentRoomController.get('/:id', async (req, res) => {
