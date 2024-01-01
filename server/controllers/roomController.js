@@ -13,7 +13,8 @@ roomController.post('/', hasUser(), async (req, res) => {
         const newRoom = { 
           id: uniqid(),
           name, 
-          description, url 
+          description, 
+          url 
         };
         rooms.push(newRoom);
 

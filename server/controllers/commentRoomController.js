@@ -1,32 +1,25 @@
-const roomService = require('../services/roomService');
 const commentRoomController = require('express').Router();
 const uniqid = require('uniqid');
 const {hasUser} = require('../middlewares/guards');
+const service = require('../services/commentRoomService');
 
-// Create a new room
-commentRoomController.post('/', hasUser(), (req, res) => {
+// Create a new comment
+commentRoomController.post('/', hasUser(), async (req, res) => {
     try {
-        // const { name, description, url } = req.body;
-        // const rooms = await roomService.readDataFile();
+        const { userId, data } = req.body;
+        const comments = await service.readDataFile();
 
-        // const newRoom = { 
-        //   id: uniqid(),
-        //   name, 
-        //   description, 
-            // url 
-        // };
-        // rooms.push(newRoom);
+        const newComment = { 
+          commentId: uniqid(),
+          userId: userId,
+          text: data.comment
+        };
 
-        // await roomService.writeDataFile(rooms);
+        comments.push(newComment);
 
-        // res.status(201).json(newRoom);
-        const {id, text} = req.body;
-        const newComment = {
-            id,
-            text
-        }
-        console.log(req.body);
-          res.status(201).json(newComment);
+        await service.writeDataFile(comments);
+          
+        res.status(201).json(newComment);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });

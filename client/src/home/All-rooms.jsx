@@ -30,7 +30,6 @@ const formSubmitAddComment = (e) => {
   e.preventDefault();
 
   const data = Object.fromEntries(new FormData(e.currentTarget));
-
 try {
   coomentService.create(userId, data)
   
