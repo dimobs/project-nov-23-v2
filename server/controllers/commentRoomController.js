@@ -30,10 +30,10 @@ async (req, res) => {
 
 // Read - Get all comments
 commentRoomController.get('/', async (req, res) => {
-    console.log('from comment');
+    console.log('requesting....');
     try {
-        const rooms = await roomService.readDataFile();
-        res.json(rooms);
+        const comments = await service.readDataFile();
+        res.json(comments);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });

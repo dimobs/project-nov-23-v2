@@ -29,7 +29,9 @@ function Rooms(
         roomService.getAll()
             .then(result => setRooms(result))
         commentService.getAll()
-        .then(c => console.log(Object.values(c)))
+        // .then(c => setComments(c))
+        .then(res => res.json())
+        .then(d => setComments(d))
             .finally(() => setIsLoading(false))
             // try {
             //   fetch('http://localhost:3030/data/rooms/comments')
@@ -99,7 +101,7 @@ url={r.url}
  <ul>
 {comments.map(c => (
  
-  <li>{c.text}</li>
+  <li key={c.commentId}>{c.text}</li>
 ))}
 </ul> 
 

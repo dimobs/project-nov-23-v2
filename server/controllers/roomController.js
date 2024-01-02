@@ -31,7 +31,6 @@ async (req, res) => {
 
 //Read - Get all rooms
 roomController.get('/', async (req, res) => {
-    console.log('from froom');
     try {
         const rooms = await roomService.readDataFile();
         res.json(rooms);
