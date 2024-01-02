@@ -13,6 +13,7 @@ async (req, res) => {
 
         const newComment = { 
           commentId: uniqid(),
+          createdAt: new Date().toISOString(),
           userId: userId,
           text: data.comment
         };

@@ -32,7 +32,7 @@ function Rooms(
         commentService.getAll()
         // .then(c => setComments(c))
         .then(res => res.json())
-        .then(d => setComments(d))
+        .then(c => setComments(c))
             .finally(() => setIsLoading(false))
             // try {
             //   fetch('http://localhost:3030/data/rooms/comments')
@@ -104,11 +104,14 @@ url={r.url}
 {comments.map(c => (
   <CommentItem
   key={c.commnetId}
+  createdAt={c.createdAt}
   comment={c.text}
+
+  
   />
 ))}
 
-{comments.length === 0 && <p>Nobody commnets yet.</p>}
+{comments.length === 0 && <p key={'noComment'}>Nobody commnets yet.</p>}
      {/* view Comment */}
 
 {/* add comments */}
