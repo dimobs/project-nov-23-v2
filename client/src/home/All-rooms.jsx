@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { CommentItem } from "../components/commentItem";
 
 
+
 function Rooms(
   {userId, 
     email}
@@ -52,6 +53,7 @@ const formSubmitAddComment = async (e) => {
 
 try {
  const newComment = await commentService.create(userId, data);
+ 
  setComments(state => [...state, newComment]);
  }catch (err) {
   console.log(err);

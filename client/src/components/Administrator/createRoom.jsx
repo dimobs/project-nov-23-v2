@@ -8,7 +8,6 @@ const FORM_INITIAL_STATE = {
   name:"",
   description:"",
   url:"",
- 
 };
 
 export default function CreateRoom () {
