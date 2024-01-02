@@ -6,6 +6,7 @@ import * as commentService from '../services/commentService';
 import RoomItem from "../components/Administrator/RoomItem";
 import Spinner from "../components/Administrator/Spinner";
 import { useParams } from "react-router-dom";
+import { CommentItem } from "../components/commentItem";
 
 
 function Rooms(
@@ -97,13 +98,18 @@ url={r.url}
             </div>
           </div>
         </div>
+
         {/* view Comment */}
- <ul>
+      
 {comments.map(c => (
- 
-  <li key={c.commentId}>{c.text}</li>
+  <CommentItem
+  key={c.commnetId}
+  comment={c.text}
+  />
 ))}
-</ul> 
+
+{comments.length === 0 && <p>Nobody commnets yet.</p>}
+     {/* view Comment */}
 
 {/* add comments */}
 <div className="max-w-4xl py-16 xl:px-8 flex justify-center mx-auto" >

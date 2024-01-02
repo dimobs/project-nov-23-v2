@@ -30,7 +30,6 @@ async (req, res) => {
 
 // Read - Get all comments
 commentRoomController.get('/', async (req, res) => {
-    console.log('requesting....');
     try {
         const comments = await service.readDataFile();
         res.json(comments);
