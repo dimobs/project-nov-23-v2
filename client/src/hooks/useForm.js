@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react"
 
-export default function useForm(submitHandler, initialValues) {
-    const [values, setValues] = useState(initialValues);
+export default function useForm(
+    initialValues,
+    submitHandler, 
+    ) {
+    const [fromValues, setValues] = useState(initialValues);
 
     // useEffect(() => {
     //     setValues(initialValues);
@@ -17,11 +20,13 @@ export default function useForm(submitHandler, initialValues) {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        submitHandler(values);
+        if (onchange){
+        submitHandler(fromValues);
+        }
     };
 
     return {
-        values,
+        fromValues,
         onChange,
         onSubmit,
     }

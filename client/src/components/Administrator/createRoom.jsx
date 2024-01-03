@@ -3,7 +3,7 @@ import * as roomService from '../../services/roomService';
 import { useEffect, useState } from 'react';
 import RoomItem from './RoomItem';
 import FocusImput from "../../hooks/focusInputForm";
-import useForm from "../../hooks/useForm";
+// import useForm from "../../hooks/useForm";
 
 const FORM_INITIAL_STATE = {
   name:"",
@@ -12,12 +12,9 @@ const FORM_INITIAL_STATE = {
 };
 
 export default function CreateRoom () {
-const {values, onChange} = useForm({
-  FORM_INITIAL_STATE
-})  
 
 const inputFiled = FocusImput();
-// const [values, onchange] = useState(FORM_INITIAL_STATE);
+const [values, onchange] = useState(FORM_INITIAL_STATE);
 // const [errors, setErrors] = useState([]);
 const navigate = useNavigate();
 const [rooms, setRoom] = useState([]);
@@ -92,7 +89,7 @@ const onChangeHangler = (e) => {
       className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name room..." 
       ref={inputFiled} 
       value={values.name}
-      onChange={onChange}
+      onChange={onChangeHangler}
       />
     </label>
 
@@ -104,7 +101,7 @@ const onChangeHangler = (e) => {
     rows="4" 
     className="shadow-sm block p-2.5 w-3/4 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your description..."
       value={values.description}
-      onChange={onChange}
+      onChange={onChangeHangler}
     >
     </textarea>
     </label>
@@ -115,7 +112,7 @@ const onChangeHangler = (e) => {
       name="url"   
       className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your url resource..."
       value={values.url} 
-      onChange={onChange}
+      onChange={onChangeHangler}
       />
     </label>
     <div className='flex gap-10'>
