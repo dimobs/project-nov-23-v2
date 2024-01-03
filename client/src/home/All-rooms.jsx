@@ -5,9 +5,7 @@ import * as commentService from '../services/commentService';
 // import LatestGame from "./latest-game/LatestGame";
 import RoomItem from "../components/Administrator/RoomItem";
 import Spinner from "../components/Administrator/Spinner";
-import { useParams } from "react-router-dom";
 import { CommentItem } from "../components/commentItem";
-
 
 
 function Rooms(
@@ -24,10 +22,8 @@ function Rooms(
     const [isLoading, setIsLoading] = useState(false);
     // const [roomId] = useParams();
 
-
     useEffect(() => {
       setIsLoading(true);
-
         roomService.getAll()
             .then(result => setRooms(result))
         commentService.getAll()
@@ -50,7 +46,6 @@ const formSubmitAddComment = async (e) => {
   e.preventDefault();
 
   const data = Object.fromEntries(new FormData(e.currentTarget));
-
 try {
  const newComment = await commentService.create(userId, data);
  
@@ -59,7 +54,6 @@ try {
   console.log(err);
 }
 }
-
     return (
         <>
         <div className="flex flex-wrap -mx-3 mb-5">
@@ -92,7 +86,8 @@ description={r.description}
 url={r.url}
 />
   )}
-{rooms.length === 0 && <h2 style={{color:"red", fontSize:"32px"}}>No rooms added yet!</h2>}
+{/* {rooms.length === 0 && <h2 style={{color:"red", fontSize:"32px"}}>No rooms added yet!</h2>} */}
+  {/* {isLoading && <Spinner />} */}
   {isLoading && <Spinner />}
                   </div>
                 </div>
@@ -103,15 +98,13 @@ url={r.url}
 
         {/* view Comment */}
       
-{comments.map(c => (
+{comments.map(c => 
   <CommentItem
-  key={c.commnetId}
+  key={c.commentId}
   createdAt={c.createdAt}
   comment={c.text}
-
-  
   />
-))}
+)}
 
 {comments.length === 0 && <p key={'noComment'}>Nobody commnets yet.</p>}
      {/* view Comment */}
