@@ -3,6 +3,7 @@ import * as roomService from '../../services/roomService';
 import { useEffect, useState } from 'react';
 import RoomItem from './RoomItem';
 import FocusImput from "../../hooks/focusInputForm";
+import useForm from "../../hooks/useForm";
 
 const FORM_INITIAL_STATE = {
   name:"",
@@ -11,8 +12,12 @@ const FORM_INITIAL_STATE = {
 };
 
 export default function CreateRoom () {
+const {values, onChange} = useForm({
+  FORM_INITIAL_STATE
+})  
+
 const inputFiled = FocusImput();
-const [formValues, setFormValues] = useState(FORM_INITIAL_STATE);
+// const [values, onchange] = useState(FORM_INITIAL_STATE);
 // const [errors, setErrors] = useState([]);
 const navigate = useNavigate();
 const [rooms, setRoom] = useState([]);
@@ -59,13 +64,13 @@ const fromSubmitCreateRoomHandler = async (e) => {
 // }
 
 const resetFormHandler = () => {
-  setFormValues(FORM_INITIAL_STATE);
+  onchange(FORM_INITIAL_STATE);
   // setErrors({});
 };
 
 const onChangeHangler = (e) => {
   let value = e.target.value;
-  setFormValues(state => ({
+  onchange(state => ({
     ...state,
     [e.target.name]: value,
   })
@@ -86,8 +91,8 @@ const onChangeHangler = (e) => {
       name="name"
       className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name room..." 
       ref={inputFiled} 
-      value={formValues.name}
-      onChange={onChangeHangler}
+      value={values.name}
+      onChange={onChange}
       />
     </label>
 
@@ -98,8 +103,8 @@ const onChangeHangler = (e) => {
     name="description" 
     rows="4" 
     className="shadow-sm block p-2.5 w-3/4 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your description..."
-      value={formValues.description}
-      onChange={onChangeHangler}
+      value={values.description}
+      onChange={onChange}
     >
     </textarea>
     </label>
@@ -109,8 +114,8 @@ const onChangeHangler = (e) => {
       type="text" 
       name="url"   
       className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your url resource..."
-      value={formValues.url} 
-      onChange={onChangeHangler}
+      value={values.url} 
+      onChange={onChange}
       />
     </label>
     <div className='flex gap-10'>

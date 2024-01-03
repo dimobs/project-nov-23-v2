@@ -1,3 +1,10 @@
+
+//bash
+@echo off
+cd C:\MyServer
+start /B npm nodemon
+
+
 https://github.com/MarsX-dev/floatui - floatui.com/ templates
 
 https://github.com/msnegurski/tailwind-react-datepicker calendar picker
