@@ -81,9 +81,13 @@ const onChangeHangler = (e) => {
   <div className=" bg-slate-100s dark:bg-slate-600 dark:text-green-100 py-0 px-6 shadow rounded-lg sm:px-10">
     <form onSubmit={fromSubmitCreateRoomHandler} className="m-0 padd block text-xs font-medium text-gray-700 dark:text-green-100">
     <div> 
-    <label className="m-3 block text-sm font-medium text-gray-700 dark:text-green-100">
+    <label 
+    className="m-3 block text-sm font-medium text-gray-700 dark:text-green-100"
+    htmlFor='name'
+    >
       Name: 
       <input
+      id="name"
       type="text"
       name="name"
       className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name room..." 
@@ -93,7 +97,10 @@ const onChangeHangler = (e) => {
       />
     </label>
 
-    <label className="block text-sm font-medium text-gray-900 dark:text-gray-400">
+    <label 
+    className="block text-sm font-medium text-gray-900 dark:text-gray-400"
+    htmlFor='message'
+    >
     Your description:
     <textarea 
     id="message" 
@@ -106,8 +113,13 @@ const onChangeHangler = (e) => {
     </textarea>
     </label>
     
-    <label className="m-3 block text-sm font-medium text-gray-700 dark:text-green-100">
-      url: <input 
+    <label 
+    className="m-3 block text-sm font-medium text-gray-700 dark:text-green-100"
+    htmlFor='url'
+    >
+      url: 
+      <input 
+      id='url'
       type="text" 
       name="url"   
       className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your url resource..."
