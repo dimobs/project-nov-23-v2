@@ -34,7 +34,7 @@ export default function Login() {
               <Link to='/register'
                 className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-orange-200 dark:hover:text-indigo-100"
               >
-                Login
+                Register
               </Link>
             </p>
           </div>

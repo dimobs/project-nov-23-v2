@@ -51,7 +51,7 @@ const fromSubmitCreateRoomHandler = async (e) => {
 
         navigate('/admin/createRoom');
     }catch (err) {
-        console.log(err);
+        console.log('create room:',err);
     }
 };
 
