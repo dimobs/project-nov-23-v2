@@ -14,8 +14,7 @@ export default function Login() {
     const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
         [LoginFormKyes.Email]: '',
         [LoginFormKyes.Password]: '',
-    });
-
+    })
 
     const imputField = FocusImput();
 
