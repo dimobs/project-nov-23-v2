@@ -4,23 +4,19 @@ import { AuthProvider } from './contexts/authContext';
 import '../src/input.css'
 import Path from './paths';
 import Header from './components/Header-Footer/Header'
-// import Home from "./components/home/Home"
-import GameList from './components/game-list/GameList';
-import GameCreate from './components/game-create/GameCreate';
+// import GameList from './components/game-list/GameList';
+// import GameCreate from './components/game-create/GameCreate';
 import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import Register from './components/register/Register';
-// import GameEdit from './components/game-edit/GameEdit';
 import ErrorBoundary from './components/ErrorBoundary';
 import AuthGuard from './components/guards/AuthGuard';
 import AboutUs from './components/AboutUs/AboutUs';
 import CreateRoom from './components/Administrator/createRoom';
 import AllRooms from './home/All-rooms';
-// import RoomDetails from './components/Administrator/room-edit/RoomDetails';
 import RoomEdit from './components/Administrator/room-edit/roomEdit';
 import RoomDetails from './components/RoomDetails';
 import Footer from './components/Header-Footer/Footer';
-// import GameDetails from './components/game-details/GameDetails';
 // const GameDetails = lazy(() => import('./components/game-details/GameDetails'));
 
 function App() {
@@ -59,7 +55,7 @@ function App() {
                         <Routes>
                             {/* <Route path={Path.Home} element={<Home />} /> */}
                             <Route path='/' element={<AllRooms />} />
-                            <Route path="/games" element={<GameList />} />
+                            {/* <Route path="/games" element={<GameList />} /> */}
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             {/* <Route path="/games/:gameId" element={<GameDetails />} /> */}
@@ -67,7 +63,7 @@ function App() {
                                 <Route path="/rooms/:roomId" element={<RoomDetails />} />
 
                             <Route element={<AuthGuard />}>
-                                <Route path="/games/create" element={<GameCreate />} />
+                                {/* <Route path="/games/create" element={<GameCreate />} /> */}
                                 <Route path="/admin/createRoom" element={<CreateRoom />} />
                                 <Route path='/admin/edit-room/:roomId' element={<RoomEdit />} />
                                 {/* <Route path={Path.GameEdit} element={<GameEdit />} /> */}
@@ -77,7 +73,7 @@ function App() {
                         </div>
                     </Suspense>
                     <div id="box" className='dark:text-green-100 white dark:bg-slate-500' >
-                    {/* <Footer /> */}
+                    <Footer />
                 </div>
             </AuthProvider>
         </ErrorBoundary>
