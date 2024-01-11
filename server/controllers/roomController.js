@@ -1,5 +1,5 @@
-const roomService = require('../services/roomService');
 const roomController = require('express').Router();
+const roomService = require('../services/roomService');
 const uniqid = require('uniqid');
 const {hasUser} = require('../middlewares/guards');
 
