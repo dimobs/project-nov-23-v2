@@ -8,7 +8,6 @@ roomController.post('/',
 hasUser(), 
 async (req, res) => {
     try {
-    
         const { name, description, url } = req.body;
         const rooms = await roomService.readDataFile();
 
