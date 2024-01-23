@@ -55,16 +55,16 @@ function Rooms({ userId, email }) {
     });
 
     const deleteButtonClickHandler = async (commentId) => {
-      console.log('running...');
       const hasConfirmed = confirm(`Are you sure you want to delete ${comments.text}`);
-
+    
       if (hasConfirmed) {
-          await commentService.remove(commentId);
-      }
-      dispatchComments({
-        type: "DELETE_COMMENT",
-        payload: newComment,
-      });
+        const deleteComment  = await commentService.remove(commentId);
+        // console.log(deleteComment);
+          dispatchComments({
+            type: "DELETE_COMMENT",
+            payload: deleteComment,
+          });
+        }
   }
 
   return (

@@ -9,11 +9,8 @@ const reducer = (state, action) => {
                 ? {...c, text: action.payload.text} 
                 : c
                 )
-        case 'DELETE_COMMMENT':
-            return state.map(c => c.id === action.payload.id 
-                ? {...c, text: action.payload.text} 
-                : c
-                )
+        case 'DELETE_COMMENT':
+            return (state.filter(c =>  c.commentId !== action.payload.commentId))
         default:
             return state;
     }

@@ -15,7 +15,6 @@ export const CommentItem = (
 ) => {
 
 const deleteHandler = () => {
-  console.log(commentId);
   deleteButtonClickHandler(commentId)
 }
 
