@@ -41,9 +41,6 @@ function Rooms({ userId, email }) {
         values.comment,
         owner
       );
-      
-      // newComment.owner = { email };
-    0  
       dispatchComments({
         type: "ADD_COMMENT",
         payload: newComment,
@@ -63,9 +60,11 @@ function Rooms({ userId, email }) {
 
       if (hasConfirmed) {
           await commentService.remove(commentId);
-
-          // navigate('/games');
       }
+      dispatchComments({
+        type: "DELETE_COMMENT",
+        payload: newComment,
+      });
   }
 
   return (
