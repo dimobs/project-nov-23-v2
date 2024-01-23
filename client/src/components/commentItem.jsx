@@ -4,10 +4,20 @@ import {formatDate } from '../utils/dataUtils'
 export const CommentItem = (
 {
   createdAt,
-  comment
+  comment,
+  owner,
+  userId,
+  ownerId,
+  commentId,
+  deleteButtonClickHandler
 }
 
 ) => {
+
+const deleteHandler = () => {
+  console.log(commentId);
+  deleteButtonClickHandler(commentId)
+}
 
     return (
 
@@ -24,7 +34,7 @@ export const CommentItem = (
      <div className="flex flex-col w-full">
       <div className="flex flex-row justify-between">
           <p className="dark:text-gray-500 relative text-xl whitespace-nowrap truncate overflow-hidden">
-          COMMENTOR
+          {owner}
           </p>
           <a className="text-gray-500 text-xl" href="#">
           <i className="fa-solid fa-trash" />
@@ -36,6 +46,16 @@ export const CommentItem = (
           <p className="-mt-4 text-gray-500">
            {comment}
           </p>
+          
+            {userId === ownerId && (
+            <p>
+          <button 
+          className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-secondary-dark border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+          onClick={deleteHandler}
+          >
+            Delete</button>
+          </p>
+          )}
    </div>
   </div>
 </>

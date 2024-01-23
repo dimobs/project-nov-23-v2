@@ -21,8 +21,6 @@ async function writeDataFile(data) {
 }
 
 
-
-
 module.exports = {
     readDataFile, 
     writeDataFile

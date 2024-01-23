@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useState, useMemo } from "react";
+ import { useContext, useEffect, useReducer, useState, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import * as gameService from '../../services/gameService';
@@ -11,7 +11,7 @@ import Path from "../../paths";
 
 export default function GameDetails() {
     const navigate = useNavigate();
-    const { email, userId } = useContext(AuthContext);
+     const { email, userId } = useContext(AuthContext);
     const [game, setGame] = useState({});
     const [comments, dispatch] = useReducer(reducer, []);
     const { gameId } = useParams();
@@ -56,6 +56,8 @@ export default function GameDetails() {
     const { values, onChange, onSubmit } = useForm(addCommentHandler, {
         comment: '',
     });
+
+    const isOwner = userId === room._ownerId;
 
     return (
         <section id="game-details">

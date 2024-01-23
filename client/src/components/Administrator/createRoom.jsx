@@ -3,7 +3,7 @@ import * as roomService from '../../services/roomService';
 import { useEffect, useState } from 'react';
 import RoomItem from './RoomItem';
 import FocusImput from "../../hooks/focusInputForm";
-// import useForm from "../../hooks/useForm";
+
 
 const FORM_INITIAL_STATE = {
   name:"",
@@ -12,12 +12,12 @@ const FORM_INITIAL_STATE = {
 };
 
 export default function CreateRoom () {
-
 const inputFiled = FocusImput();
 const [values, onchange] = useState(FORM_INITIAL_STATE);
-// const [errors, setErrors] = useState([]);
-const navigate = useNavigate();
 const [rooms, setRoom] = useState([]);
+
+
+const navigate = useNavigate();
 
 useEffect(() => {
   // const abortController = new AbortController();

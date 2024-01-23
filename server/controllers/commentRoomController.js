@@ -8,14 +8,15 @@ commentRoomController.post('/',
 hasUser(), 
 async (req, res) => {
     try {
-        const { userId, data } = req.body;
+        const { userId, data, owner } = req.body;
         const comments = await service.readDataFile();
 
         const newComment = { 
           commentId: uniqid(),
           createdAt: new Date().toISOString(),
           userId: userId,
-          text: data.comment
+          text: data,
+          owner: owner
         };
 
         comments.push(newComment);
@@ -81,25 +82,25 @@ commentRoomController.get('/', async (req, res) => {
 // });
 
 // Delete a room by ID
-// commentRoomController.delete('/:id', hasUser(), async (req, res) => {
-//     try {
-//         let rooms = await roomService.readDataFile();
+commentRoomController.delete('/:id', hasUser(), async (req, res) => {
+    console.log(req.params.id);
+    try {
+        let comments = await service.readDataFile();
+        const index = comments.findIndex(c => c.commentId === req.params.id);
 
-//         const index = rooms.findIndex(r => r.id === req.params.id);
+        if (index === -1) {
+            return res.status(404).json({ error: 'Comment not found' });
+        }
 
-//         if (index === -1) {
-//             return res.status(404).json({ error: 'Room not found' });
-//         }
+        const deletedComment = comments.splice(index, 1)[0];
 
-//         const deletedRoom = rooms.splice(index, 1)[0];
+        await service.writeDataFile(comments);
 
-//         await roomService.writeDataFile(rooms);
-
-//         res.json(deletedRoom);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
+        res.json(deletedComment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 module.exports = commentRoomController;

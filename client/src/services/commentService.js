@@ -12,15 +12,18 @@ export const getAll = async () => {
 
         // const result = await request.get(baseUrl);
         const result = await fetch(baseUrl);
-        
-        return (result);
+        const response = await(result.json())
+        return (response);
 };
 
-export const create = async (userId, data) => {
+export const create = async (userId, data, owner) => {2
     const newComment = await request.post(baseUrl, {
         userId,
         data,
+        owner,
     });
 
     return newComment;
 };
+
+export const remove = async (coomentId) => request.remove(`${baseUrl}/${coomentId}`);

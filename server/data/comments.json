@@ -1,32 +1,23 @@
 [
   {
-    "commentId": "4wd7na3wlqw6dvqk",
-    "createdAt": "2024-01-02T09:57:09.739Z",
+    "commentId": "4wd7nd9wlrqfg7e3",
+    "createdAt": "2024-01-23T14:03:59.978Z",
     "userId": "6581dbd53495be624fe4916a",
-    "text": "Nov koemntar tuk"
+    "text": "Пъри коментар в тази секция",
+    "owner": "bg_rosen@yahoo.com"
   },
   {
-    "commentId": "4wd7nbbglqw7jar7",
-    "createdAt": "2024-01-02T10:29:22.098Z",
-    "userId": "6581dbd53495be624fe4916a",
-    "text": "Яко е това."
-  },
-  {
-    "commentId": "4wd7n1mclqxl3bi2",
-    "createdAt": "2024-01-03T09:36:37.369Z",
-    "userId": "6581dbd53495be624fe4916a",
-    "text": "Now коментар"
-  },
-  {
-    "commentId": "4wd7nb1glqz575sw",
-    "createdAt": "2024-01-04T11:47:15.104Z",
+    "commentId": "4wd7n318lrqfh0wq",
+    "createdAt": "2024-01-23T14:04:38.233Z",
     "userId": "6595f9669f645ce2d6ff5f0c",
-    "text": "оп!"
+    "text": "Втори Тестов Коментар!",
+    "owner": "test1@test1.test"
   },
   {
-    "commentId": "4wd7nbkwlr3sfjfb",
-    "createdAt": "2024-01-07T17:48:41.878Z",
-    "userId": "6581dbd53495be624fe4916a",
-    "text": "new comment"
+    "commentId": "4wd7nbkolrqfi3gm",
+    "createdAt": "2024-01-23T14:05:28.197Z",
+    "userId": "6595f9669f645ce2d6ff5f0c",
+    "text": "Втори Тестов Коментар!",
+    "owner": "test1@test1.test"
   }
 ]
