@@ -24,8 +24,8 @@ export const getLatest = async () => {
     return result;
 }
 
-export const create = async (roomData) => {
-    const result = await request.post(baseUrl, roomData);
+export const create = async (roomData, file) => {
+    const result = await request.post(baseUrl, roomData, file);
 
     return result;
 };

@@ -7,25 +7,26 @@ const {hasUser} = require('../middlewares/guards');
 roomController.post('/', 
 hasUser(), 
 async (req, res) => {
-    try {
-        const { name, description, url } = req.body;
-        const rooms = await roomService.readDataFile();
+console.log(req.body);
+    // try {
+    //     const { name, description, url } = req.body;
+    //     const rooms = await roomService.readDataFile();
 
-        const newRoom = { 
-          id: uniqid(),
-          name, 
-          description, 
-          url 
-        };
-        rooms.push(newRoom);
+    //     const newRoom = { 
+    //       id: uniqid(),
+    //       name, 
+    //       description, 
+    //       url 
+    //     };
+    //     rooms.push(newRoom);
 
-        await roomService.writeDataFile(rooms);
+    //     await roomService.writeDataFile(rooms);
 
-        res.status(201).json(newRoom);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+    //     res.status(201).json(newRoom);
+    // } catch (error) {
+    //     console.error(error);
+    //     res.status(500).json({ error: 'Internal Server Error' });
+    // }
 });
 
 //Read - Get all rooms

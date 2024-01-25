@@ -6,7 +6,7 @@ import * as commentService from "../services/commentService";
 import RoomItem from "../components/Administrator/RoomItem";
 import Spinner from "../components/Administrator/Spinner";
 import { CommentItem } from "../components/commentItem";
-import reducer from "./commentReducer";
+import reducer from "../utils/stateReducer";
 import useForm from "../hooks/useForm";
 
 function Rooms({ userId, email }) {
@@ -26,7 +26,7 @@ function Rooms({ userId, email }) {
       // .then(c => setComments(c))
       .then((res) => {
         dispatchComments({
-          type: "GET_ALL_COMMENTS",
+          type: "GET_ALL",
           payload: res,
         });
       })
@@ -42,9 +42,14 @@ function Rooms({ userId, email }) {
         owner
       );
       dispatchComments({
-        type: "ADD_COMMENT",
+        type: "ADD",
         payload: newComment,
       });
+
+      onchange(
+        values.comment = "",
+    );
+
     } catch (err) {
       console.log(err);
     }
@@ -61,7 +66,7 @@ function Rooms({ userId, email }) {
         const deleteComment  = await commentService.remove(commentId);
         // console.log(deleteComment);
           dispatchComments({
-            type: "DELETE_COMMENT",
+            type: "DELETE",
             payload: deleteComment,
           });
         }

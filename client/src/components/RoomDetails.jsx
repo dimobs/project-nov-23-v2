@@ -1,18 +1,15 @@
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import * as roomService from '../services/roomService';
-import { useEffect, useState } from 'react';
-import * as commentServices from '../services/commentService';
-// import commentItem from '../components/commetarItem';
-// import withAuth from "../../HOC/withAuth";
+import { useEffect, useReducer, useState } from 'react';
 import withAuth from '../HOC/withAuth';
+import reducer from '../utils/stateReducer';
 
 
 function RDetails(
-
 ) {
   const navigate = useNavigate();
   const { roomId } = useParams();
-  // const [comments, setComments] = useState([]);
+const [state, setState] = useReducer(reducer, []);  
   const [room, setRoom] = useState({
     name: '',
     description: '',
@@ -25,8 +22,6 @@ function RDetails(
             .then(result => {
                 setRoom(result);
                 // .then(setRoom) alternative
-        // commentServices.getAll()
-            // .then(setComments);
             });
 
           }catch(err){
@@ -67,18 +62,6 @@ function RDetails(
        navigate('/') 
       }
     };  
-
- 
-    const formSubmitAddComment = async (e) => {
-      e.preventDefault();
-
-     const newComment = await commentServices.create(
-      roomId,
-       Object.fromEntries(new FormData(e.currentTarget))
-        );
-
-        setComments(state => [...state, newComment]);
-    }
 
  return (
 
