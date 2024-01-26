@@ -12,5 +12,12 @@
     "userId": "6595f9669f645ce2d6ff5f0c",
     "text": "Втори Тестов Коментар!",
     "owner": "test1@test1.test"
+  },
+  {
+    "commentId": "4wd7ncy4lrtqu4qt",
+    "createdAt": "2024-01-25T21:46:04.036Z",
+    "userId": "6595f9669f645ce2d6ff5f0c",
+    "text": "new comment",
+    "owner": "test1@test1.test"
   }
 ]
