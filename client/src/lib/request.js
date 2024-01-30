@@ -20,6 +20,31 @@ const buildOptions = (data) => {
     return options;
 };
 
+// const buildOptions = (data) => {
+//     const options = {};
+
+//     if (data) {
+//         options.body= data
+//         options.mode = 'no-cors',
+//         options.headers = {
+//             "Content-Type": "multipart/form-data",
+//         "Accept": "application/json",
+//         "type": "formData"
+//         };
+//     }
+
+//     const token = localStorage.getItem('accessToken');
+
+//     if (token) {
+//         options.headers = {
+//             ...options.headers,
+//             'X-Authorization': token
+//         };
+//     }
+
+//     return options;
+// };
+
 const request = async (method, url, data) => {
     const response = await fetch(url, {
         ...buildOptions(data),

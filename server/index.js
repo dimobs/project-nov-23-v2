@@ -9,6 +9,8 @@ const roomController = require('./controllers/roomController')
 const commentRoomController = require('./controllers/commentRoomController');
 const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
+const fileupload = require("express-fileupload");
+
 
 start();
 
@@ -16,6 +18,11 @@ async function start() {
 
     const app = express();
    await initDB();
+
+   app.use(fileupload({
+      createParentPath: true,}),
+  );
+  
     app.use(express.urlencoded({extended: true})) 
 
     app.use(express.json());
@@ -27,6 +34,7 @@ async function start() {
         res.json({ message: 'REST service operational' });
     });
 
+ 
     app.use('/users', authController);
     app.use('/data/catalog', dataController);
     app.use('/data/rooms', roomController);

@@ -7,6 +7,7 @@ const {hasUser} = require('../middlewares/guards');
 roomController.post('/', 
 hasUser(), 
 async (req, res) => {
+console.log(req.filesS);
 console.log(req.body);
     // try {
     //     const { name, description, url } = req.body;

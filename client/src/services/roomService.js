@@ -24,12 +24,19 @@ export const getLatest = async () => {
     return result;
 }
 
-export const create = async (roomData, file) => {
-    const result = await request.post(baseUrl, roomData, file);
+// export const create = async (roomData, file) => {
+//     console.log(roomData);
+//     const result = await request.post(baseUrl, roomData, file);
+
+//     return result;
+// };
+
+export const create = async (roomData) => {
+    console.log(roomData);
+    const result = await request.post(baseUrl, roomData);
 
     return result;
 };
-
 export const edit = async (roomId, roomData) => {
     const result = await request.put(`${baseUrl}/${roomId}`, roomData);
 

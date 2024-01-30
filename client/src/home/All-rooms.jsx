@@ -41,6 +41,7 @@ function Rooms({ userId, email }) {
         values.comment,
         owner
       );
+      console.log(newComment);
       dispatchComments({
         type: "ADD",
         payload: newComment,

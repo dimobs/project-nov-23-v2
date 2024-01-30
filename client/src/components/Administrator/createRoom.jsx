@@ -20,16 +20,18 @@ export default function CreateRoom() {
   const [file, setFile] = useState(null);
 
   const formAddCommentHandler = async (values) => {
-    
     // const roomData = Object.fromEntries(new FormData(e.currentTarget));
-    const fd = new FormData();
-    fd.append("file", file);
+    // const fd = new FormData();
+    // console.log(values.fd[0]);
+    // fd.append("file", file);
 
     const data = {
       name: values.name,
       description: values.description,
+      file:values.file
     };
-    fd.append('data', data)
+
+    // fd.append('data', data)
 
     try {
       if (!file) {
@@ -37,7 +39,7 @@ export default function CreateRoom() {
         confirm(`No file selected`);
         return;
       }
-      const newRoom = await roomService.create(fd);
+      const newRoom = await roomService.create(data);
       setState({
         type: "ADD",
         payload: newRoom,
@@ -54,7 +56,7 @@ export default function CreateRoom() {
   const { values, onChange, onSubmit } = useForm(formAddCommentHandler, {
     name: "",
     description: "",
-    // file: "",
+    file: "",
   });
 
   const navigate = useNavigate();
@@ -98,6 +100,7 @@ export default function CreateRoom() {
       <h1 className="text-center text-4xl mb-0 ">Admin Panel / Create Room </h1>
       <div className=" bg-slate-100s dark:bg-slate-600 dark:text-green-100 py-0 px-6 shadow rounded-lg sm:px-10">
         <form
+        encType="multipart/form-data"
           onSubmit={onSubmit}
           className="m-0 padd block text-xs font-medium text-gray-700 dark:text-green-100"
         >
@@ -134,10 +137,10 @@ export default function CreateRoom() {
                 type="file"
                 name="file"
                 className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Your url resource..."
-                // value={values.image}
-                // onChange={onChange}
-                onChange={(e) => {
+                // placeholder="Your url resource..."
+              accept="image/jpeg, image/jpg, image/png"
+                value={values.file}
+                  onChange={(e) => {
                   setFile(e.target.files[0])                  
                 }}
                 // onChange={handleFile}
