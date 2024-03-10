@@ -5,6 +5,7 @@ import RoomItem from "./RoomItem";
 import FocusImput from "../../hooks/focusInputForm";
 import reducer from "../../utils/stateReducer";
 import useForm from "../../hooks/useForm";
+// import { json } from "stream/consumers";
 
 const FORM_INITIAL_STATE = {
   name: "",
@@ -17,33 +18,54 @@ export default function CreateRoom() {
   // const [values, onchange] = useState(FORM_INITIAL_STATE);
   // const [rooms, setRoom] = useState([]);
   const [rooms, setState] = useReducer(reducer, []);
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState("");
+  const [value, setValue] = useState("");
 
-  const formAddCommentHandler = async (values) => {
-    // const roomData = Object.fromEntries(new FormData(e.currentTarget));
-    // const fd = new FormData();
-    // console.log(values.fd[0]);
-    // fd.append("file", file);
 
+    const [formData, setFormData] = useState({
+      name: '',
+      description: '',
+    })
+
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === 'file' ? files[0] : value,
+    }));
+  };
+
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+    const fd = new FormData();
     const data = {
-      name: values.name,
-      description: values.description,
-      file:values.file
+      name: formData.name,
+      description: formData.description,
     };
-
+console.log(data.name);
+    fd.append("file", file);
     // fd.append('data', data)
 
     try {
-      if (!file) {
-        console.log("No file selected");
-        confirm(`No file selected`);
-        return;
-      }
-      const newRoom = await roomService.create(data);
-      setState({
-        type: "ADD",
-        payload: newRoom,
-      });
+      // const newRoom = await roomService.create(fd);
+      console.log(fd.file);
+      const newRoom = await fetch('http://192.168.50.206:3030/data/rooms', {  
+      method: "POST",
+       body: fd
+      })
+
+      const json = await newRoom.json();
+      console.log(json?.status);
+      console.log(json?.message);
+      // setState({
+      //   type: "ADD",
+      //   payload: newRoom,
+      // });
 
       // setRoom(state => [...state, newRoom]);
       resetFormHandler();
@@ -53,11 +75,11 @@ export default function CreateRoom() {
       console.log("create room:", err);
     }
   };
-  const { values, onChange, onSubmit } = useForm(formAddCommentHandler, {
-    name: "",
-    description: "",
-    file: "",
-  });
+  // const { values, onChange, onSubmit } = useForm(formAddCommentHandler, {
+  //   name: "",
+  //   description: "",
+  //   file: "",
+  // });
 
   const navigate = useNavigate();
 
@@ -66,6 +88,7 @@ export default function CreateRoom() {
       fetch("http://localhost:3030/data/rooms")
         .then((res) => res.json())
         .then((data) => {
+          console.log();
           setState({
             type: "GET_ALL",
             payload: Object.values(data),
@@ -90,7 +113,7 @@ export default function CreateRoom() {
   //   let value = e.target.value;
   //   onchange(state => ({
   //     ...state,
-  //     [e.target.name]: value,
+  //     [e.target.name]: value, 
   //   })
   // )
   // }
@@ -101,7 +124,8 @@ export default function CreateRoom() {
       <div className=" bg-slate-100s dark:bg-slate-600 dark:text-green-100 py-0 px-6 shadow rounded-lg sm:px-10">
         <form
         encType="multipart/form-data"
-          onSubmit={onSubmit}
+        action=""
+          onSubmit={handleSubmit}
           className="m-0 padd block text-xs font-medium text-gray-700 dark:text-green-100"
         >
           <div>
@@ -113,8 +137,8 @@ export default function CreateRoom() {
                 className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Name room..."
                 ref={inputFiled}
-                value={values.name}
-                onChange={onChange}
+                value={formData.name}
+                onChange={handleChange}
               />
             </label>
 
@@ -126,8 +150,8 @@ export default function CreateRoom() {
                 rows="4"
                 className="shadow-sm block p-2.5 w-3/4 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Your description..."
-                value={values.description}
-                onChange={onChange}
+                value={formData.description}
+                onChange={handleChange}
               ></textarea>
             </label>
 
@@ -139,11 +163,11 @@ export default function CreateRoom() {
                 className="shadow-sm block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 // placeholder="Your url resource..."
               accept="image/jpeg, image/jpg, image/png"
-                value={values.file}
+                // value={file.file}
                   onChange={(e) => {
                   setFile(e.target.files[0])                  
                 }}
-                // onChange={handleFile}
+                // onChange={handleChange}
               />
             </label>
 

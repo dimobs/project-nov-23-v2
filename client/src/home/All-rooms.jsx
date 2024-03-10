@@ -4,7 +4,7 @@ import * as roomService from "../services/roomService";
 import * as commentService from "../services/commentService";
 // import LatestGame from "./latest-game/LatestGame";
 import RoomItem from "../components/Administrator/RoomItem";
-import Spinner from "../components/Administrator/Spinner";
+// import Spinner from "../components/Administrator/Spinner";
 import { CommentItem } from "../components/commentItem";
 import reducer from "../utils/stateReducer";
 import useForm from "../hooks/useForm";
@@ -15,11 +15,11 @@ function Rooms({ userId, email }) {
     user = email.split("@")[0];
   }
   const [rooms, setRooms] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [comments, dispatchComments] = useReducer(reducer, []);
 
   useEffect(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     roomService.getAll().then((result) => setRooms(result));
     commentService
       .getAll()
@@ -30,7 +30,7 @@ function Rooms({ userId, email }) {
           payload: res,
         });
       })
-      .finally(() => setIsLoading(false));
+      // .finally(() => setIsLoading(false));
   }, []);
 
   const formAddCommentHandler = async (values) => {
@@ -115,7 +115,7 @@ function Rooms({ userId, email }) {
                   ))}
                   {/* {rooms.length === 0 && <h2 style={{color:"red", fontSize:"32px"}}>No rooms added yet!</h2>} */}
                   {/* {isLoading && <Spinner />} */}
-                  {isLoading && <Spinner />}
+                  {/* {isLoading && <Spinner />} */}
                 </div>
               </div>
             </div>
@@ -160,6 +160,8 @@ function Rooms({ userId, email }) {
               name="comment"
               className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-secondary-dark border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
               // placeholder="Write your comment..."
+              spellCheck={true}
+              lang="en"
               rows={5}
               cols={33}
               value={values.comment}

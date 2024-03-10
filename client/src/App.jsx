@@ -17,6 +17,7 @@ import AllRooms from './home/All-rooms';
 import RoomEdit from './components/Administrator/room-edit/roomEdit';
 import RoomDetails from './components/RoomDetails';
 import Footer from './components/Header-Footer/Footer';
+import YourComponent from './components/Administrator/helper';
 // const GameDetails = lazy(() => import('./components/game-details/GameDetails'));
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
                         <Routes>
                             {/* <Route path={Path.Home} element={<Home />} /> */}
                             <Route path='/' element={<AllRooms />} />
+                            {/* <Route path='/' element={<YourComponent />} /> */}
                             {/* <Route path="/games" element={<GameList />} /> */}
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />

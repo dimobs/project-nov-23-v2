@@ -9,21 +9,16 @@ const roomController = require('./controllers/roomController')
 const commentRoomController = require('./controllers/commentRoomController');
 const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
-const fileupload = require("express-fileupload");
-
+// const fileUpload = require('express-fileupload');
 
 start();
 
 async function start() {
-
     const app = express();
    await initDB();
 
-   app.use(fileupload({
-      createParentPath: true,}),
-  );
-  
-    app.use(express.urlencoded({extended: true})) 
+   app.use(express.urlencoded({extended: true})) //form value
+//    app.use(fileUpload());
 
     app.use(express.json());
     app.use(cors());
@@ -33,7 +28,6 @@ async function start() {
     app.get('/', (req, res) => {
         res.json({ message: 'REST service operational' });
     });
-
  
     app.use('/users', authController);
     app.use('/data/catalog', dataController);

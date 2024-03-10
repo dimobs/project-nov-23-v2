@@ -32,11 +32,10 @@ export const getLatest = async () => {
 // };
 
 export const create = async (roomData) => {
-    console.log(roomData);
     const result = await request.post(baseUrl, roomData);
-
     return result;
 };
+
 export const edit = async (roomId, roomData) => {
     const result = await request.put(`${baseUrl}/${roomId}`, roomData);
 

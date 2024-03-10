@@ -1,16 +1,37 @@
 const roomController = require('express').Router();
+
 const roomService = require('../services/roomService');
 const uniqid = require('uniqid');
 const {hasUser} = require('../middlewares/guards');
-
+const fileUpload = require('express-fileupload');
+roomController.use(fileUpload());
+const fs = require('fs/promises'); // Using promises version for async/await
+const path = require('path');
 // Create a new room
 roomController.post('/', 
-hasUser(), 
+// fileUpload({createParentPath: true}),
+// hasUser(), 
 async (req, res) => {
-console.log(req.filesS);
-console.log(req.body);
+    console.log('resiving...', req.files);
+    
+    const dataResive = req.files.file
+    
+        // const dataFilePath = path.join(__dirname, 'upload', dataResive.name);
+        // writeImage(dataFilePath);
+        // async function writeImage(dataFilePath) {
+        //     await fs.writeFile(dataFilePath, dataResive.data, (error) => {
+        //         if(error) {
+        //             console.error('Error writing file:', error)
+        //             res,status(500).send('Error uploading file')
+        //         }else {
+        //             console.log('File uploaded successfully');
+        //             res.status(200).send('File upload successfully')
+        //         }
+        //     })
+        // }
+
     // try {
-    //     const { name, description, url } = req.body;
+    //     // const { name, description, url } = req.body;
     //     const rooms = await roomService.readDataFile();
 
     //     const newRoom = { 
@@ -32,6 +53,7 @@ console.log(req.body);
 
 //Read - Get all rooms
 roomController.get('/', async (req, res) => {
+    console.log('getting rooms');
     try {
         const rooms = await roomService.readDataFile();
         res.json(rooms);

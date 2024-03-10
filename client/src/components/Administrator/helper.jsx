@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as roomService from "../../services/roomService";
 
 const YourComponent = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const YourComponent = () => {
     }));
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange =  (e) => {
     const file = e.target.files[0];
     setFormData((prevData) => ({
       ...prevData,
@@ -26,16 +27,12 @@ const YourComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('description', formData.description);
-    formDataToSend.append('file', formData.file);
-
+    const formDataToSend = new FormData(e.target);
+    console.log(...formDataToSend);
     try {
-      const response = await fetch('your-server-endpoint', {
-        method: 'POST',
-        body: formDataToSend,
-      });
+      console.log('after append',formDataToSend);
+      const response = await roomService.create(formDataToSend);
+
 
       if (response.ok) {
         console.log('Form data sent successfully');
@@ -63,7 +60,11 @@ const YourComponent = () => {
       <br />
       <label>
         Attach File:
-        <input type="file" name="file" onChange={handleFileChange} />
+        <input 
+        type="file" 
+        name="file" 
+        onChange={handleFileChange} 
+        />
       </label>
       <br />
       <button type="submit">Submit</button>
