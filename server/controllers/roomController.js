@@ -13,22 +13,22 @@ roomController.post('/',
 // hasUser(), 
 async (req, res) => {
     console.log('resiving...', req.files);
+    const file = req.files.file
+const filePath = path.join(__dirname, `../uploads/${file.name}`);
     
-    const dataResive = req.files.file
-    
-        // const dataFilePath = path.join(__dirname, 'upload', dataResive.name);
-        // writeImage(dataFilePath);
-        // async function writeImage(dataFilePath) {
-        //     await fs.writeFile(dataFilePath, dataResive.data, (error) => {
-        //         if(error) {
-        //             console.error('Error writing file:', error)
-        //             res,status(500).send('Error uploading file')
-        //         }else {
-        //             console.log('File uploaded successfully');
-        //             res.status(200).send('File upload successfully')
-        //         }
-        //     })
-        // }
+        // const dataFilePath = path.join(__dirname + `../upload/${dataResive.name}`, dataResive.name);
+        writeImage();
+        async function writeImage() {
+            await fs.writeFile(filePath, file.data, (error) => {
+                if(error) {
+                    console.error('Error writing file:', error)
+                    res,status(500).send('Error uploading file')
+                }else {
+                    console.log('File uploaded successfully');
+                    res.status(200).send('File upload successfully')
+                }
+            })
+        }
 
     // try {
     //     // const { name, description, url } = req.body;
