@@ -43,25 +43,26 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
     const fd = new FormData();
-    const data = {
-      name: formData.name,
-      description: formData.description,
-    };
-console.log(data.name);
+    // const data = {
+    //   name: formData.name,
+    //   description: formData.description,
+    // };
+    
     fd.append("file", file);
-    // fd.append('data', data)
+    fd.append("name", formData.name);
+    fd.append("description", formData.description);
 
+    // fd.append('data', data)
     try {
       // const newRoom = await roomService.create(fd);
-      console.log(fd.file);
       const newRoom = await fetch('http://192.168.50.206:3030/data/rooms', {  
       method: "POST",
        body: fd
       })
 
-      const json = await newRoom.json();
-      console.log(json?.status);
-      console.log(json?.message);
+      const response = await newRoom.json();
+      console.log(response.error);
+     
       // setState({
       //   type: "ADD",
       //   payload: newRoom,

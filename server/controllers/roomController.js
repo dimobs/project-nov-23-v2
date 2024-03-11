@@ -12,48 +12,56 @@ roomController.post('/',
 // fileUpload({createParentPath: true}),
 // hasUser(), 
 async (req, res) => {
-    console.log('resiving...', req.files);
+
     const file = req.files.file
-const filePath = path.join(__dirname, `../uploads/${file.name}`);
-    
-        // const dataFilePath = path.join(__dirname + `../upload/${dataResive.name}`, dataResive.name);
-        writeImage();
-        async function writeImage() {
-            await fs.writeFile(filePath, file.data, (error) => {
-                if(error) {
-                    console.error('Error writing file:', error)
-                    res,status(500).send('Error uploading file')
-                }else {
-                    console.log('File uploaded successfully');
-                    res.status(200).send('File upload successfully')
-                }
-            })
-        }
+    const {name, description} = req.body
 
-    // try {
-    //     // const { name, description, url } = req.body;
-    //     const rooms = await roomService.readDataFile();
+        //     writeImage();
+        // async function writeImage() {
+        //     await fs.writeFile(filePath, file.data, (error) => {
+        //         if(error) {
+        //             console.error('Error writing file:', error)
+        //             res,status(500).send('Error uploading file')
+        //         }else {
+        //             console.log('File uploaded successfully');
+        //             res.status(200).send('File upload successfully')
+        //         }
+        //     })
+        // }
 
-    //     const newRoom = { 
-    //       id: uniqid(),
-    //       name, 
-    //       description, 
-    //       url 
-    //     };
-    //     rooms.push(newRoom);
+    try {
+        const rooms = await roomService.readDataFile();
+        const newRoom = { 
+          id: uniqid(),
+          name, 
+          description, 
+        };
+        // console.log(newRoom);
+        rooms.push(newRoom);
+        await roomService.writeDataFile(rooms);
 
-    //     await roomService.writeDataFile(rooms);
+        // const filePath = path.join(__dirname, `../uploads/${id}`);
+        // await fs.writeFile(filePath, file.data, (error) => {
+        //     if(error) {
+        //         console.error('Error writing file:', error)
+        //         res,status(500).send('Error uploading file')
+        //     }else {
+        
+
+        //         console.log('File uploaded successfully');
+        //         res.status(201).send('File upload successfully')
+        //     }
+        // })
 
     //     res.status(201).json(newRoom);
-    // } catch (error) {
-    //     console.error(error);
-    //     res.status(500).json({ error: 'Internal Server Error' });
-    // }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 //Read - Get all rooms
 roomController.get('/', async (req, res) => {
-    console.log('getting rooms');
     try {
         const rooms = await roomService.readDataFile();
         res.json(rooms);
