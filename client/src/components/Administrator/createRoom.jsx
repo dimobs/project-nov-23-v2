@@ -52,8 +52,14 @@ const handleSubmit = async (e) => {
     fd.append("name", formData.name);
     fd.append("description", formData.description);
 
+
     // fd.append('data', data)
     try {
+
+      if (!file) {
+        return confirm('You should attach file!');
+      }
+      // file ? return console.error('You shoud attach file');
       // const newRoom = await roomService.create(fd);
       const newRoom = await fetch('http://192.168.50.206:3030/data/rooms', {  
       method: "POST",

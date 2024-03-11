@@ -13,7 +13,7 @@ roomController.post('/',
 // hasUser(), 
 async (req, res) => {
 
-    const file = req.files.file
+    const file = req.files?.file
     const {name, description} = req.body
 
         //     writeImage();
@@ -36,24 +36,24 @@ async (req, res) => {
           name, 
           description, 
         };
-        // console.log(newRoom);
         rooms.push(newRoom);
         await roomService.writeDataFile(rooms);
 
-        // const filePath = path.join(__dirname, `../uploads/${id}`);
-        // await fs.writeFile(filePath, file.data, (error) => {
-        //     if(error) {
-        //         console.error('Error writing file:', error)
-        //         res,status(500).send('Error uploading file')
-        //     }else {
+        const fileExtension = file.name.split('.').pop();
+        const filePath = path.join(__dirname, `../data/media/${newRoom.id}.${fileExtension}`);
+        await fs.writeFile(filePath, file.data, (error) => {
+            if(error) {
+                console.error('Error writing file:', error)
+                res,status(500).send('Error uploading file')
+            }else {
         
 
-        //         console.log('File uploaded successfully');
-        //         res.status(201).send('File upload successfully')
-        //     }
-        // })
+                console.log('File uploaded successfully');
+                res.status(201).send('File upload successfully')
+            }
+        })
 
-    //     res.status(201).json(newRoom);
+        res.status(201).json(newRoom);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
