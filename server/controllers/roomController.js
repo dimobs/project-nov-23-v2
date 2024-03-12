@@ -7,9 +7,9 @@ const fileUpload = require('express-fileupload');
 roomController.use(fileUpload());
 const fs = require('fs/promises'); // Using promises version for async/await
 const path = require('path');
+
 // Create a new room
 roomController.post('/', 
-// fileUpload({createParentPath: true}),
 // hasUser(), 
 async (req, res) => {
 
@@ -30,17 +30,12 @@ async (req, res) => {
         // }
 
     try {
-        const rooms = await roomService.readDataFile();
-        const newRoom = { 
-          id: uniqid(),
-          name, 
-          description, 
-        };
-        rooms.push(newRoom);
-        await roomService.writeDataFile(rooms);
+
+        const id = uniqid();
 
         const fileExtension = file.name.split('.').pop();
-        const filePath = path.join(__dirname, `../data/media/${newRoom.id}.${fileExtension}`);
+        const fileName = `${id}.${fileExtension}`;
+        const filePath = path.join(__dirname, `../data/media/${fileName}`);
         await fs.writeFile(filePath, file.data, (error) => {
             if(error) {
                 console.error('Error writing file:', error)
@@ -53,13 +48,21 @@ async (req, res) => {
             }
         })
 
+        const rooms = await roomService.readDataFile();
+        const newRoom = { 
+          id,
+          name, 
+          description,
+          url: `http://localhost:3030/static/${fileName}` 
+        };
+        rooms.push(newRoom);
+        await roomService.writeDataFile(rooms);
         res.status(201).json(newRoom);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 //Read - Get all rooms
 roomController.get('/', async (req, res) => {
     try {
@@ -71,7 +74,7 @@ roomController.get('/', async (req, res) => {
     }
 });
 
-// Get a specific room by ID
+// Read a specific room by ID
 roomController.get('/:id', async (req, res) => {
     try {
         const rooms = await roomService.readDataFile();

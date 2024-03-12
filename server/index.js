@@ -18,17 +18,16 @@ async function start() {
    await initDB();
 
    app.use(express.urlencoded({extended: true})) //form value
-//    app.use(fileUpload());
-
     app.use(express.json());
     app.use(cors());
     app.use(trimBody());
     app.use(session());
-
+    
     app.get('/', (req, res) => {
         res.json({ message: 'REST service operational' });
     });
- 
+    
+    app.use('/static', express.static('data/media'));
     app.use('/users', authController);
     app.use('/data/catalog', dataController);
     app.use('/data/rooms', roomController);

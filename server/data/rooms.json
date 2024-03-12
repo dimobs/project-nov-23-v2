@@ -24,8 +24,21 @@
     "url": "https://images.unsplash.com/photo-1682687220063-4742bd7fd538?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
   },
   {
-    "id": "4wd7n88wlto76sup",
-    "name": "Димо Карачорбаджиев",
-    "description": "new rooom "
+    "id": "4wd7naw4ltoex2c6",
+    "name": "Test Room",
+    "description": "opisanie",
+    "url": "http://localhost:3030/static/4wd7naw4ltoex2c6.jpeg"
+  },
+  {
+    "id": "4wd7nepoltoezpll",
+    "name": "nova staq",
+    "description": "opisanie za nova staq",
+    "url": "http://localhost:3030/static/4wd7nepoltoezpll.jpg"
+  },
+  {
+    "id": "4wd7nckltof0v98",
+    "name": "test2",
+    "description": "testttt2",
+    "url": "http://localhost:3030/static/4wd7nckltof0v98.jpg"
   }
 ]
