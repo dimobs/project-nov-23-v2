@@ -40,5 +40,19 @@
     "userId": "6595f9669f645ce2d6ff5f0c",
     "text": "das",
     "owner": "test1@test1.test"
+  },
+  {
+    "commentId": "4wd7n9qkltoi5tth",
+    "createdAt": "2024-03-12T15:03:46.996Z",
+    "userId": "6595f9669f645ce2d6ff5f0c",
+    "text": "ддссадас",
+    "owner": "test1@test1.test"
+  },
+  {
+    "commentId": "4wd7naigltoic2gl",
+    "createdAt": "2024-03-12T15:08:38.132Z",
+    "userId": "6595f9669f645ce2d6ff5f0c",
+    "text": "",
+    "owner": "test1@test1.test"
   }
 ]

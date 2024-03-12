@@ -40,5 +40,11 @@
     "name": "test2",
     "description": "testttt2",
     "url": "http://localhost:3030/static/4wd7nckltof0v98.jpg"
+  },
+  {
+    "id": "4wd7nao4ltog7djv",
+    "name": "Master bedroom",
+    "description": "хххх",
+    "url": "http://localhost:3030/static/4wd7nao4ltog7djv.jpg"
   }
 ]

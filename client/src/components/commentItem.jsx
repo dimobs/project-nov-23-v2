@@ -21,8 +21,8 @@ const deleteHandler = () => {
     return (
 
     <>
-  <div className="ml-6 inline-flex gap-10 justify-start relative top-1/3"> 
-   <div className="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg">
+  <div className="ml-6 inline-flex gap-10 justify-start relative top-1/3" > 
+   <div className="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg border-solid shadow-lg">
     <div className="relative flex gap-4">
       <img
         src="https://icons.iconarchive.com/icons/diversity-avatars/avatars/256/charlie-chaplin-icon.png"
