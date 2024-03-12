@@ -58,7 +58,7 @@ return (
               type="email"
               autoComplete="email"
               required=""
-              className="text-amber-900 font-bold "
+              className="text-amber-900 font-bold p-2"
               ref={focusField}
               onChange={onChange}
               values={values[RegisterFormKeys.Email]}
@@ -79,7 +79,7 @@ return (
               type="password"
               autoComplete="current-password"
               required=""
-              className="text-zinc-500"
+              className="text-zinc-500 p-2"
                onChange={onChange}
                         values={values[RegisterFormKeys.Password]}
             />
@@ -148,9 +148,9 @@ return (
         <div>
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="uppercase w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Sign up
+           Register
           </button>
         </div>
       </form>

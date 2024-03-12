@@ -49,7 +49,7 @@ const deleteHandler = () => {
             {userId === ownerId && (
             <p>
           <button 
-          className="text-white w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-secondary-dark border border-2 border-transparent dark:border-gray-900 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+          className="bg-slate-400 w-full px-4 py-3 mb-4 dark:placeholder:text-orange-100 dark:bg-secondary-dark border border-2 border-transparent focus:ring-blue-500 focus:outline-none dark:border-gray-500 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
           onClick={deleteHandler}
           >
             Delete</button>

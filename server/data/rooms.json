@@ -46,5 +46,11 @@
     "name": "Master bedroom",
     "description": "хххх",
     "url": "http://localhost:3030/static/4wd7nao4ltog7djv.jpg"
+  },
+  {
+    "id": "4wd7n4hwltolr37d",
+    "name": "bbb",
+    "description": "asd",
+    "url": "http://localhost:3030/static/4wd7n4hwltolr37d.jpg"
   }
 ]

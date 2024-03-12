@@ -55,7 +55,7 @@ export default function Login() {
                       type="email"
                       autoComplete="email"
                       required=""
-                      className="text-amber-900 font-bold"
+                      className="text-amber-900 font-bold p-3 border-8"
                       onChange={onChange}
                         value={values[LoginFormKyes.Email]}
                         ref={imputField}
@@ -75,7 +75,7 @@ export default function Login() {
                       type="password"
                       autoComplete="current-password"
                       required=""
-                      className="text-zinc-500"
+                      className="text-zinc-500 p-3 font-bold border-8 focus"
                       name={LoginFormKyes.Password}
                         onChange={onChange}
                         value={values[LoginFormKyes.Password]}
@@ -110,7 +110,7 @@ export default function Login() {
                 <div>
                   <button
                     type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white"
+                    className="uppercase w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white"
                   >
                     login
                   </button>
