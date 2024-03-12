@@ -110,7 +110,7 @@ function Rooms({ userId, email }) {
                       id={r.id}
                       name={r.name}
                       description={r.description}
-                      url={r.url}
+                      // url={r.url}
                     />
                   ))}
                   {/* {rooms.length === 0 && <h2 style={{color:"red", fontSize:"32px"}}>No rooms added yet!</h2>} */}
