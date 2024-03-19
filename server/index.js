@@ -29,6 +29,7 @@ async function start() {
     
     app.use('/static', express.static('data/media'));
     app.use('/users', authController);
+    
     app.use('/data/catalog', dataController);
     app.use('/data/rooms', roomController);
     app.use('/data/comments', commentRoomController);

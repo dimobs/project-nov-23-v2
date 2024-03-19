@@ -15,24 +15,8 @@ async (req, res) => {
 
     const file = req.files?.file
     const {name, description} = req.body
-
-        //     writeImage();
-        // async function writeImage() {
-        //     await fs.writeFile(filePath, file.data, (error) => {
-        //         if(error) {
-        //             console.error('Error writing file:', error)
-        //             res,status(500).send('Error uploading file')
-        //         }else {
-        //             console.log('File uploaded successfully');
-        //             res.status(200).send('File upload successfully')
-        //         }
-        //     })
-        // }
-
+    const id = uniqid();
     try {
-
-        const id = uniqid();
-
         const fileExtension = file.name.split('.').pop();
         const fileName = `${id}.${fileExtension}`;
         const filePath = path.join(__dirname, `../data/media/${fileName}`);
@@ -63,6 +47,7 @@ async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 //Read - Get all rooms
 roomController.get('/', async (req, res) => {
     try {

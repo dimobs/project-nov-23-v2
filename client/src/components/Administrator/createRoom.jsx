@@ -19,7 +19,7 @@ export default function CreateRoom() {
   // const [rooms, setRoom] = useState([]);
   const [rooms, setState] = useReducer(reducer, []);
   const [file, setFile] = useState("");
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
 
 
     const [formData, setFormData] = useState({
@@ -112,7 +112,9 @@ const handleSubmit = async (e) => {
   // }
 
   const resetFormHandler = () => {
-    onchange(FORM_INITIAL_STATE);
+    formData.name = "";
+    formData.description = "";
+    handleChange.files = "";
     // setErrors({});
   };
 

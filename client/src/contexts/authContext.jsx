@@ -15,6 +15,10 @@ export const AuthProvider = ({
 
     const loginSubmitHandler = async (values) => {
 
+        if (values.email == "" || values.password == "") {
+            throw new Error ('Plase, fill all field.')
+        }
+
         const result = await authService.login(values.email, values.password);
 
         setAuth(result);

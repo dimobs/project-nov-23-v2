@@ -61,5 +61,19 @@
     "userId": "65f08db10069f1b01c8da0c3",
     "text": "nov komentar ot men",
     "owner": "test12@test2.test"
+  },
+  {
+    "commentId": "4wd7nc90ltysiz54",
+    "createdAt": "2024-03-19T19:51:38.344Z",
+    "userId": "65f08db10069f1b01c8da0c3",
+    "text": "Mnogo e yako",
+    "owner": "test12@test2.test"
+  },
+  {
+    "commentId": "4wd7n1a0ltysjiau",
+    "createdAt": "2024-03-19T19:52:03.173Z",
+    "userId": "65f08db10069f1b01c8da0c3",
+    "text": "mport * as roomService from \"../services/roomService\";\nimport * as commentService from \"../services/commentService\";\n// import LatestGame from \"./latest-game/LatestGame\";\nimport RoomItem from \"../components/Administrator/RoomItem\";\n// import Spinner from \"../components/Administrator/Spinner\";\nimport { CommentItem } from \"../components/commentItem\";\nimport reducer from \"../utils/stateReducer\";\nimport useForm from \"../hooks/useForm\";\n\nfunction Rooms({ userId, email }) {\n  let user;\n  if (email) {\n    user = email.split(\"@\")[0];\n  }\n  const [rooms, setRooms] = useState([]);\n  // const [isLoading, setIsLoading] = useState(false);\n  const [comments, dispatchComments] = useReducer(reducer, []);\n\n  useEffect(() => {\n    // setIsLoading(true);\n    roomService.getAll().then((result) => setRooms(result));\n    commentService\n      .getAll()\n      // .then(c => setComments(c))\n      .then((res) => {\n        dispatchComments({\n          type: \"GET_ALL\",\n          payload: res,\n        });\n      })\n      // .finally(() => setIsLoading(false));\n  }, []);\n\n  const formAddCommentHandler = async (values) => {",
+    "owner": "test12@test2.test"
   }
 ]
