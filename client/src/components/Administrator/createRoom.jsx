@@ -43,11 +43,6 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
     const fd = new FormData();
-    // const data = {
-    //   name: formData.name,
-    //   description: formData.description,
-    // };
-    
     fd.append("file", file);
     fd.append("name", formData.name);
     fd.append("description", formData.description);
@@ -59,8 +54,6 @@ const handleSubmit = async (e) => {
       if (!file) {
         return confirm('You should attach file!');
       }
-      // file ? return console.error('You shoud attach file');
-      // const newRoom = await roomService.create(fd);
       const newRoom = await fetch('http://192.168.50.206:3030/data/rooms', {  
       method: "POST",
        body: fd
@@ -69,24 +62,14 @@ const handleSubmit = async (e) => {
       const response = await newRoom.json();
       console.log(response.error);
      
-      // setState({
-      //   type: "ADD",
-      //   payload: newRoom,
-      // });
-
-      // setRoom(state => [...state, newRoom]);
       resetFormHandler();
+
 
       navigate("/admin/createRoom");
     } catch (err) {
       console.log("create room:", err);
     }
   };
-  // const { values, onChange, onSubmit } = useForm(formAddCommentHandler, {
-  //   name: "",
-  //   description: "",
-  //   file: "",
-  // });
 
   const navigate = useNavigate();
 
@@ -114,7 +97,7 @@ const handleSubmit = async (e) => {
   const resetFormHandler = () => {
     formData.name = "";
     formData.description = "";
-    handleChange.files = "";
+   
     // setErrors({});
   };
 
