@@ -60,7 +60,7 @@ const handleSubmit = async (e) => {
       })
 
       const response = await newRoom.json();
-      console.log(response.error);
+      // console.log(response?.error);
      
       resetFormHandler();
 

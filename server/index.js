@@ -9,7 +9,6 @@ const roomController = require('./controllers/roomController')
 const commentRoomController = require('./controllers/commentRoomController');
 const trimBody = require('./middlewares/trimBody');
 const session = require('./middlewares/session');
-// const fileUpload = require('express-fileupload');
 
 start();
 
