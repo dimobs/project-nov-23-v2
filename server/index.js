@@ -18,10 +18,10 @@ async function start() {
    await initDB();
 
    app.use(express.urlencoded({extended: true})) //form value
-    app.use(express.json());
-    app.use(cors());
-    app.use(trimBody());
-    app.use(session());
+    app.use(express.json()); //auth
+    app.use(cors()); //autitecation
+    app.use(trimBody()); //sanitarise
+    app.use(session()); //jwt
     
     app.get('/', (req, res) => {
         res.json({ message: 'REST service operational' });
