@@ -41,7 +41,7 @@ function Rooms({ userId, email }) {
         values.comment,
         owner
       );
-      console.log(newComment);
+   
       dispatchComments({
         type: "ADD",
         payload: newComment,
@@ -65,7 +65,6 @@ function Rooms({ userId, email }) {
     
       if (hasConfirmed) {
         const deleteComment  = await commentService.remove(commentId);
-        // console.log(deleteComment);
           dispatchComments({
             type: "DELETE",
             payload: deleteComment,

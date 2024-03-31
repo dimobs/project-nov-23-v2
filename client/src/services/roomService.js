@@ -1,11 +1,10 @@
 import * as request from "../lib/request";
 
-// const baseUrl = 'http://localhost:3030/data/rooms'
-const baseUrl = 'http://192.168.50.206:3030/data/rooms'
+const baseUrl = 'http://localhost:3030/data/rooms'
+// const baseUrl = 'http://192.168.50.206:3030/data/rooms'
 
 
-export const getAll = async () => {
-   
+export const getAll = async () => {   
     const result = await request.get(baseUrl);
     return result;
 };
@@ -25,7 +24,6 @@ export const getLatest = async () => {
 }
 
 // export const create = async (roomData, file) => {
-//     console.log(roomData);
 //     const result = await request.post(baseUrl, roomData, file);
 
 //     return result;

@@ -1,55 +1,42 @@
 const buildOptions = (data) => {
     const options = {};
+    const token = localStorage.getItem('accessToken');
 
     if (data) {
-        options.body = JSON.stringify(data);
-        options.headers = {
-            'content-type': 'application/json'
-        };
+        if (data.email) {
+            options.body = JSON.stringify(data);
+            options.headers = {
+                'Content-type': 'application/json'
+            };
+            if (token) {
+                options.headers = {
+                    ...options.headers,
+                };
+            }
+        } else {
+            options.body = data;
+            options.headers = {
+                "Content-Type": "multipart/form-data",
+                "Accept": "application/json",
+                "type": "formData"
+            };
+           
+        }
     }
-
-    const token = localStorage.getItem('accessToken');
 
     if (token) {
         options.headers = {
-            ...options.headers,
             'X-Authorization': token
         };
     }
-
     return options;
 };
-
-// const buildOptions = (data) => {
-//     const options = {};
-
-//     if (data) {
-//         options.body= data
-//         options.mode = 'no-cors',
-//         options.headers = {
-//             "Content-Type": "multipart/form-data",
-//         "Accept": "application/json",
-//         "type": "formData"
-//         };
-//     }
-
-//     const token = localStorage.getItem('accessToken');
-
-//     if (token) {
-//         options.headers = {
-//             ...options.headers,
-//             'X-Authorization': token
-//         };
-//     }
-
-//     return options;
-// };
 
 const request = async (method, url, data) => {
 
     const response = await fetch(url, {
         ...buildOptions(data),
-        method,        
+        method,
     });
 
     if (response.status === 204) {
@@ -60,7 +47,7 @@ const request = async (method, url, data) => {
 
     if (!response.ok) {
         throw result;
-    } 
+    }
 
     return result;
 };
@@ -70,5 +57,3 @@ export const post = request.bind(null, 'POST');
 export const put = request.bind(null, 'PUT');
 export const remove = request.bind(null, 'DELETE');
 export const patch = request.bind(null, 'PATCH');
-
-

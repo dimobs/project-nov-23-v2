@@ -10,9 +10,8 @@ const path = require('path');
 
 // Create a new room
 roomController.post('/', 
-// hasUser(), 
+hasUser(), 
 async (req, res) => {
-
     const file = req.files?.file
     const {name, description} = req.body
     const id = uniqid();
@@ -50,6 +49,7 @@ async (req, res) => {
 
 //Read - Get all rooms
 roomController.get('/', async (req, res) => {
+    console.log('gettttingg alll from server');
     try {
         const rooms = await roomService.readDataFile();
         res.json(rooms);
@@ -100,7 +100,9 @@ roomController.put('/:id', hasUser(), async (req, res) => {
 });
 
 // Delete a room by ID
-roomController.delete('/:id', hasUser(), async (req, res) => {
+roomController.delete('/:id', 
+hasUser(),
+ async (req, res) => {
     try {
         let rooms = await roomService.readDataFile();
 

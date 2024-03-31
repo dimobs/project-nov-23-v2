@@ -83,7 +83,6 @@ commentRoomController.get('/', async (req, res) => {
 
 // Delete a room by ID
 commentRoomController.delete('/:id', hasUser(), async (req, res) => {
-    console.log(req.params.id);
     try {
         let comments = await service.readDataFile();
         const index = comments.findIndex(c => c.commentId === req.params.id);

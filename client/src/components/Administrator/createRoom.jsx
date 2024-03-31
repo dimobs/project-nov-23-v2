@@ -54,14 +54,14 @@ const handleSubmit = async (e) => {
       if (!file) {
         return confirm('You should attach file!');
       }
-      const newRoom = await fetch('http://192.168.50.206:3030/data/rooms', {  
-      method: "POST",
-       body: fd
-      })
 
-      const response = await newRoom.json();
-      // console.log(response?.error);
-     
+      // const newRoom = await fetch('http://192.168.50.206:3030/data/rooms', {  
+      // method: "POST",
+      //  body: fd
+      // })
+
+      const newRoom = await roomService.create(fd);
+      await newRoom.json();
       resetFormHandler();
 
 
@@ -78,7 +78,6 @@ const handleSubmit = async (e) => {
       fetch("http://localhost:3030/data/rooms")
         .then((res) => res.json())
         .then((data) => {
-          console.log();
           setState({
             type: "GET_ALL",
             payload: Object.values(data),
