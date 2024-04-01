@@ -1,6 +1,6 @@
 const roomController = require('express').Router();
 
-const roomService = require('../services/roomService');
+const roomService = require('../services/crudService');
 const uniqid = require('uniqid');
 const {hasUser} = require('../middlewares/guards');
 const fileUpload = require('express-fileupload');
@@ -19,18 +19,11 @@ async (req, res) => {
         const fileExtension = file.name.split('.').pop();
         const fileName = `${id}.${fileExtension}`;
         const filePath = path.join(__dirname, `../data/media/${fileName}`);
-        await fs.writeFile(filePath, file.data, (error) => {
-            if(error) {
-                console.error('Error writing file:', error)
-                res,status(500).send('Error uploading file')
-            }else {
-        
-
-                console.log('File uploaded successfully');
-                res.status(201).send('File upload successfully')
-            }
+        await roomService.writeDataFile({
+            image: true,
+            filePath: filePath,
+            file:file.data,
         })
-
         const rooms = await roomService.readDataFile();
         const newRoom = { 
           id,
@@ -38,18 +31,18 @@ async (req, res) => {
           description,
           url: `http://localhost:3030/static/${fileName}` 
         };
+
         rooms.push(newRoom);
         await roomService.writeDataFile(rooms);
         res.status(201).json(newRoom);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Cannot save data.' });
     }
 });
 
 //Read - Get all rooms
 roomController.get('/', async (req, res) => {
-    console.log('gettttingg alll from server');
     try {
         const rooms = await roomService.readDataFile();
         res.json(rooms);

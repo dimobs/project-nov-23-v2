@@ -20,16 +20,14 @@ async (req, res) => {
         };
 
         comments.push(newComment);
-
         await service.writeDataFile(comments);
-          
         res.status(201).json(newComment);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
+  
 // Read - Get all comments
 commentRoomController.get('/', async (req, res) => {
     try {
@@ -82,7 +80,9 @@ commentRoomController.get('/', async (req, res) => {
 // });
 
 // Delete a room by ID
-commentRoomController.delete('/:id', hasUser(), async (req, res) => {
+commentRoomController.delete('/:id', 
+hasUser(), 
+async (req, res) => {
     try {
         let comments = await service.readDataFile();
         const index = comments.findIndex(c => c.commentId === req.params.id);

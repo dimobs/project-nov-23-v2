@@ -16,7 +16,7 @@ export const getAll = async () => {
         return (response);
 };
 
-export const create = async (userId, data, owner) => {2
+export const create = async (userId, data, owner) => {
     const newComment = await request.post(baseUrl, {
         userId,
         data,

@@ -60,8 +60,7 @@ const handleSubmit = async (e) => {
       //  body: fd
       // })
 
-      const newRoom = await roomService.create(fd);
-      await newRoom.json();
+      await roomService.create(fd);
       resetFormHandler();
 
 

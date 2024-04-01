@@ -33,7 +33,7 @@ function Rooms({ userId, email }) {
       // .finally(() => setIsLoading(false));
   }, []);
 
-  const formAddCommentHandler = async (values) => {
+  const commentHandler = async (values) => {
     const owner =  email;
     try {
       const newComment = await commentService.create(
@@ -56,11 +56,11 @@ function Rooms({ userId, email }) {
     }
   };
 
-  const { values, onChange, onSubmit } = useForm(formAddCommentHandler, {
+  const { values, onChange, onSubmit } = useForm(commentHandler, {
     comment: "",
     });
 
-    const deleteButtonClickHandler = async (commentId) => {
+    const deleteCommentClickHandler = async (commentId) => {
       const hasConfirmed = confirm(`Are you sure you want to delete ${comments.text}`);
     
       if (hasConfirmed) {
@@ -133,7 +133,7 @@ function Rooms({ userId, email }) {
           comment={c.text}
           owner={c.owner}
           ownerId={c.userId}
-          deleteButtonClickHandler={deleteButtonClickHandler}
+          deleteButtonClickHandler={deleteCommentClickHandler}
         />
       ))}
 
