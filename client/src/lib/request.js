@@ -2,9 +2,9 @@ const buildOptions = (data) => {
     const options = {};
     const token = localStorage.getItem('accessToken');
     if (token) {
-        options.headers = { 'X-Authorization': token}
+        options.headers = { 'X-Authorization': token }
     }
-    
+
     if (data) {
         if (data instanceof FormData) {
             options.body = data;
@@ -13,7 +13,7 @@ const buildOptions = (data) => {
             //     "Accept": "application/json",
             //     "type": "formData"
             // };
-        
+
         } else {
             options.body = JSON.stringify(data);
             options.headers = {
@@ -22,9 +22,9 @@ const buildOptions = (data) => {
             if (token) {
                 options.headers = {
                     ...options.headers,
-                    // 'X-Authorization': token
+                    'X-Authorization': token
                 };
-            } 
+            }
         }
     }
 

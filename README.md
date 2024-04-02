@@ -127,7 +127,7 @@ MONGO_URI=mongodb://127.0.0.1:27017/RestApi
 JWT_SECRET=dsadsad1221dasd
 
 Start the Server
-The server will start, and you'll see a message indicating that it's running, typically on port 5000 (http://localhost:5000).
+The server will start, and you'll see a message indicating that it's running, typically on port 5000 (http://localhost:3030).
 
 Test
 Now that the API is running locally with MongoDB and your environment variables configured, you can use tools like Postman to make requests to the API endpoints. Refer to the "Usage" section of this README for details on available endpoints and their expected responses.

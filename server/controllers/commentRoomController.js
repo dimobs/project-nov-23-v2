@@ -9,6 +9,7 @@ hasUser(),
 async (req, res) => {
     try {
         const { userId, data, owner } = req.body;
+        console.log('comment on server', userId, data, owner);
         const comments = await service.readDataFile();
 
         const newComment = { 
