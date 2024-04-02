@@ -1,45 +1,37 @@
 const buildOptions = (data) => {
     const options = {};
     const token = localStorage.getItem('accessToken');
-    console.log('requested...');
+    if (token) {
+        options.headers = { 'X-Authorization': token}
+    }
+    
     if (data) {
         if (data instanceof FormData) {
-            console.log('request is FormData');
             options.body = data;
             // options.headers = {
             //     "Content-Type": "multipart/form-data",
             //     "Accept": "application/json",
             //     "type": "formData"
             // };
+        
         } else {
-            console.log('request not FormData');
             options.body = JSON.stringify(data);
             options.headers = {
                 'Content-type': 'application/json'
             };
-            // if (token) {
-            //     options.headers = {
-            //         ...options.headers,
-            //         'X-Authorization': token
-            //     };
+            if (token) {
+                options.headers = {
+                    ...options.headers,
+                    // 'X-Authorization': token
+                };
+            } 
         }
     }
 
-    if (token) {
-        // options.headers = {
-        //     'Content-type': 'application/json'}
-            
-        options.headers = {
-            // ...options.headers,
-            'X-Authorization': token
-        }
-    }
-console.log(options.headers);
     return options;
 };
 
 const request = async (method, url, data) => {
-    console.log('request...', method, url, data)
     const response = await fetch(url, {
         ...buildOptions(data),
         method,

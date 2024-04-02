@@ -33,7 +33,7 @@ function Rooms({ userId, email }) {
       // .finally(() => setIsLoading(false));
   }, []);
 
-  const commentHandler = async (values) => {
+  const addCommentHandler = async (values) => {
     const owner =  email;
     try {
       const newComment = await commentService.create(
@@ -56,7 +56,7 @@ function Rooms({ userId, email }) {
     }
   };
 
-  const { values, onChange, onSubmit } = useForm(commentHandler, {
+  const { values, onChange, onSubmit } = useForm(addCommentHandler, {
     comment: "",
     });
 
